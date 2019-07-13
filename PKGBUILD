@@ -60,8 +60,8 @@ _localmodcfg=y
 
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
-pkgbase=linux-custom
-_srcver=5.1.16-arch1
+pkgbase=linux-muqss
+_srcver=5.1.17-arch1
 pkgver=${_srcver%-*}
 pkgrel=1
 arch=(x86_64)
@@ -89,7 +89,6 @@ source=(
   0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
   0001-ZEN-Add-a-CONFIG-option-that-sets-O3.patch
   0002-ZEN-Add-CONFIG-for-unprivileged_userns_clone.patch
-  0001-Bluetooth-Fix-minimum-encryption-key-size-check.patch
   https://gitlab.com/sirlucjan/kernel-patches/raw/master/5.1/uksm-pf/${_uksm_patch}
   https://gitlab.com/sirlucjan/kernel-patches/raw/master/5.1/uksm-pf-fix/${_uksm_fix}
   )
@@ -97,7 +96,7 @@ validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('8a3e55be3e788700836db6f75875b4d3b824a581d1eacfc2fcd29ed4e727ba3e'
+sha256sums=('5935c37966a7883cea6a541684fd4076b8d8d11776d7e76996c62c832b96c43d'
             'SKIP'
             'f584efb55c65cbb8b164bd581ce15200dbc56bb34a3407a34ac1e063eb2de7db'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
@@ -108,7 +107,6 @@ sha256sums=('8a3e55be3e788700836db6f75875b4d3b824a581d1eacfc2fcd29ed4e727ba3e'
             '560c8c06cb7833ab24743b818f831add8a7b6ed65181f30417e7b75f107441ef'
             '6fa639054b51172335f69fa75c6c3332b8a73f419eeb6e7eb20e297047ad08ff'
             '5a058e7207bd203eb2890703342a9c92eeaafc3209b4e65028cde7221e53a607'
-            'beabfbaf2cc81d8c2e933ba32a266fd28876d1d0438277c8172fa590296e918d'
             'SKIP'
             'SKIP')
 
@@ -190,7 +188,7 @@ _package() {
   #pkgdesc="${_Kpkgdesc}"
   depends=(coreutils linux-firmware kmod mkinitcpio)
   optdepends=('crda: to set the correct wireless channels of your country')
-  provides=("linux-custom=${pkgver}")
+  provides=("linux-muqss=${pkgver}")
   backup=("etc/mkinitcpio.d/$pkgbase.preset")
   install=linux.install
   
@@ -246,8 +244,8 @@ _package-headers() {
   pkgdesc="Header files and scripts for building modules for ${pkgbase/linux/Linux} kernel"
   #_Hpkgdesc="Header files and scripts for building modules for ${pkgbase/linux/Linux} kernel"
   #pkgdesc="${_Hpkgdesc}"
-  depends=('linux-custom') # added to keep kernel and headers packages matched
-  provides=("linux-custom-headers=${pkgver}" "linux-headers=${pkgver}")
+  depends=('linux-muqss') # added to keep kernel and headers packages matched
+  provides=("linux-muqss-headers=${pkgver}" "linux-headers=${pkgver}")
   
  local builddir="$pkgdir/usr/lib/modules/$(<version)/build"
 
