@@ -28,22 +28,23 @@ _makenconfig=
 #  9. AMD Steamroller (MSTEAMROLLER)
 #  10. AMD Excavator (MEXCAVATOR)
 #  11. AMD Zen (MZEN)
-#  12. Intel P4 / older Netburst based Xeon (MPSC)
-#  13. Intel Atom (MATOM)
-#  14. Intel Core 2 (MCORE2)
-#  15. Intel Nehalem (MNEHALEM)
-#  16. Intel Westmere (MWESTMERE)
-#  17. Intel Silvermont (MSILVERMONT)
-#  18. Intel Sandy Bridge (MSANDYBRIDGE)
-#  19. Intel Ivy Bridge (MIVYBRIDGE)
-#  20. Intel Haswell (MHASWELL)
-#  21. Intel Broadwell (MBROADWELL)
-#  22. Intel Skylake (MSKYLAKE)
-#  23. Intel Skylake X (MSKYLAKEX)
-#  24. Intel Cannon Lake (MCANNONLAKE)
-#  25. Intel Ice Lake (MICELAKE)
-#  26. Generic-x86-64 (GENERIC_CPU)
-_subarch=3
+#  12. AMD Zen 2 (MZEN2)
+#  13. Intel P4 / older Netburst based Xeon (MPSC)
+#  14. Intel Atom (MATOM)
+#  15. Intel Core 2 (MCORE2)
+#  16. Intel Nehalem (MNEHALEM)
+#  17. Intel Westmere (MWESTMERE)
+#  18. Intel Silvermont (MSILVERMONT)
+#  19. Intel Sandy Bridge (MSANDYBRIDGE)
+#  20. Intel Ivy Bridge (MIVYBRIDGE)
+#  21. Intel Haswell (MHASWELL)
+#  22. Intel Broadwell (MBROADWELL)
+#  23. Intel Skylake (MSKYLAKE)
+#  24. Intel Skylake X (MSKYLAKEX)
+#  25. Intel Cannon Lake (MCANNONLAKE)
+#  26. Intel Ice Lake (MICELAKE)
+#  27. Generic-x86-64 (GENERIC_CPU)
+#  28. Native optimizations autodetected by GCC (MNATIVE)
 
 # Compile ONLY probed modules
 # Build in only the modules that you currently have probed in your system VASTLY
@@ -61,7 +62,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-_srcver=5.1.19-arch1
+_srcver=5.2.2-arch1
 pkgver=${_srcver%-*}
 pkgrel=1
 arch=(x86_64)
@@ -69,11 +70,9 @@ url="https://wiki.archlinux.org/index.php/Linux-ck"
 license=(GPL2)
 makedepends=(kmod inetutils bc libelf)
 options=('!strip')
-_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-version-0.192.patch
+_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-version-0.193.patch
 #_bmq_patch="v5.1_bmq094.patch"
-_uksm_patch="0001-uksm-5.1-initial-submission.patch"
-_uksm_fix="0001-uksm-5.1-apply-52d1e606ee733.patch"
-_gcc_more_v='20180509'
+_gcc_more_v='20190714'
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
@@ -84,14 +83,12 @@ source=(
   #https://raw.githubusercontent.com/dolohow/uksm/master/v5.x/${_uksm_patch}
   #https://raw.githubusercontent.com/zaza42/uksm/master/${_uksm_patch}
   #https://raw.githubusercontent.com/sirlucjan/uksm/master/v5.x/${_uksm_patch}
-  http://ck.kolivas.org/patches/muqss/5.0/5.1/${_muqss_patch}
-  #https://gitlab.com/alfredchen/bmq/raw/master/5.1/${_bmq_patch}
+  http://ck.kolivas.org/patches/muqss/5.0/5.2/${_muqss_patch}
   0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
   0001-ZEN-Add-a-CONFIG-option-that-sets-O3.patch
   0002-ZEN-Add-CONFIG-for-unprivileged_userns_clone.patch
-  https://gitlab.com/sirlucjan/kernel-patches/raw/master/5.1/uksm-pf/${_uksm_patch}
-  https://gitlab.com/sirlucjan/kernel-patches/raw/master/5.1/uksm-pf-fix/${_uksm_fix}
-  )
+  0003-iwlwifi-mvm-disable-TX-AMSDU-on-older-NICs.patch
+)
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
@@ -102,13 +99,10 @@ sha256sums=('0e231bf83ec550d606aef54295590533c693b137460a813939790b402e6c68c2'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
             'c043f3033bb781e2688794a59f6d1f7ed49ef9b13eb77ff9a425df33a244a636'
             'ad6344badc91ad0630caacde83f7f9b97276f80d26a20619a87952be65492c65'
-            '226e30068ea0fecdb22f337391385701996bfbdba37cdcf0f1dbf55f1080542d'
-            'SKIP'
+            '2466fb4aecc66d1b258b4cbdb2f215b5099f266d8c4386bb62ad1a0acd0caf5b'
             '560c8c06cb7833ab24743b818f831add8a7b6ed65181f30417e7b75f107441ef'
             '6fa639054b51172335f69fa75c6c3332b8a73f419eeb6e7eb20e297047ad08ff'
-            '5a058e7207bd203eb2890703342a9c92eeaafc3209b4e65028cde7221e53a607'
-            'SKIP'
-            'SKIP')
+            '5a058e7207bd203eb2890703342a9c92eeaafc3209b4e65028cde7221e53a607')
 
 _kernelname=${pkgbase#linux}
 : ${_kernelname:=-ARCH}
@@ -143,8 +137,8 @@ prepare() {
   sed -i -e 's/# CONFIG_PSI_DEFAULT_DISABLED is not set/CONFIG_PSI_DEFAULT_DISABLED=y/' ./.config
 
   # https://github.com/graysky2/kernel_gcc_patch
-  msg2 "Applying enable_additional_cpu_optimizations_for_gcc_v8.1+_kernel_v4.13+ patch..."
-  patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/enable_additional_cpu_optimizations_for_gcc_v8.1+_kernel_v4.13+.patch"
+  msg2 "Applying enable_additional_cpu_optimizations_for_gcc_v9.1+_kernel_v4.13+.patch ..."
+  patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/enable_additional_cpu_optimizations_for_gcc_v9.1+_kernel_v4.13+.patch"
 
   if [ -n "$_subarch" ]; then
     yes "$_subarch" | make oldconfig
