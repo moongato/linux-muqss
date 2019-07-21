@@ -61,7 +61,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-_srcver=5.1.18-arch1
+_srcver=5.1.19-arch1
 pkgver=${_srcver%-*}
 pkgrel=1
 arch=(x86_64)
@@ -96,7 +96,7 @@ validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('6013e7dcf59d7c1b168d8edce3dbd61ce340ff289541f920dbd0958bef98f36a'
+sha256sums=('0e231bf83ec550d606aef54295590533c693b137460a813939790b402e6c68c2'
             'SKIP'
             '69b5c07c1cf2f8154a7a15190ae1277feac25c1924e3775d76f1b56a36a87743'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
