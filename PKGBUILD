@@ -64,7 +64,7 @@ _localmodcfg=y
 pkgbase=linux-muqss
 _srcver=5.2.2-arch1
 pkgver=${_srcver%-*}
-pkgrel=1
+pkgrel=2
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
 license=(GPL2)
@@ -95,7 +95,7 @@ validpgpkeys=(
 )
 sha256sums=('e5d91382699391e228efae87903ffeeac39b9e694ee3cf32970c87d28e516d9c'
             'SKIP'
-            '69121f7b7333e455fbefe119c9f36fb29ce9cb1c094b72abd0794022d7e1d780'
+            'a994e364d2bccc432e9bb4ad48dcc00de57b1768333b7646dafe019a352427f4'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
             'c043f3033bb781e2688794a59f6d1f7ed49ef9b13eb77ff9a425df33a244a636'
             'ad6344badc91ad0630caacde83f7f9b97276f80d26a20619a87952be65492c65'
