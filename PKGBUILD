@@ -64,7 +64,7 @@ _localmodcfg=y
 pkgbase=linux-muqss
 _srcver=5.2.2-arch1
 pkgver=${_srcver%-*}
-pkgrel=2
+pkgrel=3
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
 license=(GPL2)
@@ -88,7 +88,9 @@ source=(
   0001-ZEN-Add-a-CONFIG-option-that-sets-O3.patch
   0002-ZEN-Add-CONFIG-for-unprivileged_userns_clone.patch
   0003-iwlwifi-mvm-disable-TX-AMSDU-on-older-NICs.patch
-)
+  0001-iwlwifi-Add-support-for-SAR-South-Korea-limitation.patch
+  0001-netfilter-nf_tables-fix-module-autoload-for-redir.patch
+  )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
@@ -104,7 +106,9 @@ sha256sums=('e5d91382699391e228efae87903ffeeac39b9e694ee3cf32970c87d28e516d9c'
             '560c8c06cb7833ab24743b818f831add8a7b6ed65181f30417e7b75f107441ef'
             '6fa639054b51172335f69fa75c6c3332b8a73f419eeb6e7eb20e297047ad08ff'
             '5a058e7207bd203eb2890703342a9c92eeaafc3209b4e65028cde7221e53a607'
-            'fc96300831506965383ef30bc46b72735dc45bb97dea2ccb8b9450c005d2f020')
+            'fc96300831506965383ef30bc46b72735dc45bb97dea2ccb8b9450c005d2f020'
+            'e20f487eb3338c0350f1fb4b76131f2bebadb4ad39740bd16a787c8fa3bfb6ca'
+            'ebbc5d6d0f6c9de2536d46ea358d52014b847d3a2ab317c97dcba97fc2fba908')
 
 _kernelname=${pkgbase#linux}
 : ${_kernelname:=-ARCH}
