@@ -64,7 +64,7 @@ _localmodcfg=y
 pkgbase=linux-muqss
 _srcver=5.2.9-arch1
 pkgver=${_srcver%-*}
-pkgrel=1
+pkgrel=2
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -72,7 +72,7 @@ license=(GPL2)
 makedepends=(kmod inetutils bc libelf)
 options=('!strip')
 _ckpatch="patch-5.2-ck${_ckpatchversion}"
-_gcc_more_v='20190714'
+_gcc_more_v='20190822'
 _uksm_patch=uksm-5.2.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
@@ -101,7 +101,7 @@ sha256sums=('b6f02a4b306ca5cd314d72615bfc2650166969613135da202630e6c4e1b5d4e6'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
             'c043f3033bb781e2688794a59f6d1f7ed49ef9b13eb77ff9a425df33a244a636'
             'ad6344badc91ad0630caacde83f7f9b97276f80d26a20619a87952be65492c65'
-            '2466fb4aecc66d1b258b4cbdb2f215b5099f266d8c4386bb62ad1a0acd0caf5b'
+            'cf56ffd011f1c97e61522a6a5a6ada042459f2c6057c66268001b058fc7e5723'
             'f1abc13a8d859fbf6350040e45d7f04ad551a6d39f113ba96fbbd820118c0e36'
             '5febbab9437b1b97605fbfd170660e86d12593dac9033e8a32d112360eec1acc'
             '560c8c06cb7833ab24743b818f831add8a7b6ed65181f30417e7b75f107441ef'
