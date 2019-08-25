@@ -62,9 +62,9 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-_srcver=5.2.9-arch1
+_srcver=5.2.10-arch1
 pkgver=${_srcver%-*}
-pkgrel=2
+pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -89,13 +89,13 @@ source=(
   0001-ZEN-Add-a-CONFIG-option-that-sets-O3.patch
   0002-ZEN-Add-CONFIG-for-unprivileged_userns_clone.patch
   0003-iwlwifi-mvm-disable-TX-AMSDU-on-older-NICs.patch
-  0001-iwlwifi-Add-support-for-SAR-South-Korea-limitation.patch
+  0001-drm-amdgpu-pin-the-csb-buffer-on-hw-init-for-gfx-v8.patch
   )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('b6f02a4b306ca5cd314d72615bfc2650166969613135da202630e6c4e1b5d4e6'
+sha256sums=('6096c4387c2a296de9136080942d11ae3f1bd28129b6952f7133c570e43bfc49'
             'SKIP'
             'd2b79e05d8584a21f1161032e13a89e23c26ae9a765e3c2565ec918ccbddcbb6'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
@@ -108,7 +108,7 @@ sha256sums=('b6f02a4b306ca5cd314d72615bfc2650166969613135da202630e6c4e1b5d4e6'
             '6fa639054b51172335f69fa75c6c3332b8a73f419eeb6e7eb20e297047ad08ff'
             '5a058e7207bd203eb2890703342a9c92eeaafc3209b4e65028cde7221e53a607'
             'fc96300831506965383ef30bc46b72735dc45bb97dea2ccb8b9450c005d2f020'
-            'e20f487eb3338c0350f1fb4b76131f2bebadb4ad39740bd16a787c8fa3bfb6ca')
+            '4dc66a0902627e6b9787b792ac1c6ed4dc5eaa8d72dc0e8f8d3e0527ed4dfa95')
             
 _kernelname=${pkgbase#linux}
 : ${_kernelname:=-ARCH}
