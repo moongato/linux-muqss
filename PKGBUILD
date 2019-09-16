@@ -63,9 +63,9 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-_srcver=5.2.14-arch1
+_srcver=5.2.15-arch1
 pkgver=${_srcver%-*}
-pkgrel=2
+pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -89,13 +89,12 @@ source=(
   0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
   0001-ZEN-Add-a-CONFIG-option-that-sets-O3.patch
   0002-ZEN-Add-CONFIG-for-unprivileged_userns_clone.patch
-  0003-Btrfs-fix-unwritten-extent-buffers-and-hangs-on-future-writeback-attempts.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('c64d36477fee6a864a734ec417407768e60040a13f144c33208fa9622fd0ce8c'
+sha256sums=('eb561009da8106b463b1e1a16ab0f75cdef564784f49177148f5f92c32380c4a'
             'SKIP'
             '1d746b1ea3bf4a05b2844ee8ecaaa6a7a6dbe523cd14ecc07384a9afeae9b516'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
@@ -106,8 +105,7 @@ sha256sums=('c64d36477fee6a864a734ec417407768e60040a13f144c33208fa9622fd0ce8c'
             '5febbab9437b1b97605fbfd170660e86d12593dac9033e8a32d112360eec1acc'
             '560c8c06cb7833ab24743b818f831add8a7b6ed65181f30417e7b75f107441ef'
             '6fa639054b51172335f69fa75c6c3332b8a73f419eeb6e7eb20e297047ad08ff'
-            '5a058e7207bd203eb2890703342a9c92eeaafc3209b4e65028cde7221e53a607'
-            'fc26a05d0725bf120cd3b893a9ae04ac31b9ae8c4954a3fe7f1310dd1b69de94')
+            '5a058e7207bd203eb2890703342a9c92eeaafc3209b4e65028cde7221e53a607')
             
 _kernelname=${pkgbase#linux}
 : ${_kernelname:=-ARCH}
@@ -120,17 +118,11 @@ prepare() {
   echo "-$pkgrel" > localversion.10-pkgrel
   echo "$_kernelname" > localversion.20-pkgname
 
-  # fix naming schema in EXTRAVERSION of ck patch set
-  sed -i -re "s/^(.EXTRAVERSION).*$/\1 = /" "../${_ckpatch}"
-
-  msg2 "Patching with ck patchset..."
-  patch -Np1 -i "$srcdir/${_ckpatch}"
-
   local src
   for src in "${source[@]}"; do
     src="${src%%::*}"
     src="${src##*/}"
-    [[ $src = *.patch ]] || continue
+    [[ $src = 00*.patch ]] || continue
     msg2 "Applying patch $src..."
     patch -Np1 < "../$src"
   done
@@ -141,6 +133,16 @@ prepare() {
   # https://bbs.archlinux.org/viewtopic.php?pid=1824594#p1824594
   sed -i -e 's/# CONFIG_PSI_DEFAULT_DISABLED is not set/CONFIG_PSI_DEFAULT_DISABLED=y/' ./.config
 
+  # https://bbs.archlinux.org/viewtopic.php?pid=1863567#p1863567
+  sed -i -e '/CONFIG_LATENCYTOP=/ s,y,n,' \
+      -i -e '/CONFIG_SCHED_DEBUG=/ s,y,n,' ./.config
+
+  # fix naming schema in EXTRAVERSION of ck patch set
+  sed -i -re "s/^(.EXTRAVERSION).*$/\1 = /" "../${_ckpatch}"
+
+  msg2 "Patching with ck patchset..."
+  patch -Np1 -i ../"${_ckpatch}"
+  
   # https://github.com/graysky2/kernel_gcc_patch
   msg2 "Applying enable_additional_cpu_optimizations_for_gcc_v9.1+_kernel_v4.13+.patch ..."
   patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/enable_additional_cpu_optimizations_for_gcc_v9.1+_kernel_v4.13+.patch"
