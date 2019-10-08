@@ -63,7 +63,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-_srcver=5.2.19-arch1
+_srcver=5.2.20-arch1
 pkgver=${_srcver%-*}
 pkgrel=1
 _ckpatchversion=1
@@ -82,7 +82,7 @@ source=(
   90-linux.hook  # pacman hook for initramfs regeneration
   linux.preset   # standard config files for mkinitcpio ramdisk
   "enable_additional_cpu_optimizations-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
-  "http://ck.kolivas.org/patches/5.0/5.2/5.2-ck${_ckpatchversion}/$_ckpatch.xz" 
+  "http://ck.kolivas.org/patches/5.0/5.2/5.2-ck${_ckpatchversion}/$_ckpatch.xz"
   #https://raw.githubusercontent.com/dolohow/uksm/master/v5.x/${_uksm_patch}
   #https://raw.githubusercontent.com/zaza42/uksm/master/${_uksm_patch}
   https://raw.githubusercontent.com/Szpadel/uksm/master/v5.x/${_uksm_patch}
@@ -94,7 +94,7 @@ validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('de98e4c28e08cd992c3aadc32450b3fa738b6101c509093192bb344f4f41b18a'
+sha256sums=('b121e2497cb6d1752f8f041f1385a72edf9fcf273cb505250e0c0135bb56ad69'
             'SKIP'
             '1d746b1ea3bf4a05b2844ee8ecaaa6a7a6dbe523cd14ecc07384a9afeae9b516'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
@@ -106,7 +106,7 @@ sha256sums=('de98e4c28e08cd992c3aadc32450b3fa738b6101c509093192bb344f4f41b18a'
             '560c8c06cb7833ab24743b818f831add8a7b6ed65181f30417e7b75f107441ef'
             '6fa639054b51172335f69fa75c6c3332b8a73f419eeb6e7eb20e297047ad08ff'
             '5a058e7207bd203eb2890703342a9c92eeaafc3209b4e65028cde7221e53a607')
-            
+
 _kernelname=${pkgbase#linux}
 : ${_kernelname:=-ARCH}
 
