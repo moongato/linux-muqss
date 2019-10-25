@@ -63,7 +63,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-_srcver=5.2.21-arch1
+_srcver=5.3.7-arch1
 pkgver=${_srcver%-*}
 pkgrel=1
 _ckpatchversion=1
@@ -72,9 +72,13 @@ url="https://wiki.archlinux.org/index.php/Linux-ck"
 license=(GPL2)
 makedepends=(kmod inetutils bc libelf)
 options=('!strip')
-_ckpatch="patch-5.2-ck${_ckpatchversion}"
+_ckpatch="patch-5.3-ck${_ckpatchversion}"
+_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.195.patch
 _gcc_more_v='20190822'
-_uksm_patch=uksm-5.2.patch
+_uksm_patch=uksm-5.3.patch
+_bfq_rev_path="bfq-reverts-sep"
+_bfq_rev_patch="0001-Revert-block-bfq-push-up-injection-only-after-settin.patch"
+_bfq_patch="5.3-bfq-dev-lucjan-v11-r2K191008.patch"
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
@@ -82,33 +86,42 @@ source=(
   90-linux.hook  # pacman hook for initramfs regeneration
   linux.preset   # standard config files for mkinitcpio ramdisk
   "enable_additional_cpu_optimizations-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
-  "http://ck.kolivas.org/patches/5.0/5.2/5.2-ck${_ckpatchversion}/$_ckpatch.xz"
-  #https://raw.githubusercontent.com/dolohow/uksm/master/v5.x/${_uksm_patch}
+  "http://ck.kolivas.org/patches/5.0/5.3/5.3-ck${_ckpatchversion}/$_ckpatch.xz"
+  #http://ck.kolivas.org/patches/muqss/5.0/5.3/${_muqss_patch}
+  https://github.com/dolohow/uksm/raw/master/v5.x/${_uksm_patch}
   #https://raw.githubusercontent.com/zaza42/uksm/master/${_uksm_patch}
-  https://raw.githubusercontent.com/Szpadel/uksm/master/v5.x/${_uksm_patch}
-  0001-add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by.patch
+  #https://raw.githubusercontent.com/Szpadel/uksm/master/v5.x/${_uksm_patch}
+  https://github.com/sirlucjan/kernel-patches/raw/master/5.3/${_bfq_rev_path}/${_bfq_rev_patch}
+  https://github.com/sirlucjan/kernel-patches/raw/master/5.3/bfq-dev-lucjan/${_bfq_patch}
   0001-ZEN-Add-a-CONFIG-option-that-sets-O3.patch
-  0002-ZEN-Add-CONFIG-for-unprivileged_userns_clone.patch
+  0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
+  0002-Bluetooth-hidp-Fix-assumptions-on-the-return-value-o.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('9a8ee3ff75dabffa76141c8dc7529dfbb3ca07888a3708a13f15b412268b3538'
+sha256sums=('c6c9714e21531c825c306b107bc6f6c7bfa2d5270a14bad170f8de5a73d34802'
             'SKIP'
-            '1d746b1ea3bf4a05b2844ee8ecaaa6a7a6dbe523cd14ecc07384a9afeae9b516'
+            'SKIP'
             '452b8d4d71e1565ca91b1bebb280693549222ef51c47ba8964e411b2d461699c'
             'c043f3033bb781e2688794a59f6d1f7ed49ef9b13eb77ff9a425df33a244a636'
             'ad6344badc91ad0630caacde83f7f9b97276f80d26a20619a87952be65492c65'
             '8c11086809864b5cef7d079f930bd40da8d0869c091965fa62e95de9a0fe13b5'
-            'f1abc13a8d859fbf6350040e45d7f04ad551a6d39f113ba96fbbd820118c0e36'
-            '5febbab9437b1b97605fbfd170660e86d12593dac9033e8a32d112360eec1acc'
-            '560c8c06cb7833ab24743b818f831add8a7b6ed65181f30417e7b75f107441ef'
+            'SKIP'
+            '985e5f38d740a54f0b36b9f8d9fde8045ac0561e90067322235115f0ff0c2729'
+            'e8a18a793d8ce41fa435848c702637d6ae9ea4d6089c1e836a440b8a83bf0bf3'
+            '5d3de83bd4991fb36df90ac55e8f91377edf3b15a3ec7e8f0b202b49f43a9620'
             '6fa639054b51172335f69fa75c6c3332b8a73f419eeb6e7eb20e297047ad08ff'
-            '5a058e7207bd203eb2890703342a9c92eeaafc3209b4e65028cde7221e53a607')
+            'cb38c0468a9ee0507e97e48be4a51116c1db952b7599906f2c36933b03e1ca34'
+            '4b4d388e0cb6b2448d644463e4693bb08122716117aafa411ce78305da305642')
 
 _kernelname=${pkgbase#linux}
 : ${_kernelname:=-ARCH}
+
+export KBUILD_BUILD_HOST=archlinux
+export KBUILD_BUILD_USER=$pkgbase
+export KBUILD_BUILD_TIMESTAMP="@${SOURCE_DATE_EPOCH:-$(date +%s)}"
 
 prepare() {
   cd linux-${pkgver}
@@ -195,7 +208,6 @@ _package() {
   provides=("linux-muqss=${pkgver}")
   backup=("etc/mkinitcpio.d/$pkgbase.preset")
   install=linux.install
-  
 
   cd linux-${pkgver}
 
@@ -262,9 +274,6 @@ _package-headers() {
 
   # add xfs and shmem for aufs building
   mkdir -p "$builddir"/{fs/xfs,mm}
-
-  # this is gone in v5.3
-  mkdir "$builddir/.tmp_versions"
 
   msg2 "Installing headers..."
   cp -t "$builddir" -a include
