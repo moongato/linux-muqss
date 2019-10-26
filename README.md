@@ -15,4 +15,6 @@ GCC CPU optimization patch from graysky
 
 Full -ck patchset
 
-UKSM - currently unofficial fork
+UKSM 
+
+BFQ enhancements
