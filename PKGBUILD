@@ -65,7 +65,7 @@ _localmodcfg=y
 pkgbase=linux-muqss
 _srcver=5.3.8-arch1
 pkgver=${_srcver%-*}
-pkgrel=1
+pkgrel=2
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -88,6 +88,7 @@ source=(
   "enable_additional_cpu_optimizations-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
   "http://ck.kolivas.org/patches/5.0/5.3/5.3-ck${_ckpatchversion}/$_ckpatch.xz"
   #http://ck.kolivas.org/patches/muqss/5.0/5.3/${_muqss_patch}
+  fix.systemd-detect-virt.patch::https://github.com/ckolivas/linux/commit/6e346c7b4258ac03ec308741e8e28e0da3abf911.patch
   https://github.com/dolohow/uksm/raw/master/v5.x/${_uksm_patch}
   #https://raw.githubusercontent.com/zaza42/uksm/master/${_uksm_patch}
   #https://raw.githubusercontent.com/Szpadel/uksm/master/v5.x/${_uksm_patch}
@@ -103,12 +104,13 @@ validpgpkeys=(
 )
 sha256sums=('78f3cfc6c20b10ff21c0bb22d7d257cab03781c44d8c5aae289f749f94f76649'
             'SKIP'
-            'db9d9bad78114f281d0169f569cc05ac19ba9b16ed43f39bfda84b5c76a2988e'
+            'b9bc27aa86faad6e94b20bd788155264b4aad27a558f249d500eb4bccb38f6ac'
             '452b8d4d71e1565ca91b1bebb280693549222ef51c47ba8964e411b2d461699c'
             'c043f3033bb781e2688794a59f6d1f7ed49ef9b13eb77ff9a425df33a244a636'
             'ad6344badc91ad0630caacde83f7f9b97276f80d26a20619a87952be65492c65'
             '8c11086809864b5cef7d079f930bd40da8d0869c091965fa62e95de9a0fe13b5'
-            'SKIP'
+            '5b66761eae4efa4cb967aba9d4e555aa320cf5c004f0848e6bfbcb75ef66fbf1'
+            '01367272cd82cafc24ae04d309d5c738352949727dc2a37f8578c14c7a90b9f0'
             '985e5f38d740a54f0b36b9f8d9fde8045ac0561e90067322235115f0ff0c2729'
             'e8a18a793d8ce41fa435848c702637d6ae9ea4d6089c1e836a440b8a83bf0bf3'
             '5d3de83bd4991fb36df90ac55e8f91377edf3b15a3ec7e8f0b202b49f43a9620'
@@ -135,7 +137,7 @@ prepare() {
   for src in "${source[@]}"; do
     src="${src%%::*}"
     src="${src##*/}"
-    [[ $src = *.patch ]] || continue
+    [[ $src = 00*.patch ]] || continue
     msg2 "Applying patch $src..."
     patch -Np1 < "../$src"
   done
@@ -157,16 +159,35 @@ prepare() {
 
   # fix ck1 patchset for 5.2.18
   sed -i -e '/^-CFLAGS/ s,+=,:=,' -i -e '/^+CFLAGS/ s,+=,:=,' ../"${_ckpatch}"
+
+  # ck patchset itself
   patch -Np1 -i ../"${_ckpatch}"
+
+  # systemd-detect-virt fix from CK merged but not yet released
+  patch -Np1 -i ../fix.systemd-detect-virt.patch
+
+  # UKSM
+  msg2 "applying uksm patch..."
+  patch -Np1 -i ../"${_uksm_patch}"
+
+  # BFQ patches
+  msg2 "applying bfq patches..."
+  patch -Np1 -i ../"${_bfq_patch}"
+
+  # non-interactively apply ck1 default options
+  # this isn't redundant if we want a clean selection of subarch below
+  make olddefconfig
 
   # https://github.com/graysky2/kernel_gcc_patch
   msg2 "Applying enable_additional_cpu_optimizations_for_gcc_v9.1+_kernel_v4.13+.patch ..."
   patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/enable_additional_cpu_optimizations_for_gcc_v9.1+_kernel_v4.13+.patch"
 
   if [ -n "$_subarch" ]; then
+    # user wants a subarch so apply choice defined above interactively via 'yes'
     yes "$_subarch" | make oldconfig
   else
-    make prepare
+    # no subarch defined so allow user to pick one
+    make oldconfig
   fi
 
   ### Optionally load needed modules for the make localmodconfig
@@ -180,9 +201,6 @@ prepare() {
         exit
       fi
     fi
-
-  # do not run `make olddefconfig` as it sets default options
-  yes "" | make config >/dev/null
 
   make -s kernelrelease > version
   msg2 "Prepared %s version %s" "$pkgbase" "$(<version)"
@@ -216,7 +234,11 @@ _package() {
   msg2 "Installing boot image..."
   # systemd expects to find the kernel here to allow hibernation
   # https://github.com/systemd/systemd/commit/edda44605f06a41fb86b7ab8128dcf99161d2344
-  install -Dm644 "$(make -s image_name)" "$modulesdir/vmlinuz"
+  #install -Dm644 "$(make -s image_name)" "$modulesdir/vmlinuz"
+  #
+  # hard-coded path in case user defined CC=xxx for build which causes errors
+  # see this FS https://bugs.archlinux.org/task/64315
+  install -Dm644 arch/x86/boot/bzImage "$modulesdir/vmlinuz"
   install -Dm644 "$modulesdir/vmlinuz" "$pkgdir/boot/vmlinuz-$pkgbase"
 
   # Used by mkinitcpio to name the kernel
