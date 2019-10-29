@@ -63,7 +63,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-_srcver=5.3.7-arch1
+_srcver=5.3.8-arch1
 pkgver=${_srcver%-*}
 pkgrel=1
 _ckpatchversion=1
@@ -101,9 +101,9 @@ validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('c6c9714e21531c825c306b107bc6f6c7bfa2d5270a14bad170f8de5a73d34802'
+sha256sums=('78f3cfc6c20b10ff21c0bb22d7d257cab03781c44d8c5aae289f749f94f76649'
             'SKIP'
-            'SKIP'
+            'db9d9bad78114f281d0169f569cc05ac19ba9b16ed43f39bfda84b5c76a2988e'
             '452b8d4d71e1565ca91b1bebb280693549222ef51c47ba8964e411b2d461699c'
             'c043f3033bb781e2688794a59f6d1f7ed49ef9b13eb77ff9a425df33a244a636'
             'ad6344badc91ad0630caacde83f7f9b97276f80d26a20619a87952be65492c65'
@@ -135,7 +135,7 @@ prepare() {
   for src in "${source[@]}"; do
     src="${src%%::*}"
     src="${src##*/}"
-    [[ $src = 00*.patch ]] || continue
+    [[ $src = *.patch ]] || continue
     msg2 "Applying patch $src..."
     patch -Np1 < "../$src"
   done
