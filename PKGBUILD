@@ -65,7 +65,7 @@ _localmodcfg=y
 pkgbase=linux-muqss
 _srcver=5.3.8-arch1
 pkgver=${_srcver%-*}
-pkgrel=2
+pkgrel=3
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -79,6 +79,7 @@ _uksm_patch=uksm-5.3.patch
 _bfq_rev_path="bfq-reverts-sep"
 _bfq_rev_patch="0001-Revert-block-bfq-push-up-injection-only-after-settin.patch"
 _bfq_patch="5.3-bfq-dev-lucjan-v11-r2K191008.patch"
+_fsync_patch="0007-v5.3-fsync.patch"
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
@@ -97,6 +98,7 @@ source=(
   0001-ZEN-Add-a-CONFIG-option-that-sets-O3.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
   0002-Bluetooth-hidp-Fix-assumptions-on-the-return-value-o.patch
+  https://github.com/Tk-Glitch/PKGBUILDS/raw/master/linux53-tkg/linux53-tkg-patches/${_fsync_patch}
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -116,7 +118,8 @@ sha256sums=('78f3cfc6c20b10ff21c0bb22d7d257cab03781c44d8c5aae289f749f94f76649'
             '5d3de83bd4991fb36df90ac55e8f91377edf3b15a3ec7e8f0b202b49f43a9620'
             '6fa639054b51172335f69fa75c6c3332b8a73f419eeb6e7eb20e297047ad08ff'
             'cb38c0468a9ee0507e97e48be4a51116c1db952b7599906f2c36933b03e1ca34'
-            '4b4d388e0cb6b2448d644463e4693bb08122716117aafa411ce78305da305642')
+            '4b4d388e0cb6b2448d644463e4693bb08122716117aafa411ce78305da305642'
+            '2d9260b80b43bbd605cf420d6bd53aa7262103dfd77196ba590ece5600b6dc0d')
 
 _kernelname=${pkgbase#linux}
 : ${_kernelname:=-ARCH}
