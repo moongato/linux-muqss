@@ -1,7 +1,5 @@
 # Contributor: graysky <graysky AT archlinux DOT us>
 # Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
-# Contributor: Tobias Powalowski <tpowa@archlinux.org>
-# Contributor: Thomas Baechler <thomas@archlinux.org>
 
 ### BUILD OPTIONS
 # Set these variables to ANYTHING that is not null to enable them
@@ -65,7 +63,7 @@ _localmodcfg=y
 pkgbase=linux-muqss
 _srcver=5.3.8-arch1
 pkgver=${_srcver%-*}
-pkgrel=3
+pkgrel=4
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -83,9 +81,6 @@ _fsync_patch="0007-v5.3-fsync.patch"
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
-  60-linux.hook  # pacman hook for depmod
-  90-linux.hook  # pacman hook for initramfs regeneration
-  linux.preset   # standard config files for mkinitcpio ramdisk
   "enable_additional_cpu_optimizations-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
   "http://ck.kolivas.org/patches/5.0/5.3/5.3-ck${_ckpatchversion}/$_ckpatch.xz"
   #http://ck.kolivas.org/patches/muqss/5.0/5.3/${_muqss_patch}
@@ -106,10 +101,7 @@ validpgpkeys=(
 )
 sha256sums=('78f3cfc6c20b10ff21c0bb22d7d257cab03781c44d8c5aae289f749f94f76649'
             'SKIP'
-            'b9bc27aa86faad6e94b20bd788155264b4aad27a558f249d500eb4bccb38f6ac'
-            '452b8d4d71e1565ca91b1bebb280693549222ef51c47ba8964e411b2d461699c'
-            'c043f3033bb781e2688794a59f6d1f7ed49ef9b13eb77ff9a425df33a244a636'
-            'ad6344badc91ad0630caacde83f7f9b97276f80d26a20619a87952be65492c65'
+            '252d583056270a48fc641bd8c489326b181d1997b38a28cf9b9e9a553cac5636'
             '8c11086809864b5cef7d079f930bd40da8d0869c091965fa62e95de9a0fe13b5'
             '5b66761eae4efa4cb967aba9d4e555aa320cf5c004f0848e6bfbcb75ef66fbf1'
             '01367272cd82cafc24ae04d309d5c738352949727dc2a37f8578c14c7a90b9f0'
@@ -121,9 +113,6 @@ sha256sums=('78f3cfc6c20b10ff21c0bb22d7d257cab03781c44d8c5aae289f749f94f76649'
             '4b4d388e0cb6b2448d644463e4693bb08122716117aafa411ce78305da305642'
             '2d9260b80b43bbd605cf420d6bd53aa7262103dfd77196ba590ece5600b6dc0d')
 
-_kernelname=${pkgbase#linux}
-: ${_kernelname:=-ARCH}
-
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
 export KBUILD_BUILD_TIMESTAMP="@${SOURCE_DATE_EPOCH:-$(date +%s)}"
@@ -134,7 +123,7 @@ prepare() {
   msg2 "Setting version..."
   scripts/setlocalversion --save-scmversion
   echo "-$pkgrel" > localversion.10-pkgrel
-  echo "$_kernelname" > localversion.20-pkgname
+  echo "${pkgbase#linux}" > localversion.20-pkgname
 
   local src
   for src in "${source[@]}"; do
@@ -227,13 +216,12 @@ _package() {
   optdepends=('crda: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
   provides=("linux-muqss=${pkgver}")
-  backup=("etc/mkinitcpio.d/$pkgbase.preset")
-  install=linux.install
 
   cd linux-${pkgver}
 
   local kernver="$(<version)"
   local modulesdir="$pkgdir/usr/lib/modules/$kernver"
+
   msg2 "Installing boot image..."
   # systemd expects to find the kernel here to allow hibernation
   # https://github.com/systemd/systemd/commit/edda44605f06a41fb86b7ab8128dcf99161d2344
@@ -252,25 +240,6 @@ _package() {
 
   # remove build and source links
   rm "$modulesdir"/{source,build}
-
-  msg2 "Installing hooks..."
-  # sed expression for following substitutions
-  local subst="
-    s|%PKGBASE%|$pkgbase|g
-    s|%KERNVER%|$kernver|g
-  "
-
-  # hack to allow specifying an initially nonexisting install file
-  sed "$subst" "$startdir/$install" > "$startdir/$install.pkg"
-  true && install=$install.pkg
-
-  # fill in mkinitcpio preset and pacman hooks
-  sed "$subst" ../linux.preset | install -Dm644 /dev/stdin \
-    "$pkgdir/etc/mkinitcpio.d/$pkgbase.preset"
-  sed "$subst" ../60-linux.hook | install -Dm644 /dev/stdin \
-    "$pkgdir/usr/share/libalpm/hooks/60-$pkgbase.hook"
-  sed "$subst" ../90-linux.hook | install -Dm644 /dev/stdin \
-    "$pkgdir/usr/share/libalpm/hooks/90-$pkgbase.hook"
 
   msg2 "Fixing permissions..."
   chmod -Rc u=rwX,go=rX "$pkgdir"
