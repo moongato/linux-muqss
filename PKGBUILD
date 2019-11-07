@@ -61,9 +61,9 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-_srcver=5.3.8-arch1
+_srcver=5.3.9-arch1
 pkgver=${_srcver%-*}
-pkgrel=5
+pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -99,9 +99,9 @@ validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('78f3cfc6c20b10ff21c0bb22d7d257cab03781c44d8c5aae289f749f94f76649'
+sha256sums=('d72579aa732edd0e25779adfc43e68a53f77e80020c4aab5db2f5b28c247e98a'
             'SKIP'
-            'a8738d5471479ad53d52dec8d3bb744956e33eb841664224f9467f257db7e7af'
+            '84d199929a99778835b9cf1b5a28f86831725860e0ad87021d8af6b02a695a88'
             '8c11086809864b5cef7d079f930bd40da8d0869c091965fa62e95de9a0fe13b5'
             '5b66761eae4efa4cb967aba9d4e555aa320cf5c004f0848e6bfbcb75ef66fbf1'
             '01367272cd82cafc24ae04d309d5c738352949727dc2a37f8578c14c7a90b9f0'
@@ -115,7 +115,7 @@ sha256sums=('78f3cfc6c20b10ff21c0bb22d7d257cab03781c44d8c5aae289f749f94f76649'
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
-export KBUILD_BUILD_TIMESTAMP="@${SOURCE_DATE_EPOCH:-$(date +%s)}"
+export KBUILD_BUILD_TIMESTAMP="$(date -Ru${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EPOCH})"
 
 prepare() {
   cd linux-${pkgver}
@@ -210,8 +210,6 @@ build() {
 
 _package() {
   pkgdesc="The ${pkgbase/linux/Linux} kernel and modules with the ck1 patchset featuring MuQSS CPU scheduler"
-  #_Kpkgdesc="The ${pkgbase/linux/Linux} kernel and modules with the ck1 patchset featuring MuQSS CPU scheduler"
-  #pkgdesc="${_Kpkgdesc}"
   depends=(coreutils kmod initramfs)
   optdepends=('crda: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
@@ -247,11 +245,8 @@ _package() {
 
 _package-headers() {
   pkgdesc="Header files and scripts for building modules for ${pkgbase/linux/Linux} kernel"
-  #_Hpkgdesc="Header files and scripts for building modules for ${pkgbase/linux/Linux} kernel"
-  #pkgdesc="${_Hpkgdesc}"
   depends=('linux-muqss') # added to keep kernel and headers packages matched
   provides=("linux-muqss-headers=${pkgver}" "linux-headers=${pkgver}")
-  
 
   cd linux-${pkgver}
   local builddir="$pkgdir/usr/lib/modules/$(<version)/build"
