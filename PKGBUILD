@@ -227,7 +227,6 @@ _package() {
   # hard-coded path in case user defined CC=xxx for build which causes errors
   # see this FS https://bugs.archlinux.org/task/64315
   install -Dm644 arch/x86/boot/bzImage "$modulesdir/vmlinuz"
-  install -Dm644 "$modulesdir/vmlinuz" "$pkgdir/boot/vmlinuz-$pkgbase"
 
   # Used by mkinitcpio to name the kernel
   echo "$pkgbase" | install -Dm644 /dev/stdin "$modulesdir/pkgbase"
