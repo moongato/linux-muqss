@@ -61,7 +61,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-_srcver=5.4-arch1
+_srcver=5.4.1-arch1
 pkgver=${_srcver%-*}
 pkgrel=1
 _ckpatchversion=1
@@ -85,18 +85,26 @@ source=(
   #https://raw.githubusercontent.com/Szpadel/uksm/master/v5.x/${_uksm_patch}
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
   0001-cpu-5.4-make-O3-always-available.patch
+  0002-lib-devres-add-a-helper-function-for-ioremap_uc.patch
+  0003-mfd-intel-lpss-Use-devm_ioremap_uc-for-MMIO.patch
+  0004-PCI-pciehp-Do-not-disable-interrupt-twice-on-suspend.patch
+  0005-PCI-pciehp-Prevent-deadlock-on-disconnect.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('bf338980b1670bca287f9994b7441c2361907635879169c64ae78364efc5f491'
+sha256sums=('a7d48bb324d53e421ffbe4da40087b3c0c5112707e5f3d827c30118542c74fd9'
             'SKIP'
             'f2ddcb38bcab1ba3e80a833fcd9c3ab3e864c688bc7422a797c1c833b0f0d755'
             '8c11086809864b5cef7d079f930bd40da8d0869c091965fa62e95de9a0fe13b5'
             'f445eea4d0ec2015a25f1ad625c848f4f2252099795966fa4105e0aa29674c5c'
             'b008f5e21bdbaaf95aecebe443761ee0a9adfb4dcf5729e384dcd53323bab149'
-            '8203736c5809e5cdfb9968840b2b90c16572b63e1c4b6eb7a009cb96df54cc8b')
+            '8203736c5809e5cdfb9968840b2b90c16572b63e1c4b6eb7a009cb96df54cc8b'
+            '6fd45ccc07747f177b83550d397c16f8c32fa49985eab790be9792bcb0adf8fd'
+            'd7257a252b7912cd9a5e96fb9eedadd6fa0744f5ea2ac52c135de7c28dac9c98'
+            '5c783631f63bb87f8f8a7b98d4fc5eb2a650a4c101e877f0b58815f2538ec481'
+            '657fd313fb16cb6a6ce6cff4bc6ad96069b500514e6998442aed95573ab4083a')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
