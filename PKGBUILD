@@ -61,7 +61,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-_srcver=5.4.1-arch1
+_srcver=5.4.2-arch1
 pkgver=${_srcver%-*}
 pkgrel=1
 _ckpatchversion=1
@@ -73,14 +73,14 @@ options=('!strip')
 _ckpatch="patch-5.4-ck${_ckpatchversion}"
 _muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.196.patch
 _gcc_more_v='20190822'
-#_uksm_patch=uksm-5.3.patch
+_uksm_patch=uksm-5.4.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
   "enable_additional_cpu_optimizations-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
   "http://ck.kolivas.org/patches/5.0/5.4/5.4-ck${_ckpatchversion}/$_ckpatch.xz"
   #http://ck.kolivas.org/patches/muqss/5.0/5.4/${_muqss_patch}
-  #https://github.com/dolohow/uksm/raw/master/v5.x/${_uksm_patch}
+  https://github.com/dolohow/uksm/raw/master/v5.x/${_uksm_patch}
   #https://raw.githubusercontent.com/zaza42/uksm/master/${_uksm_patch}
   #https://raw.githubusercontent.com/Szpadel/uksm/master/v5.x/${_uksm_patch}
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
@@ -94,11 +94,12 @@ validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('a7d48bb324d53e421ffbe4da40087b3c0c5112707e5f3d827c30118542c74fd9'
+sha256sums=('32f98256877ca6b016715ffffcf184f1603df9e17a324787f252cd602e03a557'
             'SKIP'
             'f2ddcb38bcab1ba3e80a833fcd9c3ab3e864c688bc7422a797c1c833b0f0d755'
             '8c11086809864b5cef7d079f930bd40da8d0869c091965fa62e95de9a0fe13b5'
             'f445eea4d0ec2015a25f1ad625c848f4f2252099795966fa4105e0aa29674c5c'
+            '81d34bf02e771a126af5cb382d44a86dcc759c88b7c89fc7e5b7737731b9130e'
             'b008f5e21bdbaaf95aecebe443761ee0a9adfb4dcf5729e384dcd53323bab149'
             '8203736c5809e5cdfb9968840b2b90c16572b63e1c4b6eb7a009cb96df54cc8b'
             '6fd45ccc07747f177b83550d397c16f8c32fa49985eab790be9792bcb0adf8fd'
