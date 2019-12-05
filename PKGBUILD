@@ -74,6 +74,7 @@ _ckpatch="patch-5.4-ck${_ckpatchversion}"
 _muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.196.patch
 _gcc_more_v='20190822'
 _uksm_patch=uksm-5.4.patch
+_bfq_patch=5.4-bfq-dev-lucjan-v11-r2K191204.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
@@ -83,6 +84,7 @@ source=(
   https://github.com/dolohow/uksm/raw/master/v5.x/${_uksm_patch}
   #https://raw.githubusercontent.com/zaza42/uksm/master/${_uksm_patch}
   #https://raw.githubusercontent.com/Szpadel/uksm/master/v5.x/${_uksm_patch}
+  https://github.com/sirlucjan/kernel-patches/raw/master/5.4/bfq-dev-lucjan/${_bfq_patch}
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
   0001-cpu-5.4-make-O3-always-available.patch
   0002-lib-devres-add-a-helper-function-for-ioremap_uc.patch
@@ -100,6 +102,7 @@ sha256sums=('32f98256877ca6b016715ffffcf184f1603df9e17a324787f252cd602e03a557'
             '8c11086809864b5cef7d079f930bd40da8d0869c091965fa62e95de9a0fe13b5'
             'f445eea4d0ec2015a25f1ad625c848f4f2252099795966fa4105e0aa29674c5c'
             '81d34bf02e771a126af5cb382d44a86dcc759c88b7c89fc7e5b7737731b9130e'
+            '22b92693111f6b341d9b638d4147ec366d094512990e35dad12c06d553d25b14'
             'b7f445d79b4a790138e6306f84c33ccd38f69918b3c34ad9452b69e59e7f489a'
             '8203736c5809e5cdfb9968840b2b90c16572b63e1c4b6eb7a009cb96df54cc8b'
             '6fd45ccc07747f177b83550d397c16f8c32fa49985eab790be9792bcb0adf8fd'
@@ -151,8 +154,8 @@ prepare() {
   patch -Np1 -i ../"${_uksm_patch}"
 
   # BFQ patches
-  #msg2 "applying bfq patches..."
-  #patch -Np1 -i ../"${_bfq_patch}"
+  msg2 "applying bfq patches..."
+  patch -Np1 -i ../"${_bfq_patch}"
 
   # non-interactively apply ck1 default options
   # this isn't redundant if we want a clean selection of subarch below
