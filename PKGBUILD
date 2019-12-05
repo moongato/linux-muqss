@@ -147,8 +147,8 @@ prepare() {
   patch -Np1 -i ../"${_ckpatch}"
 
   # UKSM
-  #msg2 "applying uksm patch..."
-  #patch -Np1 -i ../"${_uksm_patch}"
+  msg2 "applying uksm patch..."
+  patch -Np1 -i ../"${_uksm_patch}"
 
   # BFQ patches
   #msg2 "applying bfq patches..."
