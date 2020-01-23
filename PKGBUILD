@@ -61,8 +61,8 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.4.13
-pkgrel=2
+pkgver=5.4.14
+pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -99,13 +99,12 @@ source=(
   0012-Revert-iwlwifi-mvm-fix-scan-config-command-size.patch
   0013-e1000e-Revert-e1000e-Make-watchdog-use-delayed-work.patch
   0014-drm-amdgpu-Add-DC-feature-mask-to-disable-fractional-pwm.patch
-  0015-ptp-free-ptp-device-pin-descriptors-properly.patch
   )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('49fb29d96d7e7c1d7e6082701bd26bfddd0fbc87a796fb6ba6258bc5fd386ad7'
+sha256sums=('531e18b0eef516fa4b3843f89729fafbf3c6bc00325b082cc1f2cfcb28c8d7f0'
             'SKIP'
             '5846061889e70eae83340d9889f9edefbef194c056619a867d5ddb4a22fb223e'
             '8c11086809864b5cef7d079f930bd40da8d0869c091965fa62e95de9a0fe13b5'
@@ -126,8 +125,7 @@ sha256sums=('49fb29d96d7e7c1d7e6082701bd26bfddd0fbc87a796fb6ba6258bc5fd386ad7'
             '33ec2170ace6b4f7dbc1cc751110d325d8619202d0f312587adbc4bef7a045ce'
             '54104b9118d9151379589f0b95bce38aaea5d7068e80e7ab5dbdad0b73d7b1b7'
             'f9464bc1980e54f6d090f20658907318456c2d86654c8681fd518083c2596be7'
-            'cba63c224af57d6b9432bb5f507121148d02b313c5f87c55504f49632a3a6062'
-            'b8b878b0bb2c25f3f9e8250e8ecf5d05cd5a0b8c0ffa7ab55fbdbd74042d8878')
+            'cba63c224af57d6b9432bb5f507121148d02b313c5f87c55504f49632a3a6062')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
