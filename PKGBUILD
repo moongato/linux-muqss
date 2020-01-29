@@ -61,7 +61,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.4.15
+pkgver=5.4.16
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -95,16 +95,14 @@ source=(
   0008-drm-i915-Fix-audio-power-up-sequence-for-gen10-displ.patch
   0009-drm-i915-extend-audio-CDCLK-2-BCLK-constraint-to-more.patch
   0010-drm-i915-Limit-audio-CDCLK-2-BCLK-constraint-back-to-GLK-only.patch
-  0011-pinctrl-sunrisepoint-Add-missing-Interrupt-Status-register-offset.patch
-  0012-Revert-iwlwifi-mvm-fix-scan-config-command-size.patch
-  0013-e1000e-Revert-e1000e-Make-watchdog-use-delayed-work.patch
-  0014-drm-amdgpu-Add-DC-feature-mask-to-disable-fractional-pwm.patch
+  0011-e1000e-Revert-e1000e-Make-watchdog-use-delayed-work.patch
+  0012-drm-amdgpu-Add-DC-feature-mask-to-disable-fractional-pwm.patch
   )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('6407222f850f685b346011bd696a3216d5df0f37e0184099100d2724396d94b1'
+sha256sums=('911541df2974782062f551ba0a818d7822ec69db4c41e590bcc7422398bada7a'
             'SKIP'
             '5846061889e70eae83340d9889f9edefbef194c056619a867d5ddb4a22fb223e'
             '8c11086809864b5cef7d079f930bd40da8d0869c091965fa62e95de9a0fe13b5'
@@ -122,8 +120,6 @@ sha256sums=('6407222f850f685b346011bd696a3216d5df0f37e0184099100d2724396d94b1'
             '988ffbb96d85564a9d96145e5973339a8f78ae95d919efb2ee7bb50f7a8e8fc9'
             '5257159e20a5fcb102a3b3ee6de33882a9e132e7f1d4345b8730effdd0240bb6'
             '763cd8e7d5b4a5c24f7a82f24c64ec5503ea5c81dfb42fa74150136c0ca066fd'
-            '33ec2170ace6b4f7dbc1cc751110d325d8619202d0f312587adbc4bef7a045ce'
-            '54104b9118d9151379589f0b95bce38aaea5d7068e80e7ab5dbdad0b73d7b1b7'
             'f9464bc1980e54f6d090f20658907318456c2d86654c8681fd518083c2596be7'
             'cba63c224af57d6b9432bb5f507121148d02b313c5f87c55504f49632a3a6062')
 
