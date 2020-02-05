@@ -1,8 +1,7 @@
-From 46190aab49a3591ebd824367627b47492653fa31 Mon Sep 17 00:00:00 2001
+From 673deeaa0505b542ef9516a42ced24d724c2cc6f Mon Sep 17 00:00:00 2001
 From: "Jan Alexander Steffens (heftig)" <jan.steffens@gmail.com>
 Date: Mon, 16 Sep 2019 04:53:20 +0200
-Subject: [PATCH 1/5] ZEN: Add sysctl and CONFIG to disallow unprivileged
- CLONE_NEWUSER
+Subject: ZEN: Add sysctl and CONFIG to disallow unprivileged CLONE_NEWUSER
 
 Our default behavior continues to match the vanilla kernel.
 ---
@@ -13,10 +12,10 @@ Our default behavior continues to match the vanilla kernel.
  4 files changed, 50 insertions(+)
 
 diff --git a/init/Kconfig b/init/Kconfig
-index 47d40f399000..6647db098428 100644
+index a34064a031a5..0342f34271b3 100644
 --- a/init/Kconfig
 +++ b/init/Kconfig
-@@ -1103,6 +1103,22 @@ config USER_NS
+@@ -1102,6 +1102,22 @@ config USER_NS
  
  	  If unsure, say N.
  
@@ -128,5 +127,5 @@ index 8eadadc478f9..c36ecd19562c 100644
  static DEFINE_MUTEX(userns_state_mutex);
  
 -- 
-2.25.0
+cgit v1.2.1-1-g437b
 

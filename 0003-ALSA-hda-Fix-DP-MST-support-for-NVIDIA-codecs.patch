@@ -1,7 +1,7 @@
 From 6b43b6519a752c51657b9afa4eb844cad29d2b8c Mon Sep 17 00:00:00 2001
 From: Nikhil Mahale <nmahale@nvidia.com>
 Date: Mon, 3 Feb 2020 15:36:17 +0530
-Subject: [PATCH 3/5] ALSA: hda - Fix DP-MST support for NVIDIA codecs
+Subject: ALSA: hda - Fix DP-MST support for NVIDIA codecs
 
 If dyn_pcm_assign is set, different jack objects are being created
 for pcm and pins.
@@ -18,7 +18,7 @@ common for acomp and !acomp code paths.
 Fixes: 5398e94fb753 ALSA: hda - Add DP-MST support for NVIDIA codecs
 Signed-off-by: Nikhil Mahale <nmahale@nvidia.com>
 ---
- sound/pci/hda/patch_hdmi.c | 94 +++++++++++++++++++-------------------
+ sound/pci/hda/patch_hdmi.c | 94 +++++++++++++++++++++++-----------------------
  1 file changed, 47 insertions(+), 47 deletions(-)
 
 diff --git a/sound/pci/hda/patch_hdmi.c b/sound/pci/hda/patch_hdmi.c
@@ -178,5 +178,5 @@ index 630b1f5c276d..469b25065643 100644
  }
  
 -- 
-2.25.0
+cgit v1.2.1-1-g437b
 
