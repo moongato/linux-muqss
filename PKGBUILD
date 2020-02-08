@@ -62,7 +62,7 @@ _localmodcfg=y
 
 pkgbase=linux-muqss
 pkgver=5.5.2
-pkgrel=3
+pkgrel=4
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -73,7 +73,7 @@ _ckpatch="patch-5.5-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.198.patch
 _gcc_more_v='20191217'
 #_uksm_patch=uksm-5.4.patch
-_bfq_patch=5.5-bfq-dev-lucjan-v11-r2K200203.patch
+_bfq_patch=5.5-bfq-dev-lucjan-v11-r2K200207.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
@@ -100,7 +100,7 @@ sha256sums=('24f5f383b0337374f160723bcf3bf679c75cb5bd3fd0824a56998e47c04ef99e'
             '4275f70b3f30a2e6f1f816611a1619fecf89c03b8fd95f1e1f664ac05e35b651'
             '7a4a209de815f4bae49c7c577c0584c77257e3953ac4324d2aa425859ba657f5'
             '37a9d61e8a0b5a73992e1397c3a9cc947d39e715f205f3c665eb157b96d58f98'
-            '4cb641eb59424abe830629d37c7fd3e85affe38f9cc11d5f4696e8b381b66d37'
+            '56fb93dc3997ebf8cf218dd44bb2148e139477fa7f934fe0f6049deb3dbc1f94'
             '1c949aa5ca3beb4c84eccf57806d6cbe88c83b1cb79941002bc4b4954543f796'
             '42cec52b2d0129cc026f038d65993be8595de4095df5479481f2a655bfcf700e'
             '5823197ab15a3bec114045ca19023dcb3bca09e8d259bde220e10f4020004b45'
