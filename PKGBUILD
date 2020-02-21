@@ -72,7 +72,7 @@ options=('!strip')
 _ckpatch="patch-5.5-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.198.patch
 _gcc_more_v='20191217'
-#_uksm_patch=uksm-5.4.patch
+_uksm_patch=uksm-5.5.patch
 _bfq_patch=5.5-bfq-dev-lucjan-v11-r2K200211.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
@@ -80,7 +80,7 @@ source=(
   "enable_additional_cpu_optimizations-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
   "http://ck.kolivas.org/patches/5.0/5.5/5.5-ck${_ckpatchversion}/$_ckpatch.xz"
   #http://ck.kolivas.org/patches/muqss/5.0/5.5/${_muqss_patch}
-  #https://github.com/dolohow/uksm/raw/master/v5.x/${_uksm_patch}
+  https://github.com/dolohow/uksm/raw/master/v5.x/${_uksm_patch}
   #https://raw.githubusercontent.com/zaza42/uksm/master/${_uksm_patch}
   #https://raw.githubusercontent.com/Szpadel/uksm/master/v5.x/${_uksm_patch}
   https://github.com/sirlucjan/kernel-patches/raw/master/5.5/bfq-dev-lucjan/${_bfq_patch}
@@ -105,9 +105,10 @@ validpgpkeys=(
 )
 sha256sums=('7ac07bc03f2d159f924d25a79df07d1a115a13f44f67455511d3c84c15ac5087'
             'SKIP'
-            '33ebcd4fb80136777a07737522a25c42c01e4526095ef31f2091f17fb23e7db3'
+            '89582b2faddfdbda5483564e2a5d4a8b2ecfbc8ec888e2eb50599678770c1517'
             '7a4a209de815f4bae49c7c577c0584c77257e3953ac4324d2aa425859ba657f5'
             '37a9d61e8a0b5a73992e1397c3a9cc947d39e715f205f3c665eb157b96d58f98'
+            'a948ee238ee89c609df9a0700eac9ac4f64bd9523c0f9ebb13263b3c979d2da1'
             '2983413677914abdb5294905fc5a56e7cbeaf1e30620e8cadc726a68c7e08b43'
             '1c949aa5ca3beb4c84eccf57806d6cbe88c83b1cb79941002bc4b4954543f796'
             '42cec52b2d0129cc026f038d65993be8595de4095df5479481f2a655bfcf700e'
@@ -164,8 +165,8 @@ prepare() {
   patch -Np1 -i ../"${_ckpatch}"
 
   # UKSM
-  #echo "applying uksm patch..."
-  #patch -Np1 -i ../"${_uksm_patch}"
+  echo "applying uksm patch..."
+  patch -Np1 -i ../"${_uksm_patch}"
 
   # BFQ patches
   echo "applying bfq patches..."
