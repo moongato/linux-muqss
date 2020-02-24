@@ -61,7 +61,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.5.5
+pkgver=5.5.6
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -73,6 +73,7 @@ _ckpatch="patch-5.5-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.198.patch
 _gcc_more_v='20191217'
 _uksm_patch=uksm-5.5.patch
+_bfq_rev_patch="0001-Revert-block-bfq-do-not-plug-I-O-for-bfq_queues-with.patch"
 _bfq_patch=5.5-bfq-dev-lucjan-v11-r2K200211.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
@@ -81,8 +82,7 @@ source=(
   "http://ck.kolivas.org/patches/5.0/5.5/5.5-ck${_ckpatchversion}/$_ckpatch.xz"
   #http://ck.kolivas.org/patches/muqss/5.0/5.5/${_muqss_patch}
   https://github.com/dolohow/uksm/raw/master/v5.x/${_uksm_patch}
-  #https://raw.githubusercontent.com/zaza42/uksm/master/${_uksm_patch}
-  #https://raw.githubusercontent.com/Szpadel/uksm/master/v5.x/${_uksm_patch}
+  https://github.com/sirlucjan/kernel-patches/raw/master/5.5/bfq-reverts-sep/${_bfq_rev_patch}
   https://github.com/sirlucjan/kernel-patches/raw/master/5.5/bfq-dev-lucjan/${_bfq_patch}
   0001-init-Kconfig-enable-O3-for-all-arches.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
@@ -103,12 +103,13 @@ validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('7ac07bc03f2d159f924d25a79df07d1a115a13f44f67455511d3c84c15ac5087'
+sha256sums=('54cc88ab9d7517267d8592905b277424ae441f3d7209c7ad1236533c2be6ee35'
             'SKIP'
-            '89582b2faddfdbda5483564e2a5d4a8b2ecfbc8ec888e2eb50599678770c1517'
+            'b9e4d40af78667373bd74e173b89c38fa12d6f13ecb147f4e4c4ef9075e8e1e6'
             '7a4a209de815f4bae49c7c577c0584c77257e3953ac4324d2aa425859ba657f5'
             '37a9d61e8a0b5a73992e1397c3a9cc947d39e715f205f3c665eb157b96d58f98'
             'a948ee238ee89c609df9a0700eac9ac4f64bd9523c0f9ebb13263b3c979d2da1'
+            '27d317fc3b7c809dffc262dc2d96d39b6d010144b11b9af3af4d334fb9a6f83f'
             '2983413677914abdb5294905fc5a56e7cbeaf1e30620e8cadc726a68c7e08b43'
             '1c949aa5ca3beb4c84eccf57806d6cbe88c83b1cb79941002bc4b4954543f796'
             '42cec52b2d0129cc026f038d65993be8595de4095df5479481f2a655bfcf700e'
