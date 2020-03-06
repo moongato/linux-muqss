@@ -67,7 +67,9 @@ _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
 license=(GPL2)
-makedepends=(bc kmod libelf)
+makedepends=(
+  bc kmod libelf
+)
 options=('!strip')
 _ckpatch="patch-5.5-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.198.patch
@@ -208,7 +210,7 @@ prepare() {
 
 build() {
   cd linux-${pkgver}
-  make bzImage modules
+  make all
 }
 
 _package() {
