@@ -62,7 +62,7 @@ _localmodcfg=y
 
 pkgbase=linux-muqss
 pkgver=5.5.13
-pkgrel=1
+pkgrel=2
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -103,7 +103,7 @@ validpgpkeys=(
 )
 sha256sums=('1f3b3614a06bffc9c621c82f98d8ca88c60538a8c6dd77f96f2e7fee310a4ee2'
             'SKIP'
-            'b9e4d40af78667373bd74e173b89c38fa12d6f13ecb147f4e4c4ef9075e8e1e6'
+            'ff26cc098dcead89d968dda5c3c401e5d166dd6e2a5d6264cff9f7bc05dc797b'
             '7a4a209de815f4bae49c7c577c0584c77257e3953ac4324d2aa425859ba657f5'
             '37a9d61e8a0b5a73992e1397c3a9cc947d39e715f205f3c665eb157b96d58f98'
             'a948ee238ee89c609df9a0700eac9ac4f64bd9523c0f9ebb13263b3c979d2da1'
