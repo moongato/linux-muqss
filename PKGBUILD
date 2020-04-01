@@ -61,8 +61,8 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.5.13
-pkgrel=3
+pkgver=5.5.14
+pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -96,13 +96,12 @@ source=(
   0009-drm-i915-Add-a-simple-is-bound-check-before-unbinding.patch
   0010-drm-i915-Introduce-a-vma-kref.patch
   0011-iwlwifi-dont-send-GEO_TX_POWER_LIMIT-if-no-wgds-table.patch
-  0012-Revert-bpf-Provide-better-register-bounds-after-jmp32-instructions.patch
   )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('1f3b3614a06bffc9c621c82f98d8ca88c60538a8c6dd77f96f2e7fee310a4ee2'
+sha256sums=('4c529e4e100df11887e0a789d0e46d7ffd053e68a0380b6173a3a2799192ef6a'
             'SKIP'
             'ff26cc098dcead89d968dda5c3c401e5d166dd6e2a5d6264cff9f7bc05dc797b'
             '7a4a209de815f4bae49c7c577c0584c77257e3953ac4324d2aa425859ba657f5'
@@ -121,8 +120,7 @@ sha256sums=('1f3b3614a06bffc9c621c82f98d8ca88c60538a8c6dd77f96f2e7fee310a4ee2'
             '277596368b8fe02704e5291a1ad043adad279e98216eb78d2c4f38c4a047a63b'
             '6a9de6902bc97f201a5c32768e8a68a0e8f2639d2e1cfe86d8f01bc6fda1f221'
             'dc46801624696fb8df0e9e5aed0f66e55e48dd03a5dfe6b04281ba810c79ce70'
-            'd154765afd46fe9c0973c1448d4226f6a43da82f582e54b59f0baa8d6f001b98'
-            '3409393f616b70cd02854aabca004678178daebeff6db2361815718864042b1f')
+            'd154765afd46fe9c0973c1448d4226f6a43da82f582e54b59f0baa8d6f001b98')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
