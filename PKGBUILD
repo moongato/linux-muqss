@@ -61,7 +61,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.5.19
+pkgver=5.6.7
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -69,51 +69,39 @@ url="https://wiki.archlinux.org/index.php/Linux-ck"
 license=(GPL2)
 makedepends=(bc kmod libelf)
 options=('!strip')
-_ckpatch="patch-5.5-ck${_ckpatchversion}"
+_ckpatch="patch-5.6-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.198.patch
 _gcc_more_v='20191217'
 #_uksm_patch=uksm-5.5.patch
-#_bfq_rev_patch="0001-bfq-reverts.patch"
-#_bfq_patch=5.5-bfq-dev-lucjan-v11-r2K200327.patch
+_bfq_rev_patch="0001-bfq-reverts.patch"
+_bfq_patch=5.6-bfq-dev-lucjan-v11-r2K200424.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
+  sphinx-workaround.patch
   "enable_additional_cpu_optimizations-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
-  "http://ck.kolivas.org/patches/5.0/5.5/5.5-ck${_ckpatchversion}/$_ckpatch.xz"
+  "http://ck.kolivas.org/patches/5.0/5.6/5.6-ck${_ckpatchversion}/$_ckpatch.xz"
   #http://ck.kolivas.org/patches/muqss/5.0/5.5/${_muqss_patch}
   #https://github.com/dolohow/uksm/raw/master/v5.x/${_uksm_patch}
-  #https://github.com/sirlucjan/kernel-patches/raw/master/5.5/bfq-reverts-all-v3/${_bfq_rev_patch}
-  #https://github.com/sirlucjan/kernel-patches/raw/master/5.5/bfq-dev-lucjan/${_bfq_patch}
+  https://github.com/sirlucjan/kernel-patches/raw/master/5.6/bfq-reverts-all-v2/${_bfq_rev_patch}
+  https://github.com/sirlucjan/kernel-patches/raw/master/5.6/bfq-dev-lucjan/${_bfq_patch}
   0001-init-Kconfig-enable-O3-for-all-arches.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
-  0002-iwlwifi-pcie-restore-support-for-Killer-Qu-C0-NICs.patch
-  0003-drm-i915-Serialise-i915_active_acquire-with__active_retire.patch
-  0004-drm-i915-gem-Take-runtime-pm-wakeref-prior-to-unbinding.patch
-  0005-drm-i915-gem-Avoid-parking-the-vma-as-we-unbind.patch
-  0006-drm-i915-gem-Try-to-flush-pending-unbind-events.patch
-  0007-drm-i915-gem-Reinitialise-the-local-list-before-repeating.patch
-  0008-drm-i915-Add-a-simple-is-bound-check-before-unbinding.patch
-  0009-drm-i915-Introduce-a-vma-kref.patch
   )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('1448334371fb52f511255726832464d33877a210a7350260fb18eb225ae211eb'
+sha256sums=('23a0420f29eacb66d71f86f64fbd35a1b6ff617d520e3e05f3e1f537d46692ca'
             'SKIP'
-            'a7898683e64fc3ba52258da15c4fdea21e01b5477253e3dbcb38093c2ba604b4'
+            '1302d2aa4c047925007e1781de7589e519133270219e11b79dc819832d0f5bb8'
+            '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
             '7a4a209de815f4bae49c7c577c0584c77257e3953ac4324d2aa425859ba657f5'
-            '37a9d61e8a0b5a73992e1397c3a9cc947d39e715f205f3c665eb157b96d58f98'
-            '1c949aa5ca3beb4c84eccf57806d6cbe88c83b1cb79941002bc4b4954543f796'
-            '42cec52b2d0129cc026f038d65993be8595de4095df5479481f2a655bfcf700e'
-            '5823197ab15a3bec114045ca19023dcb3bca09e8d259bde220e10f4020004b45'
-            '9653c9310468c38fce09d5c6450965359f453c9ec64d04b8647aad3759539d06'
-            '6b8c563287b694efff91a65cff7fc3924e0468e6874b62dd5ace629e96c1394b'
-            '2fac1c411f5c33405226b294081107ec1d0e24c52f02651c6e674b9b34f08431'
-            '1e3ad73ede2a80e1052b7e66dcc2adec7f909038c77195c3ad59ad4e8f731f6c'
-            '277596368b8fe02704e5291a1ad043adad279e98216eb78d2c4f38c4a047a63b'
-            '6a9de6902bc97f201a5c32768e8a68a0e8f2639d2e1cfe86d8f01bc6fda1f221'
-            'dc46801624696fb8df0e9e5aed0f66e55e48dd03a5dfe6b04281ba810c79ce70')
+            'a6fe596e75333a5ac8ed4a4d63e4408ef38ebef6303889223e236af3ce576877'
+            '396812c348dc27de681b20835e237ddd7777ac3fad27d65ac46b6469b64fd726'
+            'd42a3e8a918266c554fbe4c2499ad8732409a31dce0b458234a97e40e87e68ea'
+            '1c949aa5ca3beb4c84eccf57806d6cbe88c83b1cb79941002bc4b4954543f796' 
+            '534a31ff06d3bffeee21ae2a8e5ca873b26b14952315db36357685dd81f07a60')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -233,9 +221,6 @@ _package() {
 
   # remove build and source links
   rm "$modulesdir"/{source,build}
-
-  echo "Fixing permissions..."
-  chmod -Rc u=rwX,go=rX "$pkgdir"
 }
 
 _package-headers() {
@@ -314,8 +299,6 @@ _package-headers() {
   mkdir -p "$pkgdir/usr/src"
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 
-  echo "Fixing permissions..."
-  chmod -Rc u=rwX,go=rX "$pkgdir"
 }
 
 pkgname=("$pkgbase" "$pkgbase-headers")
