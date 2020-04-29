@@ -61,7 +61,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.6.7
+pkgver=5.6.8
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -92,9 +92,9 @@ validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('23a0420f29eacb66d71f86f64fbd35a1b6ff617d520e3e05f3e1f537d46692ca'
+sha256sums=('19e142ff07a2c8d10116074099b9d845682e74544a2b6c1641f7cb044ac282df'
             'SKIP'
-            '1302d2aa4c047925007e1781de7589e519133270219e11b79dc819832d0f5bb8'
+            'fbddb32f9ab077d64895f2a77f30dd069d83324982c8df8b79cac28d7dc6f5a2'
             '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
             '7a4a209de815f4bae49c7c577c0584c77257e3953ac4324d2aa425859ba657f5'
             'a6fe596e75333a5ac8ed4a4d63e4408ef38ebef6303889223e236af3ce576877'
@@ -147,8 +147,12 @@ prepare() {
   #patch -Np1 -i ../"${_uksm_patch}"
 
   # BFQ patches
-  #echo "applying bfq patches..."
-  #patch -Np1 -i ../"${_bfq_patch}"
+  echo "applying bfq patches..."
+  patch -Np1 -i ../"${_bfq_patch}"
+
+  # sphinx-workaround.patch
+  echo "applying sphinx-workaround patch..."
+  patch -Np1 -i ../sphinx-workaround.patch
 
   # non-interactively apply ck1 default options
   # this isn't redundant if we want a clean selection of subarch below
