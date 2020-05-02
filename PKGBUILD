@@ -61,8 +61,8 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.6.8
-pkgrel=2
+pkgver=5.6.9
+pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -92,7 +92,7 @@ validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('19e142ff07a2c8d10116074099b9d845682e74544a2b6c1641f7cb044ac282df'
+sha256sums=('ea90713e6366859c4e2eed71f05771f589f44fddcb475cfd9abf18df704c8093'
             'SKIP'
             'fbddb32f9ab077d64895f2a77f30dd069d83324982c8df8b79cac28d7dc6f5a2'
             '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
