@@ -61,8 +61,8 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.6.11
-pkgrel=2
+pkgver=5.6.12
+pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -88,12 +88,16 @@ source=(
   0001-init-Kconfig-enable-O3-for-all-arches.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
   0002-kvm-ioapic-Restrict-lazy-EOI-update-to-edge-triggered-interrupts.patch
+  0003-gcc-plugins-drop-support-for-GCC-4.7.patch
+  0004-gcc-common.h-Update-for-GCC-10.patch
+  0005-Makefile-disallow-data-races-on-gcc-10-as-well.patch
+  0006-x86-Fix-early-boot-crash-on-gcc-10-next-try.patch
   )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('d6dd6cbe99429f088eddb248abce7832e8f8e45eb072cbf0d0f86b5b87221baa'
+sha256sums=('daea336aace63a9116475b3f698e259073c00bea57a2a545300dba1c45562221'
             'SKIP'
             'fbddb32f9ab077d64895f2a77f30dd069d83324982c8df8b79cac28d7dc6f5a2'
             '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
@@ -103,7 +107,11 @@ sha256sums=('d6dd6cbe99429f088eddb248abce7832e8f8e45eb072cbf0d0f86b5b87221baa'
             '3f298d3084a13bb40e1e40013408c2e0eb87b92679a8ece65c629b6471634ba9'
             '1c949aa5ca3beb4c84eccf57806d6cbe88c83b1cb79941002bc4b4954543f796' 
             '534a31ff06d3bffeee21ae2a8e5ca873b26b14952315db36357685dd81f07a60'
-            '3a713ac3895867b6f24d48f1ec89d21e1c4ffff895c022d8e7bdfa29c1b60a30')
+            '3a713ac3895867b6f24d48f1ec89d21e1c4ffff895c022d8e7bdfa29c1b60a30'
+	    '861a3203eb2fa76dfdd3ecc71c11257822f7eb90ccc7d59a79f4ab7e8b2be5fd'
+            '38ecc3cb20214c48b8b295616c4f0f3da7be946c5e9e03bb5a06b4583883cc65'
+            'f91625bd59cdd3b05651e19dc3cfdcebaee83f72be99a0a0938c87556362d9db'
+            '97b82d4de39a6477b56991d4e25f2e9fa91c7c2155fabdcd1e7ecc49bc2f5e8a')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
