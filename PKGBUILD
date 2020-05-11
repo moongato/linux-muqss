@@ -62,7 +62,7 @@ _localmodcfg=y
 
 pkgbase=linux-muqss
 pkgver=5.6.12
-pkgrel=1
+pkgrel=2
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -99,7 +99,7 @@ validpgpkeys=(
 )
 sha256sums=('daea336aace63a9116475b3f698e259073c00bea57a2a545300dba1c45562221'
             'SKIP'
-            'fbddb32f9ab077d64895f2a77f30dd069d83324982c8df8b79cac28d7dc6f5a2'
+            'e06e8a074490467ec18b80a46505843211753d97f7b72ac43aa95b2d40d9faea'
             '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
             '7a4a209de815f4bae49c7c577c0584c77257e3953ac4324d2aa425859ba657f5'
             'a6fe596e75333a5ac8ed4a4d63e4408ef38ebef6303889223e236af3ce576877'
@@ -143,6 +143,10 @@ prepare() {
   # https://bbs.archlinux.org/viewtopic.php?pid=1863567#p1863567
   sed -i -e '/CONFIG_LATENCYTOP=/ s,y,n,' \
       -i -e '/CONFIG_SCHED_DEBUG=/ s,y,n,' ./.config
+
+  # FS#66613
+  # https://bugzilla.kernel.org/show_bug.cgi?id=207173#c6
+  sed -i -e 's/CONFIG_KVM_WERROR=y/# CONFIG_KVM_WERROR is not set/' ./.config
 
   # fix naming schema in EXTRAVERSION of ck patch set
   sed -i -re "s/^(.EXTRAVERSION).*$/\1 = /" "../${_ckpatch}"
