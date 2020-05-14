@@ -61,8 +61,8 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.6.12
-pkgrel=2
+pkgver=5.6.13
+pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -87,17 +87,16 @@ source=(
   https://github.com/sirlucjan/kernel-patches/raw/master/5.6/bfq-dev-lucjan/${_bfq_patch}
   0001-init-Kconfig-enable-O3-for-all-arches.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
-  0002-kvm-ioapic-Restrict-lazy-EOI-update-to-edge-triggered-interrupts.patch
-  0003-gcc-plugins-drop-support-for-GCC-4.7.patch
-  0004-gcc-common.h-Update-for-GCC-10.patch
-  0005-Makefile-disallow-data-races-on-gcc-10-as-well.patch
-  0006-x86-Fix-early-boot-crash-on-gcc-10-next-try.patch
+  0002-gcc-plugins-drop-support-for-GCC-4.7.patch
+  0003-gcc-common.h-Update-for-GCC-10.patch
+  0004-Makefile-disallow-data-races-on-gcc-10-as-well.patch
+  0005-x86-Fix-early-boot-crash-on-gcc-10-next-try.patch
   )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('daea336aace63a9116475b3f698e259073c00bea57a2a545300dba1c45562221'
+sha256sums=('f125d79c8f6974213638787adcad6b575bbd35a05851802fd83f622ec18ff987'
             'SKIP'
             'e06e8a074490467ec18b80a46505843211753d97f7b72ac43aa95b2d40d9faea'
             '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
@@ -107,8 +106,7 @@ sha256sums=('daea336aace63a9116475b3f698e259073c00bea57a2a545300dba1c45562221'
             '3f298d3084a13bb40e1e40013408c2e0eb87b92679a8ece65c629b6471634ba9'
             '1c949aa5ca3beb4c84eccf57806d6cbe88c83b1cb79941002bc4b4954543f796' 
             '534a31ff06d3bffeee21ae2a8e5ca873b26b14952315db36357685dd81f07a60'
-            '3a713ac3895867b6f24d48f1ec89d21e1c4ffff895c022d8e7bdfa29c1b60a30'
-	    '861a3203eb2fa76dfdd3ecc71c11257822f7eb90ccc7d59a79f4ab7e8b2be5fd'
+      	    '861a3203eb2fa76dfdd3ecc71c11257822f7eb90ccc7d59a79f4ab7e8b2be5fd'
             '38ecc3cb20214c48b8b295616c4f0f3da7be946c5e9e03bb5a06b4583883cc65'
             'f91625bd59cdd3b05651e19dc3cfdcebaee83f72be99a0a0938c87556362d9db'
             '97b82d4de39a6477b56991d4e25f2e9fa91c7c2155fabdcd1e7ecc49bc2f5e8a')
