@@ -62,8 +62,8 @@ _localmodcfg=y
 
 pkgbase=linux-muqss
 pkgver=5.6.13
-pkgrel=1
-_ckpatchversion=1
+pkgrel=3
+_ckpatchversion=2
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
 license=(GPL2)
@@ -74,11 +74,11 @@ _ckpatch="patch-5.6-ck${_ckpatchversion}"
 _gcc_more_v='20191217'
 #_uksm_patch=uksm-5.5.patch
 _bfq_rev_patch="0001-bfq-reverts.patch"
-_bfq_patch=5.6-bfq-dev-lucjan-v11-r2K200506.patch
+_bfq_patch=5.6-bfq-dev-lucjan-v11-r2K200514.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
-  sphinx-workaround.patch
+  0000-sphinx-workaround.patch
   "enable_additional_cpu_optimizations-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
   "http://ck.kolivas.org/patches/5.0/5.6/5.6-ck${_ckpatchversion}/$_ckpatch.xz"
   #http://ck.kolivas.org/patches/muqss/5.0/5.5/${_muqss_patch}
@@ -101,10 +101,10 @@ sha256sums=('f125d79c8f6974213638787adcad6b575bbd35a05851802fd83f622ec18ff987'
             'e06e8a074490467ec18b80a46505843211753d97f7b72ac43aa95b2d40d9faea'
             '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
             '7a4a209de815f4bae49c7c577c0584c77257e3953ac4324d2aa425859ba657f5'
-            'a6fe596e75333a5ac8ed4a4d63e4408ef38ebef6303889223e236af3ce576877'
+            '621905512c493d359f920e9f5f5596be60a88cae764d06ac309d8435044833a3'
             '396812c348dc27de681b20835e237ddd7777ac3fad27d65ac46b6469b64fd726'
-            '3f298d3084a13bb40e1e40013408c2e0eb87b92679a8ece65c629b6471634ba9'
-            '1c949aa5ca3beb4c84eccf57806d6cbe88c83b1cb79941002bc4b4954543f796' 
+            'd240a1c6e3c1a619508c6ab534b5b43399979e6353af1d6895ed0c806a5a534c'
+            '1c949aa5ca3beb4c84eccf57806d6cbe88c83b1cb79941002bc4b4954543f796'
             '534a31ff06d3bffeee21ae2a8e5ca873b26b14952315db36357685dd81f07a60'
       	    '861a3203eb2fa76dfdd3ecc71c11257822f7eb90ccc7d59a79f4ab7e8b2be5fd'
             '38ecc3cb20214c48b8b295616c4f0f3da7be946c5e9e03bb5a06b4583883cc65'
@@ -161,10 +161,6 @@ prepare() {
   # BFQ patches
   echo "applying bfq patches..."
   patch -Np1 -i ../"${_bfq_patch}"
-
-  # sphinx-workaround.patch
-  echo "applying sphinx-workaround patch..."
-  patch -Np1 -i ../sphinx-workaround.patch
 
   # non-interactively apply ck1 default options
   # this isn't redundant if we want a clean selection of subarch below
