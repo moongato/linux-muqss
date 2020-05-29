@@ -75,7 +75,7 @@ _gcc_more_v='20191217'
 #_uksm_patch=uksm-5.5.patch
 _bfq_rev_patch="0001-bfq-reverts.patch"
 _bfq_patch=5.6-bfq-dev-lucjan-v11-r2K200514.patch
-_fsgsbase_path=fsgsbase-patches-v2
+_fsgsbase_path=fsgsbase-patches-v3
 _fsgsbase_patch=0001-fsgsbase-patches.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
@@ -103,7 +103,7 @@ sha256sums=('65ab799393d490463c610270634874dfcb66440a312837d04b51bbb69323034e'
             '621905512c493d359f920e9f5f5596be60a88cae764d06ac309d8435044833a3'
             '396812c348dc27de681b20835e237ddd7777ac3fad27d65ac46b6469b64fd726'
             'd240a1c6e3c1a619508c6ab534b5b43399979e6353af1d6895ed0c806a5a534c'
-            'b9bfef82699d986fd0a5845296bbae5b4ce371472a069b92cf0dca1b44f16cd5'
+            'd091557b7172da982dbf2f2d6eb95e41f43dbdce5b34068dcb520516186c2d79'
             '99a070f8cbcf3312d09abe5cfd833a80797d0c5be574858317f70ca605dd57c2'
             '534a31ff06d3bffeee21ae2a8e5ca873b26b14952315db36357685dd81f07a60')
 
