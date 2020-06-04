@@ -10,7 +10,7 @@ _makenconfig=
 # Optionally select a sub architecture by number if building in a clean chroot
 # Leaving this entry blank will require user interaction during the build
 # which will cause a failure to build if using makechrootpkg. Note that the
-# generic (default) option is 32.
+# generic (default) option is 30.
 #
 # Note - the march=native option is unavailable by this method, use the nconfig
 # and manually select it.
@@ -44,11 +44,8 @@ _makenconfig=
 #  27. Intel Cannon Lake (MCANNONLAKE)
 #  28. Intel Ice Lake (MICELAKE)
 #  29. Intel Cascade Lake (MCASCADELAKE)
-#  30. Intel Cooper Lake (MCOOPERLAKE)
-#  31. Intel Tiger Lake (MTIGERLAKE)
-#  32. Generic-x86-64 (GENERIC_CPU)
-#  33. Native optimizations autodetected by GCC (MNATIVE)
-
+#  30. Generic-x86-64 (GENERIC_CPU)
+#  31. Native optimizations autodetected by GCC (MNATIVE)
 _subarch=
 
 # Compile ONLY used modules to VASTLYreduce the number of modules built
@@ -64,8 +61,8 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.6.15
-pkgrel=3
+pkgver=5.6.16
+pkgrel=1
 _ckpatchversion=2
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -74,11 +71,11 @@ makedepends=(bc kmod libelf)
 options=('!strip')
 _ckpatch="patch-5.6-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.198.patch
-_gcc_more_v='20200527'
+_gcc_more_v='20191217'
 #_uksm_patch=uksm-5.5.patch
 _bfq_rev_patch="0001-bfq-reverts.patch"
 _bfq_patch=5.6-bfq-dev-lucjan-v11-r2K200514.patch
-_fsgsbase_path=fsgsbase-patches-v3
+_fsgsbase_path=fsgsbase-patches-v2
 _fsgsbase_patch=0001-fsgsbase-patches.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
@@ -98,15 +95,15 @@ validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('65ab799393d490463c610270634874dfcb66440a312837d04b51bbb69323034e'
+sha256sums=('25504b4de7baf912071d1ed40b13af0689305442b9dea9218fd096d8bd997cf7'
             'SKIP'
             'ea7e5468a71c7cdae907e323cbb72dbfd5cb4f568a111d28409c274e2bef8897'
             '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
-            '8255e6b6e0bdcd66a73d917b56cf2cccdd1c3f4b3621891cfffc203404a5b6dc'
+            '7a4a209de815f4bae49c7c577c0584c77257e3953ac4324d2aa425859ba657f5'
             '621905512c493d359f920e9f5f5596be60a88cae764d06ac309d8435044833a3'
             '396812c348dc27de681b20835e237ddd7777ac3fad27d65ac46b6469b64fd726'
             'd240a1c6e3c1a619508c6ab534b5b43399979e6353af1d6895ed0c806a5a534c'
-            'd091557b7172da982dbf2f2d6eb95e41f43dbdce5b34068dcb520516186c2d79'
+            'b9bfef82699d986fd0a5845296bbae5b4ce371472a069b92cf0dca1b44f16cd5'
             '99a070f8cbcf3312d09abe5cfd833a80797d0c5be574858317f70ca605dd57c2'
             '534a31ff06d3bffeee21ae2a8e5ca873b26b14952315db36357685dd81f07a60')
 
@@ -166,8 +163,8 @@ prepare() {
   make olddefconfig
 
   # https://github.com/graysky2/kernel_gcc_patch
-  echo "Patching to enable GCC optimization for other uarchs..."
-  patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/enable_additional_cpu_optimizations_for_gcc_v10.1+_kernel_v5.5-v5.6.patch"
+  echo "Applying enable_additional_cpu_optimizations_for_gcc_v9.1+_kernel_v5.5+.patch"
+  patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/enable_additional_cpu_optimizations_for_gcc_v9.1+_kernel_v5.5+.patch"
 
   if [ -n "$_subarch" ]; then
     # user wants a subarch so apply choice defined above interactively via 'yes'
