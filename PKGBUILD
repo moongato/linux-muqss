@@ -64,59 +64,62 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.6.17
+pkgver=5.7.2
 pkgrel=1
-_ckpatchversion=2
+_ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
 license=(GPL2)
-makedepends=(bc kmod libelf)
+makedepends=(bc kmod libelf pahole)
 options=('!strip')
-_ckpatch="patch-5.6-ck${_ckpatchversion}"
+_ckpatch="patch-5.7-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.198.patch
 _gcc_more_v='20200527'
 #_uksm_patch=uksm-5.5.patch
 _bfq_rev_patch="0001-bfq-reverts.patch"
-_bfq_patch=5.6-bfq-dev-lucjan-v11-r2K200514.patch
-_fsgsbase_path=fsgsbase-patches-v3
+_bfq_patch=5.7-bfq-dev-lucjan-v11-r2K200607.patch
+_fsgsbase_path=fsgsbase-patches
 _fsgsbase_patch=0001-fsgsbase-patches.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
   0000-sphinx-workaround.patch
   "enable_additional_cpu_optimizations-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
-  "http://ck.kolivas.org/patches/5.0/5.6/5.6-ck${_ckpatchversion}/$_ckpatch.xz"
+  "http://ck.kolivas.org/patches/5.0/5.7/5.7-ck${_ckpatchversion}/$_ckpatch.xz"
   #http://ck.kolivas.org/patches/muqss/5.0/5.5/${_muqss_patch}
   #https://github.com/dolohow/uksm/raw/master/v5.x/${_uksm_patch}
-  https://github.com/sirlucjan/kernel-patches/raw/master/5.6/bfq-reverts-all-v2/${_bfq_rev_patch}
-  https://github.com/sirlucjan/kernel-patches/raw/master/5.6/bfq-dev-lucjan/${_bfq_patch}
-  https://github.com/sirlucjan/kernel-patches/raw/master/5.6/${_fsgsbase_path}/${_fsgsbase_patch}
+  https://github.com/sirlucjan/kernel-patches/raw/master/5.7/bfq-reverts-all-v2/${_bfq_rev_patch}
+  https://github.com/sirlucjan/kernel-patches/raw/master/5.7/bfq-dev-lucjan/${_bfq_patch}
+  https://github.com/sirlucjan/kernel-patches/raw/master/5.7/${_fsgsbase_path}/${_fsgsbase_patch}
   0001-init-Kconfig-enable-O3-for-all-arches.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
-  )
+  "unfuck-ck1.patch::https://github.com/ckolivas/linux/commit/0b69e633d6b0b08ae8547dc4099c8c0985019553.patch"
+)
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
+  '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('c33a245401db38de760a7229cf3917eb6e6f8fabab0dc5add95b9b8f3e557f9e'
+sha256sums=('6065ae820e2d52a77a549ef97444c36adf7ab2969b294460256f028b4eed7909'
             'SKIP'
             # config
-            'ea7e5468a71c7cdae907e323cbb72dbfd5cb4f568a111d28409c274e2bef8897'
+            'b2d17be17bad3a550d6c4a7dcadf869f4028408cb906bfec8c69b49c0cc4ce33'
             # sphinx-workaround
             '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
             # gcc patch
             '8255e6b6e0bdcd66a73d917b56cf2cccdd1c3f4b3621891cfffc203404a5b6dc'
             # ck patch
-            '621905512c493d359f920e9f5f5596be60a88cae764d06ac309d8435044833a3'
+            'SKIP'
             # bfq patch
-            '396812c348dc27de681b20835e237ddd7777ac3fad27d65ac46b6469b64fd726'
-            'd240a1c6e3c1a619508c6ab534b5b43399979e6353af1d6895ed0c806a5a534c'
+            'de2cce150829e41e386445620119c3bcaac89032fb4fb1442a8674f616184368'
+            '31fd499d4f21665c7dd6deefe89bf23e610742f1a15c4d54ef2284634c50eba2'
             # fsgsbase patch
-            'd091557b7172da982dbf2f2d6eb95e41f43dbdce5b34068dcb520516186c2d79'
+            '2fc02012f9c9e65a01068c246912786b80174c1c3089a46730f7b0560ed73209'
             # enable-O3
-            '99a070f8cbcf3312d09abe5cfd833a80797d0c5be574858317f70ca605dd57c2'
+            'de912c6d0de05187fd0ecb0da67326bfde5ec08f1007bea85e1de732e5a62619'
             # 0001-ZEN-Add-sysctl-and-CONFIG
-            '534a31ff06d3bffeee21ae2a8e5ca873b26b14952315db36357685dd81f07a60')
+            '211d7bcd02f146b28daecfeff410c66834b8736de1cad09158f8ec9ecccdcca6'
+            '5a08ac04975fe784d16d6c8ec2be733c73cdcfc19795f5c7b97d7a1aa7f12328')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -160,6 +163,7 @@ prepare() {
 
   # ck patchset itself
   patch -Np1 -i ../"${_ckpatch}"
+  patch -Np1 -i ../unfuck-ck1.patch
 
   # UKSM
   #echo "applying uksm patch..."
@@ -175,7 +179,7 @@ prepare() {
 
   # https://github.com/graysky2/kernel_gcc_patch
   echo "Patching to enable GCC optimization for other uarchs..."
-  patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/enable_additional_cpu_optimizations_for_gcc_v10.1+_kernel_v5.5-v5.6.patch"
+  patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/enable_additional_cpu_optimizations_for_gcc_v10.1+_kernel_v5.7+.patch"
 
   if [ -n "$_subarch" ]; then
     # user wants a subarch so apply choice defined above interactively via 'yes'
@@ -236,7 +240,7 @@ _package() {
   echo "$pkgbase" | install -Dm644 /dev/stdin "$modulesdir/pkgbase"
 
   echo "Installing modules..."
-  make INSTALL_MOD_PATH="$pkgdir/usr" modules_install
+  make INSTALL_MOD_PATH="$pkgdir/usr" INSTALL_MOD_STRIP=1 modules_install
 
   # remove build and source links
   rm "$modulesdir"/{source,build}
@@ -313,6 +317,9 @@ _package-headers() {
         strip -v $STRIP_SHARED "$file" ;;
     esac
   done < <(find "$builddir" -type f -perm -u+x ! -name vmlinux -print0)
+
+  echo "Stripping vmlinux..."
+  strip -v $STRIP_STATIC "$builddir/vmlinux"
 
   echo "Adding symlink..."
   mkdir -p "$pkgdir/usr/src"
