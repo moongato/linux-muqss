@@ -75,7 +75,7 @@ options=('!strip')
 _ckpatch="patch-5.7-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.198.patch
 _gcc_more_v='20200527'
-#_uksm_patch=uksm-5.5.patch
+#_uksm_patch=uksm-5.7.patch
 _bfq_rev_patch="0001-bfq-reverts.patch"
 _bfq_patch=5.7-bfq-dev-lucjan-v11-r2K200607.patch
 _fsgsbase_path=fsgsbase-patches
@@ -109,7 +109,9 @@ sha256sums=('6065ae820e2d52a77a549ef97444c36adf7ab2969b294460256f028b4eed7909'
             # gcc patch
             '8255e6b6e0bdcd66a73d917b56cf2cccdd1c3f4b3621891cfffc203404a5b6dc'
             # ck patch
-            'SKIP'
+            'e4a201e984cf229b66fbab713c49fa3a0e0e8f238f2216e503f9452a7a7a5e06'
+            # uksm patch
+            #'c28dc0d30bba3eedae9f5cf98a686bdfb25a0326df4e8c417d37a36597d21b37'
             # bfq patch
             'de2cce150829e41e386445620119c3bcaac89032fb4fb1442a8674f616184368'
             '31fd499d4f21665c7dd6deefe89bf23e610742f1a15c4d54ef2284634c50eba2'
@@ -119,6 +121,7 @@ sha256sums=('6065ae820e2d52a77a549ef97444c36adf7ab2969b294460256f028b4eed7909'
             'de912c6d0de05187fd0ecb0da67326bfde5ec08f1007bea85e1de732e5a62619'
             # 0001-ZEN-Add-sysctl-and-CONFIG
             '211d7bcd02f146b28daecfeff410c66834b8736de1cad09158f8ec9ecccdcca6'
+            # unfuck ck patch
             '5a08ac04975fe784d16d6c8ec2be733c73cdcfc19795f5c7b97d7a1aa7f12328')
 
 export KBUILD_BUILD_HOST=archlinux
