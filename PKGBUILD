@@ -64,7 +64,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.7.5
+pkgver=5.7.6
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -78,7 +78,7 @@ _gcc_more_v='20200615'
 #_uksm_patch=uksm-5.7.patch
 _bfq_rev_patch="0001-bfq-reverts.patch"
 _bfq_patch=5.7-bfq-dev-lucjan-v11-r2K200607.patch
-_fsgsbase_path=fsgsbase-patches
+_fsgsbase_path=fsgsbase-patches-v2
 _fsgsbase_patch=0001-fsgsbase-patches.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
@@ -100,7 +100,7 @@ validpgpkeys=(
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('6c37f90354dbe1e29aa144f850b2050259f8a2d180fd24101f9eafc636bb0b01'
+sha256sums=('9fd4c93dc6df53efa904134aa2ede6100f7453c11383490dd32ebbed84f610e6'
             'SKIP'
             # config
             '5439367d1bd302182506484c017f9e5983a93dbfcd4a27e81df75005a9e65115'
@@ -116,7 +116,7 @@ sha256sums=('6c37f90354dbe1e29aa144f850b2050259f8a2d180fd24101f9eafc636bb0b01'
             'de2cce150829e41e386445620119c3bcaac89032fb4fb1442a8674f616184368'
             '31fd499d4f21665c7dd6deefe89bf23e610742f1a15c4d54ef2284634c50eba2'
             # fsgsbase patch
-            '2fc02012f9c9e65a01068c246912786b80174c1c3089a46730f7b0560ed73209'
+            'ab72bd8b181f524e351be1ae53818db4ab833be6c3af8cd16773b5ff87eeca7b'
             # enable-O3
             'de912c6d0de05187fd0ecb0da67326bfde5ec08f1007bea85e1de732e5a62619'
             # 0001-ZEN-Add-sysctl-and-CONFIG
