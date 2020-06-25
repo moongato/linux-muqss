@@ -93,6 +93,7 @@ source=(
   https://github.com/sirlucjan/kernel-patches/raw/master/5.7/${_fsgsbase_path}/${_fsgsbase_patch}
   0001-init-Kconfig-enable-O3-for-all-arches.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
+  0002-efi-libstub-Fix-path-separator-regression.patch
   "unfuck-ck1.patch::https://github.com/ckolivas/linux/commit/0b69e633d6b0b08ae8547dc4099c8c0985019553.patch"
 )
 validpgpkeys=(
@@ -103,7 +104,7 @@ validpgpkeys=(
 sha256sums=('9fd4c93dc6df53efa904134aa2ede6100f7453c11383490dd32ebbed84f610e6'
             'SKIP'
             # config
-            '5439367d1bd302182506484c017f9e5983a93dbfcd4a27e81df75005a9e65115'
+            '0785920df094838b316fde944256d9bd791ed75c1043cdf39ab17c0b13258af9'
             # sphinx-workaround
             '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
             # gcc patch
@@ -119,8 +120,9 @@ sha256sums=('9fd4c93dc6df53efa904134aa2ede6100f7453c11383490dd32ebbed84f610e6'
             'ab72bd8b181f524e351be1ae53818db4ab833be6c3af8cd16773b5ff87eeca7b'
             # enable-O3
             'de912c6d0de05187fd0ecb0da67326bfde5ec08f1007bea85e1de732e5a62619'
-            # 0001-ZEN-Add-sysctl-and-CONFIG
+            # arch patches
             '211d7bcd02f146b28daecfeff410c66834b8736de1cad09158f8ec9ecccdcca6'
+            '6576ee1bf82c8d78b9e60b48fadc6b875cf9473917e57282db2fa6c6047548e9'
             # unfuck ck patch
             '5a08ac04975fe784d16d6c8ec2be733c73cdcfc19795f5c7b97d7a1aa7f12328')
 
