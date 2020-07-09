@@ -64,7 +64,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.7.7
+pkgver=5.7.8
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -77,7 +77,7 @@ _ckpatch="patch-5.7-ck${_ckpatchversion}"
 _gcc_more_v='20200615'
 #_uksm_patch=uksm-5.7.patch
 _bfq_rev_patch="0001-bfq-reverts.patch"
-_bfq_patch=5.7-bfq-dev-lucjan-v11-r2K200702.patch
+_bfq_patch=5.7-bfq-dev-lucjan-v11-r2K200708.patch
 _fsgsbase_path=fsgsbase-patches-v5
 _fsgsbase_patch=0001-fsgsbase-patches.patch
 source=(
@@ -94,8 +94,8 @@ source=(
   0001-init-Kconfig-enable-O3-for-all-arches.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
   0002-PCI-EDR-Log-only-ACPI_NOTIFY_DISCONNECT_RECOVER-events.patch
-  0003-ALSA-usb-audio-Fix-packet-size-calculation.patch
-  0004-drm-amd-display-Only-revalidate-bandwidth-on-medium-and-fast-updates.patch
+  0003-Revert-ath9k-Fix-general-protection-fault-in-ath9k_hif_usb_rx_cb.patch
+  0004-iwlwifi-Make-some-Killer-Wireless-AC-1550-cards-working-again.patch
   "unfuck-ck1.patch::https://github.com/ckolivas/linux/commit/0b69e633d6b0b08ae8547dc4099c8c0985019553.patch"
 )
 validpgpkeys=(
@@ -103,7 +103,7 @@ validpgpkeys=(
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('f840b9679283343c165516585c3070ebb277528721c890e9410a58e9d071ee7f'
+sha256sums=('afb577b88e400758ea64109937bb514ab8171fe9c5613138928ac232a3844dc6'
             'SKIP'
             # config
             '0785920df094838b316fde944256d9bd791ed75c1043cdf39ab17c0b13258af9'
@@ -117,7 +117,7 @@ sha256sums=('f840b9679283343c165516585c3070ebb277528721c890e9410a58e9d071ee7f'
             #'c28dc0d30bba3eedae9f5cf98a686bdfb25a0326df4e8c417d37a36597d21b37'
             # bfq patch
             'de2cce150829e41e386445620119c3bcaac89032fb4fb1442a8674f616184368'
-            '5903578dbec631d77eb3fa2c5c2fdf1e163f208a1451e2adeaf375e45f2646c8'
+            'f138a2f53ca01e86e0ab9681bc2815dbc54022cba4fa3f8e6dbeab0d61c152c4'
             # fsgsbase patch
             '2e0e8413302c2b6cd4e7ee6960198eb0cd9cc3e80c52b6f14054a196f0f48984'
             # enable-O3
@@ -125,8 +125,8 @@ sha256sums=('f840b9679283343c165516585c3070ebb277528721c890e9410a58e9d071ee7f'
             # arch patches
             '211d7bcd02f146b28daecfeff410c66834b8736de1cad09158f8ec9ecccdcca6'
             '69dfd528a2ad7a57a5036c9250a2f99dc815eef011cdc17c323c49affdb051de'
-            '863f4d199f333fbbba9d42c287b566050d3716bfbd5aed9acf1f3745f8df3a2f'
-            '495d52edab5e226d24aeb3467f5f31366cf268b0cdfa6ea714e162e01067a0eb'
+            'c3d1a6d86ee212a8735d5d51e13d5c6ddbd7b24c591536e256d6353551c9e059'
+            'f8289aff15333d2d3f086a9602028113b001f01dc51dae9ad9701c45e0535b9f'
             # unfuck ck patch
             '5a08ac04975fe784d16d6c8ec2be733c73cdcfc19795f5c7b97d7a1aa7f12328')
 
