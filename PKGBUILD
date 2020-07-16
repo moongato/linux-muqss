@@ -64,7 +64,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.7.8
+pkgver=5.7.9
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -94,8 +94,8 @@ source=(
   0001-init-Kconfig-enable-O3-for-all-arches.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
   0002-PCI-EDR-Log-only-ACPI_NOTIFY_DISCONNECT_RECOVER-events.patch
-  0003-Revert-ath9k-Fix-general-protection-fault-in-ath9k_hif_usb_rx_cb.patch
-  0004-iwlwifi-Make-some-Killer-Wireless-AC-1550-cards-working-again.patch
+  0003-iwlwifi-Make-some-Killer-Wireless-AC-1550-cards-working-again.patch
+  0004-virt-vbox-Add-support-for-the-new-VBG_IOCTL_ACQUIRE_GUEST_CAP.patch
   "unfuck-ck1.patch::https://github.com/ckolivas/linux/commit/0b69e633d6b0b08ae8547dc4099c8c0985019553.patch"
 )
 validpgpkeys=(
@@ -125,8 +125,8 @@ sha256sums=('afb577b88e400758ea64109937bb514ab8171fe9c5613138928ac232a3844dc6'
             # arch patches
             '211d7bcd02f146b28daecfeff410c66834b8736de1cad09158f8ec9ecccdcca6'
             '69dfd528a2ad7a57a5036c9250a2f99dc815eef011cdc17c323c49affdb051de'
-            'c3d1a6d86ee212a8735d5d51e13d5c6ddbd7b24c591536e256d6353551c9e059'
             'f8289aff15333d2d3f086a9602028113b001f01dc51dae9ad9701c45e0535b9f'
+            '095804fb1045f6ccb52825d0d8c3aad1237e919f30586034267918a15d1249f6'          
             # unfuck ck patch
             '5a08ac04975fe784d16d6c8ec2be733c73cdcfc19795f5c7b97d7a1aa7f12328')
 
