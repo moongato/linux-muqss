@@ -77,7 +77,7 @@ _ckpatch="patch-5.7-ck${_ckpatchversion}"
 _gcc_more_v='20200615'
 #_uksm_patch=uksm-5.7.patch
 _bfq_rev_patch="0001-bfq-reverts.patch"
-_bfq_patch=5.7-bfq-dev-lucjan-v11-r2K200708.patch
+_bfq_patch=5.7-bfq-dev-lucjan-v11-r2K200720.patch
 _fsgsbase_path=fsgsbase-patches-v6
 _fsgsbase_patch=0001-fsgsbase-patches.patch
 source=(
@@ -121,7 +121,7 @@ sha256sums=('a87d3066a7849cd6ba9a004311a9ee0402d29d17f12f64ad7d942447070b43f8'
             #'c28dc0d30bba3eedae9f5cf98a686bdfb25a0326df4e8c417d37a36597d21b37'
             # bfq patch
             'de2cce150829e41e386445620119c3bcaac89032fb4fb1442a8674f616184368'
-            'f138a2f53ca01e86e0ab9681bc2815dbc54022cba4fa3f8e6dbeab0d61c152c4'
+            'f91540cb15ed56c4d0e2bc7a2dfe9ca1ae7bc28e18c2189f2febec24396851a8'
             # fsgsbase patch
             'd9a6c35b1e00013d2db427d06bca16fef99dfdbd5f4582b05c5266dbaed9460d'
             # enable-O3
