@@ -64,8 +64,8 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.7.10
-pkgrel=2
+pkgver=5.7.11
+pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -77,7 +77,7 @@ _ckpatch="patch-5.7-ck${_ckpatchversion}"
 _gcc_more_v='20200615'
 #_uksm_patch=uksm-5.7.patch
 _bfq_rev_patch="0001-bfq-reverts.patch"
-_bfq_patch=5.7-bfq-dev-lucjan-v12-r2K200723.patch
+_bfq_patch=5.7-bfq-dev-lucjan-v12-r2K200729.patch
 _fsgsbase_path=fsgsbase-patches-v6
 _fsgsbase_patch=0001-fsgsbase-patches.patch
 source=(
@@ -96,15 +96,14 @@ source=(
   0001-init-Kconfig-enable-O3-for-all-arches.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
   0002-PCI-EDR-Log-only-ACPI_NOTIFY_DISCONNECT_RECOVER-events.patch
-  0003-iwlwifi-Make-some-Killer-Wireless-AC-1550-cards-working-again.patch
-  0004-virt-vbox-Add-support-for-the-new-VBG_IOCTL_ACQUIRE_GUEST_CAP.patch
+  0003-virt-vbox-Add-support-for-the-new-VBG_IOCTL_ACQUIRE_GUEST_CAP.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('4725430c65b7573b7d26c402dd9ffdad18529a302ce2e342c849e7800f193d44'
+sha256sums=('93293032aa13c3998eeb2afd910f11c0f2e8a76ffec46f74ce3fcfac53ed60f1'
             'SKIP'
             # config
             '0785920df094838b316fde944256d9bd791ed75c1043cdf39ab17c0b13258af9'
@@ -121,7 +120,7 @@ sha256sums=('4725430c65b7573b7d26c402dd9ffdad18529a302ce2e342c849e7800f193d44'
             #'c28dc0d30bba3eedae9f5cf98a686bdfb25a0326df4e8c417d37a36597d21b37'
             # bfq patch
             'de2cce150829e41e386445620119c3bcaac89032fb4fb1442a8674f616184368'
-            'fc3c101e6b639364e2113710e60f46a98c461e662da75da38d73250fb2813ef3'
+            'e8821637de35552059bf7e9c6240f543086d049c70c2296212b1b17e8ecfc4f2'
             # fsgsbase patch
             'd9a6c35b1e00013d2db427d06bca16fef99dfdbd5f4582b05c5266dbaed9460d'
             # enable-O3
@@ -129,7 +128,6 @@ sha256sums=('4725430c65b7573b7d26c402dd9ffdad18529a302ce2e342c849e7800f193d44'
             # arch patches
             '211d7bcd02f146b28daecfeff410c66834b8736de1cad09158f8ec9ecccdcca6'
             '69dfd528a2ad7a57a5036c9250a2f99dc815eef011cdc17c323c49affdb051de'
-            'f8289aff15333d2d3f086a9602028113b001f01dc51dae9ad9701c45e0535b9f'
             'd3a4c90f485238a284ee9e301a7c8a400468dae5357c43412d842dcd4077c93a')          
 
 export KBUILD_BUILD_HOST=archlinux
