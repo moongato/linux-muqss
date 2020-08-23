@@ -64,7 +64,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.7.16
+pkgver=5.7.17
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -88,7 +88,9 @@ source=(
   "http://ck.kolivas.org/patches/5.0/5.7/5.7-ck${_ckpatchversion}/$_ckpatch.xz"
   "unfuck-ck1.patch::https://github.com/ckolivas/linux/commit/0b69e633d6b0b08ae8547dc4099c8c0985019553.patch"
   "unfuck-ck1-fix-suspend-to-ram.patch::https://github.com/zen-kernel/zen-kernel/commit/fb7e2cfaf61cf5f9c2336331e73296f455bd2d51.patch"
+  "unfuck-ck1-muqss-Add-missing-static-function-uclamp_is_used.patch::https://github.com/zen-kernel/zen-kernel/commit/e7113f2c1d56962d4afabc627ad761c138f5b858.patch"
   fix_ck1_for_5.7.14.patch
+  fix_ck1_for_5.7.17.patch
   #http://ck.kolivas.org/patches/muqss/5.0/5.5/${_muqss_patch}
   #https://github.com/dolohow/uksm/raw/master/v5.x/${_uksm_patch}
   https://github.com/sirlucjan/kernel-patches/raw/master/5.7/bfq-reverts-all-v2/${_bfq_rev_patch}
@@ -104,7 +106,7 @@ validpgpkeys=(
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('37864e3001658cebd32f8f814e18b0d21003736fa487f881f983cecdc58cd753'
+sha256sums=('cc8c3611c9bdcd29266b2606ab6c3a07a32fb64fd7f1cd731100e4eddb565225'
             'SKIP'
             # config
             'a83e31030ad00302765845524d6a80a2f840d7fffc0b4b6a79a15c3b09d55ede'
@@ -117,7 +119,9 @@ sha256sums=('37864e3001658cebd32f8f814e18b0d21003736fa487f881f983cecdc58cd753'
             # unfuck ck patch
             '5a08ac04975fe784d16d6c8ec2be733c73cdcfc19795f5c7b97d7a1aa7f12328'
             '961ed94b8d905f1e901cacb08d253c4170af0a25828111b7558d9c874e923558'
+            'a3f66b5afd310be31ff026a835b566926430e032618435c5fd00c84fd0b68541'
             '64174da03b1995d93f61389f2fe124cea89eac794e686025db543802ef140e51'
+            '036908292b84d84ef654847734626850aabe99c4abd4971c4ff03a121168b230'
             # uksm patch
             #'c28dc0d30bba3eedae9f5cf98a686bdfb25a0326df4e8c417d37a36597d21b37'
             # bfq patch
@@ -140,6 +144,9 @@ export KBUILD_BUILD_TIMESTAMP="$(date -Ru${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EP
 prepare() {
   # changes from 5.7.13 to 5.7.14 breaks ck1
   patch -Np1 -i fix_ck1_for_5.7.14.patch
+
+  # changes from 5.7.16 to 5.7.17 breaks ck1
+  patch -Np1 -i fix_ck1_for_5.7.17.patch
 
   cd linux-${pkgver}
 
@@ -185,6 +192,7 @@ prepare() {
   patch -Np1 -i ../"${_ckpatch}"
   patch -Np1 -i ../unfuck-ck1.patch
   patch -Np1 -i ../unfuck-ck1-fix-suspend-to-ram.patch
+  patch -Np1 -i ../unfuck-ck1-muqss-Add-missing-static-function-uclamp_is_used.patch
 
   # UKSM
   #echo "applying uksm patch..."
