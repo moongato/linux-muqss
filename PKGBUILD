@@ -64,7 +64,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.7.19
+pkgver=5.9.1
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -72,69 +72,45 @@ url="https://wiki.archlinux.org/index.php/Linux-ck"
 license=(GPL2)
 makedepends=(bc kmod libelf)
 options=('!strip')
-_ckpatch="patch-5.7-ck${_ckpatchversion}"
-#_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.198.patch
+_ckpatch="patch-5.9-ck${_ckpatchversion}"
+#_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.204.patch
 _gcc_more_v='20200615'
-#_uksm_patch=uksm-5.7.patch
-_bfq_rev_patch="0001-bfq-reverts.patch"
-_bfq_patch=5.7-bfq-dev-lucjan-v12-r2K200729.patch
-_fsgsbase_path=fsgsbase-patches-v6
+_fsgsbase_path=fsgsbase-patches
 _fsgsbase_patch=0001-fsgsbase-patches.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
-  0000-sphinx-workaround.patch
   "enable_additional_cpu_optimizations-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
-  "http://ck.kolivas.org/patches/5.0/5.7/5.7-ck${_ckpatchversion}/$_ckpatch.xz"
-  "unfuck-ck1.patch::https://github.com/ckolivas/linux/commit/0b69e633d6b0b08ae8547dc4099c8c0985019553.patch"
-  "unfuck-ck1-fix-suspend-to-ram.patch::https://github.com/zen-kernel/zen-kernel/commit/fb7e2cfaf61cf5f9c2336331e73296f455bd2d51.patch"
-  "unfuck-ck1-muqss-Add-missing-static-function-uclamp_is_used.patch::https://github.com/zen-kernel/zen-kernel/commit/e7113f2c1d56962d4afabc627ad761c138f5b858.patch"
-  fix_ck1_for_5.7.14.patch
-  fix_ck1_for_5.7.17.patch
-  #http://ck.kolivas.org/patches/muqss/5.0/5.5/${_muqss_patch}
-  #https://github.com/dolohow/uksm/raw/master/v5.x/${_uksm_patch}
-  https://github.com/sirlucjan/kernel-patches/raw/master/5.7/bfq-reverts-all-v2/${_bfq_rev_patch}
-  https://github.com/sirlucjan/kernel-patches/raw/master/5.7/bfq-dev-lucjan/${_bfq_patch}
-  https://github.com/sirlucjan/kernel-patches/raw/master/5.7/${_fsgsbase_path}/${_fsgsbase_patch}
+  "http://ck.kolivas.org/patches/5.0/5.9/5.9-ck${_ckpatchversion}/$_ckpatch.xz"
+  #http://ck.kolivas.org/patches/muqss/5.0/5.9/${_muqss_patch}
+  https://github.com/sirlucjan/kernel-patches/raw/master/5.9/${_fsgsbase_path}/${_fsgsbase_patch}
+  0000-sphinx-workaround.patch
   0001-init-Kconfig-enable-O3-for-all-arches.patch
-  0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE_NEWUSER.patch
-  0002-PCI-EDR-Log-only-ACPI_NOTIFY_DISCONNECT_RECOVER-events.patch
-  0003-virt-vbox-Add-support-for-the-new-VBG_IOCTL_ACQUIRE_GUEST_CAP.patch
+  0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
+  0002-i2c-core-Restore-acpi_walk_dep_device_list-getting-c.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('419c6248b9ae4dfead4599787aecbfd202e88bc4124523adfa6dd2d642b99fe7'
+sha256sums=('ba4a11e93896305835c630969cf330ae808b0e43f09b375b510cde1bd0efc036'
             'SKIP'
             # config
-            'a83e31030ad00302765845524d6a80a2f840d7fffc0b4b6a79a15c3b09d55ede'
-            # sphinx-workaround
-            '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
+            '266abd889f6ad64bb74541729ce10cdf74e650eee4386ab579caddac8ed2a109'
             # gcc patch
             '278fe9ffb29d92cc5220e7beac34a8e3a2006e714d16a21a0427069f9634af90'
             # ck patch
-            'e4a201e984cf229b66fbab713c49fa3a0e0e8f238f2216e503f9452a7a7a5e06'
-            # unfuck ck patch
-            '5a08ac04975fe784d16d6c8ec2be733c73cdcfc19795f5c7b97d7a1aa7f12328'
-            '961ed94b8d905f1e901cacb08d253c4170af0a25828111b7558d9c874e923558'
-            'a3f66b5afd310be31ff026a835b566926430e032618435c5fd00c84fd0b68541'
-            '64174da03b1995d93f61389f2fe124cea89eac794e686025db543802ef140e51'
-            '036908292b84d84ef654847734626850aabe99c4abd4971c4ff03a121168b230'
-            # uksm patch
-            #'c28dc0d30bba3eedae9f5cf98a686bdfb25a0326df4e8c417d37a36597d21b37'
-            # bfq patch
-            'de2cce150829e41e386445620119c3bcaac89032fb4fb1442a8674f616184368'
-            'e8821637de35552059bf7e9c6240f543086d049c70c2296212b1b17e8ecfc4f2'
+            'c4e80c71ca431aaed3281d4bf63777733e8fc7467229c8051e884e95a4576133'
             # fsgsbase patch
-            'd9a6c35b1e00013d2db427d06bca16fef99dfdbd5f4582b05c5266dbaed9460d'
+            '0e96c601736fa7eda7d071e00ff61573ee0e3619ad27986a4c8ad997bc662bb5' 
+            # sphinx-workaround
+            '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
             # enable-O3
             'de912c6d0de05187fd0ecb0da67326bfde5ec08f1007bea85e1de732e5a62619'
             # arch patches
-            '211d7bcd02f146b28daecfeff410c66834b8736de1cad09158f8ec9ecccdcca6'
-            '69dfd528a2ad7a57a5036c9250a2f99dc815eef011cdc17c323c49affdb051de'
-            'd3a4c90f485238a284ee9e301a7c8a400468dae5357c43412d842dcd4077c93a'
+            'a023ed9459603b1b3e1b962f625ed10190047295c54fc84959651643e90d9b27'
+            'f27cb1ddfb6db804b8b3bfbb086fea62a08a8dd670f2d8aef68f9266401c684a'
 )          
 
 export KBUILD_BUILD_HOST=archlinux
@@ -142,12 +118,6 @@ export KBUILD_BUILD_USER=$pkgbase
 export KBUILD_BUILD_TIMESTAMP="$(date -Ru${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EPOCH})"
 
 prepare() {
-  # changes from 5.7.13 to 5.7.14 breaks ck1
-  patch -Np1 -i fix_ck1_for_5.7.14.patch
-
-  # changes from 5.7.16 to 5.7.17 breaks ck1
-  patch -Np1 -i fix_ck1_for_5.7.17.patch
-
   cd linux-${pkgver}
 
   echo "Setting version..."
@@ -186,29 +156,17 @@ prepare() {
   sed -i -e 's/CONFIG_DEBUG_INFO=y/# CONFIG_DEBUG_INFO is not set/' \
       -i -e '/CONFIG_DEBUG_INFO_DWARF4=y/d' -i -e '/CONFIG_DEBUG_INFO_BTF=y/d' ./.config
 
-  echo "Patching with ck patchset..."
+  # https://github.com/graysky2/kernel_gcc_patch
+  echo "Patching to enable GCC optimization for other uarchs..."
+  patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/enable_additional_cpu_optimizations_for_gcc_v10.1+_kernel_v5.8+.patch"
 
   # ck patchset itself
+  echo "Patching with ck patchset..."
   patch -Np1 -i ../"${_ckpatch}"
-  patch -Np1 -i ../unfuck-ck1.patch
-  patch -Np1 -i ../unfuck-ck1-fix-suspend-to-ram.patch
-  patch -Np1 -i ../unfuck-ck1-muqss-Add-missing-static-function-uclamp_is_used.patch
-
-  # UKSM
-  #echo "applying uksm patch..."
-  #patch -Np1 -i ../"${_uksm_patch}"
-
-  # BFQ patches
-  echo "applying bfq patches..."
-  patch -Np1 -i ../"${_bfq_patch}"
 
   # non-interactively apply ck1 default options
   # this isn't redundant if we want a clean selection of subarch below
   make olddefconfig
-
-  # https://github.com/graysky2/kernel_gcc_patch
-  echo "Patching to enable GCC optimization for other uarchs..."
-  patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/enable_additional_cpu_optimizations_for_gcc_v10.1+_kernel_v5.7+.patch"
 
   if [ -n "$_subarch" ]; then
     # user wants a subarch so apply choice defined above interactively via 'yes'
