@@ -156,10 +156,6 @@ prepare() {
   sed -i -e 's/CONFIG_DEBUG_INFO=y/# CONFIG_DEBUG_INFO is not set/' \
       -i -e '/CONFIG_DEBUG_INFO_DWARF4=y/d' -i -e '/CONFIG_DEBUG_INFO_BTF=y/d' ./.config
 
-  # https://github.com/graysky2/kernel_gcc_patch
-  echo "Patching to enable GCC optimization for other uarchs..."
-  patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/enable_additional_cpu_optimizations_for_gcc_v10.1+_kernel_v5.8+.patch"
-
   # ck patchset itself
   echo "Patching with ck patchset..."
   patch -Np1 -i ../"${_ckpatch}"
@@ -167,6 +163,10 @@ prepare() {
   # non-interactively apply ck1 default options
   # this isn't redundant if we want a clean selection of subarch below
   make olddefconfig
+
+  # https://github.com/graysky2/kernel_gcc_patch
+  echo "Patching to enable GCC optimization for other uarchs..."
+  patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/enable_additional_cpu_optimizations_for_gcc_v10.1+_kernel_v5.8+.patch"
 
   if [ -n "$_subarch" ]; then
     # user wants a subarch so apply choice defined above interactively via 'yes'
