@@ -64,7 +64,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.9.1
+pkgver=5.9.2
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -87,14 +87,14 @@ source=(
   0000-sphinx-workaround.patch
   0001-init-Kconfig-enable-O3-for-all-arches.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
-  0002-i2c-core-Restore-acpi_walk_dep_device_list-getting-c.patch
+  0002-mac80211-fix-regression-where-EAPOL-frames-were-sent-in-plaintext.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('ba4a11e93896305835c630969cf330ae808b0e43f09b375b510cde1bd0efc036'
+sha256sums=('51f4eced91a95206946a0f1449e3f883bb3b300baa2f7f493e4c899a7d640236'
             'SKIP'
             # config
             '72e4b27ca34c7de367918580dbce50f485d947f0b515f6f14fbc8768f3c8010d'
@@ -110,7 +110,7 @@ sha256sums=('ba4a11e93896305835c630969cf330ae808b0e43f09b375b510cde1bd0efc036'
             'de912c6d0de05187fd0ecb0da67326bfde5ec08f1007bea85e1de732e5a62619'
             # arch patches
             'a023ed9459603b1b3e1b962f625ed10190047295c54fc84959651643e90d9b27'
-            'f27cb1ddfb6db804b8b3bfbb086fea62a08a8dd670f2d8aef68f9266401c684a'
+            '8dc9a19c75835b5eb903384295c2d9e17ef7d7ff61f4fed3f4db2c299ab0ca2c'
 )          
 
 export KBUILD_BUILD_HOST=archlinux
