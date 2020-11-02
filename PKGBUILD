@@ -65,7 +65,7 @@ _localmodcfg=y
 
 pkgbase=linux-muqss
 pkgver=5.9.3
-pkgrel=1
+pkgrel=2
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -75,7 +75,7 @@ options=('!strip')
 _ckpatch="patch-5.9-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.204.patch
 _gcc_more_v='20200615'
-_fsgsbase_path=fsgsbase-patches
+_fsgsbase_path=fsgsbase-patches-v2
 _fsgsbase_patch=0001-fsgsbase-patches.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
@@ -103,7 +103,7 @@ sha256sums=('d1ae28dfe9d25b73f2e437319df1b77d7ac1d0efd188cfb5df84a6784a318a73'
             # ck patch
             'c4e80c71ca431aaed3281d4bf63777733e8fc7467229c8051e884e95a4576133'
             # fsgsbase patch
-            '0e96c601736fa7eda7d071e00ff61573ee0e3619ad27986a4c8ad997bc662bb5' 
+            'f44d1503bc421d0464ba2a21522a5b4450c761ddd6eedb34e0726c70a115d317' 
             # sphinx-workaround
             '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
             # enable-O3
