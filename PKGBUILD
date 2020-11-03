@@ -75,7 +75,7 @@ options=('!strip')
 _ckpatch="patch-5.9-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.204.patch
 _gcc_more_v='20200615'
-_fsgsbase_path=fsgsbase-patches-v2
+_fsgsbase_path=fsgsbase-patches-v3
 _fsgsbase_patch=0001-fsgsbase-patches.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
@@ -103,7 +103,7 @@ sha256sums=('d1ae28dfe9d25b73f2e437319df1b77d7ac1d0efd188cfb5df84a6784a318a73'
             # ck patch
             'c4e80c71ca431aaed3281d4bf63777733e8fc7467229c8051e884e95a4576133'
             # fsgsbase patch
-            'f44d1503bc421d0464ba2a21522a5b4450c761ddd6eedb34e0726c70a115d317' 
+            '8206b8fd7a6b545567fb7951baa3612dcb9dd0b885bdfee33ac692b37a0f5602' 
             # sphinx-workaround
             '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
             # enable-O3
