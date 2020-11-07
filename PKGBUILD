@@ -65,7 +65,7 @@ _localmodcfg=y
 
 pkgbase=linux-muqss
 pkgver=5.9.6
-pkgrel=1
+pkgrel=2
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -97,7 +97,7 @@ validpgpkeys=(
 sha256sums=('6cc182fe19a8f3958c24d453f4ab68eb73fb5cfb8af4c95b02f3db049e655370'
             'SKIP'
             # config
-            '72e4b27ca34c7de367918580dbce50f485d947f0b515f6f14fbc8768f3c8010d'
+            '7b588edb46b2aacc6747e7887b16782615e9f418598fb7481f5595355ab0420c'
             # gcc patch
             '278fe9ffb29d92cc5220e7beac34a8e3a2006e714d16a21a0427069f9634af90'
             # ck patch
