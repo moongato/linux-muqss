@@ -65,7 +65,7 @@ _localmodcfg=y
 
 pkgbase=linux-muqss
 pkgver=5.9.8
-pkgrel=1
+pkgrel=2
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -74,7 +74,7 @@ makedepends=(bc kmod libelf)
 options=('!strip')
 _ckpatch="patch-5.9-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.204.patch
-_gcc_more_v='20200615'
+_gcc_more_v='20201113'
 _fsgsbase_path=fsgsbase-patches-v3
 _fsgsbase_patch=0001-fsgsbase-patches.patch
 source=(
@@ -99,7 +99,7 @@ sha256sums=('7656733b316562662026ac82a7c0be41440e16bbf1bdc5447b119e34ff3b86a6'
             # config
             '7977434a4cdf76dc1749fa5ad9a5cf1452ff34a09dd5947f838b06196d540a3f'
             # gcc patch
-            '278fe9ffb29d92cc5220e7beac34a8e3a2006e714d16a21a0427069f9634af90'
+            '0d4db3ae8a47d7a5c5a7f37edfddef7ce8fcdc6b64926cef70e5e3dfd7c0eeed'
             # ck patch
             'c4e80c71ca431aaed3281d4bf63777733e8fc7467229c8051e884e95a4576133'
             # fsgsbase patch
