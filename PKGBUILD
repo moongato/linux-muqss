@@ -140,6 +140,14 @@ prepare() {
   echo "Setting config..."
   cp ../config .config
 
+  # disable CONFIG_DEBUG_INFO=y at build time otherwise memory usage blows up
+  # and can easily overwhelm a system with 32 GB of memory using a tmpfs build
+  # partition ... this was introduced by FS#66260, see:
+  # https://git.archlinux.org/svntogit/packages.git/commit/trunk?h=packages/linux&id=663b08666b269eeeeaafbafaee07fd03389ac8d7
+  sed -i -e 's/CONFIG_DEBUG_INFO=y/# CONFIG_DEBUG_INFO is not set/' \
+      -i -e '/CONFIG_DEBUG_INFO_DWARF4=y/d' \
+      -i -e '/CONFIG_DEBUG_INFO_BTF=y/d' ./.config
+
   # https://bbs.archlinux.org/viewtopic.php?pid=1824594#p1824594
   sed -i -e 's/# CONFIG_PSI_DEFAULT_DISABLED is not set/CONFIG_PSI_DEFAULT_DISABLED=y/' ./.config
 
@@ -154,11 +162,6 @@ prepare() {
   # fix naming schema in EXTRAVERSION of ck patch set
   sed -i -re "s/^(.EXTRAVERSION).*$/\1 = /" "../${_ckpatch}"
 
-  # disable CONFIG_DEBUG_INFO=y at build time introduced in this commit
-  # https://git.archlinux.org/svntogit/packages.git/commit/trunk?h=packages/linux&id=663b08666b269eeeeaafbafaee07fd03389ac8d7
-  sed -i -e 's/CONFIG_DEBUG_INFO=y/# CONFIG_DEBUG_INFO is not set/' \
-      -i -e '/CONFIG_DEBUG_INFO_DWARF4=y/d' -i -e '/CONFIG_DEBUG_INFO_BTF=y/d' ./.config
-
   # ck patchset itself
   echo "Patching with ck patchset..."
   patch -Np1 -i ../"${_ckpatch}"
@@ -168,6 +171,7 @@ prepare() {
   make olddefconfig
 
   # https://github.com/graysky2/kernel_gcc_patch
+  # make sure to apply after olddefconfig to allow the next section
   echo "Patching to enable GCC optimization for other uarchs..."
   patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/enable_additional_cpu_optimizations_for_gcc_v10.1+_kernel_v5.8+.patch"
 
