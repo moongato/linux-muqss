@@ -65,7 +65,7 @@ _localmodcfg=y
 
 pkgbase=linux-muqss
 pkgver=5.9.11
-pkgrel=2
+pkgrel=3
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -77,7 +77,8 @@ _ckpatch="patch-5.9-ck${_ckpatchversion}"
 _gcc_more_v='20201113'
 _fsgsbase_path=fsgsbase-patches-v3
 _fsgsbase_patch=0001-fsgsbase-patches.patch
-_uksm_patch=uksm-5.9.patch
+_uksm_path=uksm-patches-v5
+_uksm_patch=0001-UKSM-for-5.9.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
@@ -85,7 +86,7 @@ source=(
   "http://ck.kolivas.org/patches/5.0/5.9/5.9-ck${_ckpatchversion}/$_ckpatch.xz"
   #http://ck.kolivas.org/patches/muqss/5.0/5.9/${_muqss_patch}
   https://github.com/sirlucjan/kernel-patches/raw/master/5.9/${_fsgsbase_path}/${_fsgsbase_patch}
-  https://github.com/dolohow/uksm/raw/master/v5.x/${_uksm_patch}
+  https://github.com/sirlucjan/kernel-patches/raw/master/5.9/${_uksm_path}/${_uksm_patch}
   0000-sphinx-workaround.patch
   0001-init-Kconfig-enable-O3-for-all-arches.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
@@ -110,7 +111,7 @@ sha256sums=('5eb20a65a410669928f94b3975872e493fa6d0fe441c6a78b7564affa2a5d260'
             # fsgsbase patch
             '8206b8fd7a6b545567fb7951baa3612dcb9dd0b885bdfee33ac692b37a0f5602'
             # uksm patch
-            '59d2b5e63c30332bd6e7030e4050ce9722f420b0e5b9bc383e7e93aca4268929' 
+            'dbe676b947347f83b7f267d624b72a49a10419bc59bad043814e51dec499382f' 
             # sphinx-workaround
             '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
             # enable-O3
