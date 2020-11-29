@@ -77,6 +77,7 @@ _ckpatch="patch-5.9-ck${_ckpatchversion}"
 _gcc_more_v='20201113'
 _fsgsbase_path=fsgsbase-patches-v3
 _fsgsbase_patch=0001-fsgsbase-patches.patch
+_uksm_patch=uksm-5.9.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
@@ -84,6 +85,7 @@ source=(
   "http://ck.kolivas.org/patches/5.0/5.9/5.9-ck${_ckpatchversion}/$_ckpatch.xz"
   #http://ck.kolivas.org/patches/muqss/5.0/5.9/${_muqss_patch}
   https://github.com/sirlucjan/kernel-patches/raw/master/5.9/${_fsgsbase_path}/${_fsgsbase_patch}
+  https://github.com/dolohow/uksm/raw/master/v5.x/${_uksm_patch}
   0000-sphinx-workaround.patch
   0001-init-Kconfig-enable-O3-for-all-arches.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
@@ -100,13 +102,15 @@ validpgpkeys=(
 sha256sums=('5eb20a65a410669928f94b3975872e493fa6d0fe441c6a78b7564affa2a5d260'
             'SKIP'
             # config
-            '439c71b6273fa90685b408d8c0c008da5a40260e231e1c0340ed46d461030cc2'
+            '7ccca55f874daf506c1bbefbc9e8ebc420eafe24fcdc3f98453fbe58793332b5'
             # gcc patch
             '0d4db3ae8a47d7a5c5a7f37edfddef7ce8fcdc6b64926cef70e5e3dfd7c0eeed'
             # ck patch
             'c4e80c71ca431aaed3281d4bf63777733e8fc7467229c8051e884e95a4576133'
             # fsgsbase patch
-            '8206b8fd7a6b545567fb7951baa3612dcb9dd0b885bdfee33ac692b37a0f5602' 
+            '8206b8fd7a6b545567fb7951baa3612dcb9dd0b885bdfee33ac692b37a0f5602'
+            # uksm patch
+            '59d2b5e63c30332bd6e7030e4050ce9722f420b0e5b9bc383e7e93aca4268929' 
             # sphinx-workaround
             '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
             # enable-O3
