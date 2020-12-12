@@ -65,7 +65,7 @@ _localmodcfg=y
 
 pkgbase=linux-muqss
 pkgver=5.9.14
-pkgrel=0
+pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
