@@ -250,7 +250,7 @@ _package() {
 _package-headers() {
   pkgdesc="Headers and scripts for building modules for ${pkgbase/linux/Linux} kernel"
   depends=('linux-muqss') # added to keep kernel and headers packages matched
-  provides=("linux-muqss-headers=${pkgver}" "linux-headers=${pkgver}")
+  provides=("linux-muqss-headers=${pkgver}")
 
   cd linux-${pkgver}
   local builddir="$pkgdir/usr/lib/modules/$(<version)/build"
