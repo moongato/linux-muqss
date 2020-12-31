@@ -64,7 +64,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.9.16
+pkgver=5.10.4
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -72,24 +72,22 @@ url="https://wiki.archlinux.org/index.php/Linux-ck"
 license=(GPL2)
 makedepends=(bc kmod libelf cpio perl tar xz)
 options=('!strip')
-_ckpatch="patch-5.9-ck${_ckpatchversion}"
+_ckpatch="patch-5.10-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.204.patch
 _gcc_more_v='20201113'
-_fsgsbase_path=fsgsbase-patches-v3
-_fsgsbase_patch=0001-fsgsbase-patches.patch
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
   "enable_additional_cpu_optimizations-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
-  "http://ck.kolivas.org/patches/5.0/5.9/5.9-ck${_ckpatchversion}/$_ckpatch.xz"
+  "http://ck.kolivas.org/patches/5.0/5.10/5.10-ck${_ckpatchversion}/$_ckpatch.xz"
   #http://ck.kolivas.org/patches/muqss/5.0/5.9/${_muqss_patch}
-  https://github.com/sirlucjan/kernel-patches/raw/master/5.9/${_fsgsbase_path}/${_fsgsbase_patch}
-  0000-sphinx-workaround.patch
   0001-init-Kconfig-enable-O3-for-all-arches.patch
-  0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
-  0002-Bluetooth-Fix-LL-PRivacy-BLE-device-fails-to-connect.patch
-  0003-Bluetooth-Fix-attempting-to-set-RPA-timeout-when-unsupported.patch
-  0004-HID-quirks-Add-Apple-Magic-Trackpad-2-to-hid_have_special_driver-list.patch
+  0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE.patch
+  0002-Bluetooth-Fix-attempting-to-set-RPA-timeout-when-unsupported.patch
+  0003-HID-quirks-Add-Apple-Magic-Trackpad-2-to-hid_have_special_driver-list.patch
+  0004-drm-amd-display-Add-get_dig_frontend-implementation-for-DCEx.patch
+  0005-btrfs-Fix-500-2000-performance-regression-w-5.10.patch
+  0006-iwlwifi-Fix-regression-from-UDP-segmentation-support.patch
   0000-glitched-ondemand-muqss.patch
 )
 validpgpkeys=(
@@ -97,25 +95,23 @@ validpgpkeys=(
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('b0d7abae88e5f91893627c645e680a95c818defd1b4fcaf3e2afb4b2b6b4ab86'
+sha256sums=('904e396c26e9992a16cd1cc989460171536bed7739bf36049f6eb020ee5d56ec'
             'SKIP'
             # config
-            '1835af82c178f2b98dc6ecd44dd8006082aa2efa0ad316e77d47546a2c36703f'
+            'dd091106faaf735db5ee0c3eb03840acf4122377bcd061ea5885afb8c76870ff'
             # gcc patch
             '0d4db3ae8a47d7a5c5a7f37edfddef7ce8fcdc6b64926cef70e5e3dfd7c0eeed'
             # ck patch
-            'c4e80c71ca431aaed3281d4bf63777733e8fc7467229c8051e884e95a4576133'
-            # fsgsbase patch
-            '8206b8fd7a6b545567fb7951baa3612dcb9dd0b885bdfee33ac692b37a0f5602' 
-            # sphinx-workaround
-            '8cb21e0b3411327b627a9dd15b8eb773295a0d2782b1a41b2a8839d1b2f5778c'
+            '64909f07b404b138945d5d6fd19bf3c62d10adce9f592524d91a3359331a6ace'
             # enable-O3
             'de912c6d0de05187fd0ecb0da67326bfde5ec08f1007bea85e1de732e5a62619'
-            # arch patches
-            'a023ed9459603b1b3e1b962f625ed10190047295c54fc84959651643e90d9b27'
-            '9fecc2766e8afd23862db5874cd994669109995527b6a586e290d906bf5cbb1d'
+            # archlinux patches
+            '1d0975a43d3ac7e777d53a0bbd96556aa6b24e3f098075980865cdb691cb654a'
             'e216346f7c7761a53b76dea0638898e52aac9e4527a64893c9dfa9936b3c5a0d'
-            '7356bec9ad33e3121d019868ac1b993b705db0c46c12b3b63255ba1b5053f0fc' 
+            '7356bec9ad33e3121d019868ac1b993b705db0c46c12b3b63255ba1b5053f0fc'
+            '56ca378a03341bbe8ddd13a5630922b0c4e0d505b738aec3b21dcfa55ff200d7'
+            'fe2bdf14a6a011571ce45b8ccd8399776e17d50d0f5852d7364b738fd1a59c9c'
+            '5791e6fd2ae2f4938b1190af65da3213cbfa2b3e7f50e6dcfdc8ded3ca17d720'
             # glitched-ondemand-muqss patch
             '9fa06f5e69332f0ab600d0b27734ade1b98a004123583c20a983bbb8529deb7b'
 )          
@@ -206,6 +202,9 @@ prepare() {
 
   # save configuration for later reuse
   cat .config > "${startdir}/config.last"
+
+  # uncomment if you want to build with distcc
+  ### sed -i '/HAVE_GCC_PLUGINS/d' arch/x86/Kconfig
 }
 
 build() {
