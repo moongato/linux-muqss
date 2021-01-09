@@ -87,7 +87,7 @@ source=(
   0003-iwlwifi-Fix-regression-from-UDP-segmentation-support.patch
   0004-btrfs-fix-deadlock-when-cloning-inline-extent-and-low-on-free-metadata.patch
   0005-btrfs-shrink-delalloc-pages-instead-of-full-inodes.patch
-  0000-glitched-ondemand-muqss.patch
+  0000-glitched-ondemand.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -110,7 +110,7 @@ sha256sums=('7767d02c1cb5eb2a8d3c2b15a3f93e85b98baa6e9d93a3b9e3ec0e959d0a690b'
             '5791e6fd2ae2f4938b1190af65da3213cbfa2b3e7f50e6dcfdc8ded3ca17d720'
             '42502afe43f6e1425637e794360b0942960b13c6828a0f993f6af654beea0e08'
             'a7bb1c78a9dba7bac08a8fafe59b28e1e6ced5be904f79387182b35e7e3b1f18'            
-            # glitched-ondemand-muqss patch
+            # glitched-ondemand patch
             '9fa06f5e69332f0ab600d0b27734ade1b98a004123583c20a983bbb8529deb7b'
 )          
 
