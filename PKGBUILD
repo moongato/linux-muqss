@@ -142,32 +142,23 @@ prepare() {
   # and can easily overwhelm a system with 32 GB of memory using a tmpfs build
   # partition ... this was introduced by FS#66260, see:
   # https://git.archlinux.org/svntogit/packages.git/commit/trunk?h=packages/linux&id=663b08666b269eeeeaafbafaee07fd03389ac8d7
-  sed -i -e 's/CONFIG_CGROUP_BPF=y/# CONFIG_CGROUP_BPF is not set/' \
-      -i -e 's/CONFIG_BPF_LSM=y/# CONFIG_BPF_LSM is not set/' \
-      -i -e 's/CONFIG_USERMODE_DRIVER=y/# CONFIG_BPF_PRELOAD is not set/' \
-      -i -e '/CONFIG_BPF_PRELOAD=y/d' \
-      -i -e '/CONFIG_BPF_PRELOAD_UMD=m/d' \
-      -i -e '/CONFIG_BPF_STREAM_PARSER=y/g' \
-      -i -e 's/CONFIG_BPF_LIRC_MODE2=y/# CONFIG_BPF_LIRC_MODE2 is not set/' \
-      -i -e 's/CONFIG_DEBUG_INFO=y/# CONFIG_DEBUG_INFO is not set/' \
-      -i -e '/# CONFIG_DEBUG_INFO_REDUCED is not set/d' \
-      -i -e '/# CONFIG_DEBUG_INFO_COMPRESSED is not set/d' \
-      -i -e '/# CONFIG_DEBUG_INFO_SPLIT is not set/d' \
-      -i -e '/CONFIG_DEBUG_INFO_DWARF4=y/d' \
-      -i -e '/CONFIG_DEBUG_INFO_BTF=y/d' \
-      -i -e '/# CONFIG_GDB_SCRIPTS is not set/d' \
-      -i -e 's/CONFIG_BPF_KPROBE_OVERRIDE=y/# CONFIG_BPF_KPROBE_OVERRIDE is not set/' ./.config
+  scripts/config --disable CONFIG_DEBUG_INFO
+  scripts/config --disable CONFIG_CGROUP_BPF
+  scripts/config --disable CONFIG_BPF_LSM
+  scripts/config --disable CONFIG_BPF_PRELOAD
+  scripts/config --disable CONFIG_BPF_LIRC_MODE2
+  scripts/config --disable CONFIG_BPF_KPROBE_OVERRIDE
 
   # https://bbs.archlinux.org/viewtopic.php?pid=1824594#p1824594
-  sed -i -e 's/# CONFIG_PSI_DEFAULT_DISABLED is not set/CONFIG_PSI_DEFAULT_DISABLED=y/' ./.config
+  scripts/config --enable CONFIG_PSI_DEFAULT_DISABLED
 
   # https://bbs.archlinux.org/viewtopic.php?pid=1863567#p1863567
-  sed -i -e '/CONFIG_LATENCYTOP=/ s,y,n,' \
-      -i -e '/CONFIG_SCHED_DEBUG=/ s,y,n,' ./.config
+  scripts/config --disable CONFIG_LATENCYTOP
+  scripts/config --disable CONFIG_SCHED_DEBUG
 
   # FS#66613
   # https://bugzilla.kernel.org/show_bug.cgi?id=207173#c6
-  sed -i -e 's/CONFIG_KVM_WERROR=y/# CONFIG_KVM_WERROR is not set/' ./.config
+  scripts/config --disable CONFIG_KVM_WERROR
 
   # fix naming schema in EXTRAVERSION of ck patch set
   sed -i -re "s/^(.EXTRAVERSION).*$/\1 = /" "../${_ckpatch}"
