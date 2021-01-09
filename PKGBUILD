@@ -97,7 +97,7 @@ validpgpkeys=(
 sha256sums=('7767d02c1cb5eb2a8d3c2b15a3f93e85b98baa6e9d93a3b9e3ec0e959d0a690b'
             'SKIP'
             # config
-            '352d01b4c9b49bd97cbb769ec6b5a2e941785db20da13a12a8ccbe0efe86e77e'
+            'f5ae07118a2d6b7bde143fd8ec77648fb387f90f99ec9a75e6c8fd0ac1c0f4d4'
             # gcc patch
             '0d4db3ae8a47d7a5c5a7f37edfddef7ce8fcdc6b64926cef70e5e3dfd7c0eeed'
             # ck patch
