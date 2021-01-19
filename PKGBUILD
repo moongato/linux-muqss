@@ -64,7 +64,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.10.7
+pkgver=5.10.8
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -85,8 +85,6 @@ source=(
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE.patch
   0002-HID-quirks-Add-Apple-Magic-Trackpad-2-to-hid_have_special_driver-list.patch
   0003-iwlwifi-Fix-regression-from-UDP-segmentation-support.patch
-  0004-btrfs-fix-deadlock-when-cloning-inline-extent-and-low-on-free-metadata.patch
-  0005-btrfs-shrink-delalloc-pages-instead-of-full-inodes.patch
   0000-glitched-ondemand.patch
 )
 validpgpkeys=(
@@ -94,7 +92,7 @@ validpgpkeys=(
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('4cbf6e09f90f2ae7160432c884d5a2aeb9d33a07ca7f50eb7d80f427706ffabe'
+sha256sums=('5cfc829425165d699059a398f5c24cad6e40e8899f2076ecd301c3d551e503ed'
             'SKIP'
             # config
             'f5ae07118a2d6b7bde143fd8ec77648fb387f90f99ec9a75e6c8fd0ac1c0f4d4'
@@ -108,8 +106,6 @@ sha256sums=('4cbf6e09f90f2ae7160432c884d5a2aeb9d33a07ca7f50eb7d80f427706ffabe'
             '1d0975a43d3ac7e777d53a0bbd96556aa6b24e3f098075980865cdb691cb654a'
             '7356bec9ad33e3121d019868ac1b993b705db0c46c12b3b63255ba1b5053f0fc'
             '5791e6fd2ae2f4938b1190af65da3213cbfa2b3e7f50e6dcfdc8ded3ca17d720'
-            '42502afe43f6e1425637e794360b0942960b13c6828a0f993f6af654beea0e08'
-            'a7bb1c78a9dba7bac08a8fafe59b28e1e6ced5be904f79387182b35e7e3b1f18'            
             # glitched-ondemand patch
             '9fa06f5e69332f0ab600d0b27734ade1b98a004123583c20a983bbb8529deb7b'
 )          
