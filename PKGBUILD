@@ -65,7 +65,7 @@ _localmodcfg=y
 
 pkgbase=linux-muqss
 pkgver=5.10.12
-pkgrel=1
+pkgrel=2
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -85,6 +85,7 @@ source=(
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE.patch
   0002-HID-quirks-Add-Apple-Magic-Trackpad-2-to-hid_have_special_driver-list.patch
   0003-iwlwifi-provide-gso_type-to-GSO-packets.patch
+  0004-Revert-SUNRPC-Handle-TCP-socket-sends-with-kernel_se.patch
   0000-glitched-ondemand.patch
 )
 validpgpkeys=(
@@ -106,6 +107,8 @@ sha256sums=('1d454f2817ab4f34cf313ea680ab75e20f79c6431b3bd3ea3bcd39353030c4aa'
             '1d0975a43d3ac7e777d53a0bbd96556aa6b24e3f098075980865cdb691cb654a'
             '7356bec9ad33e3121d019868ac1b993b705db0c46c12b3b63255ba1b5053f0fc'
             'cde6d80bd1d9744d1a4361578b7b5a64a982a0b0a1ba1dc1c30c014ee6545c25'
+            # graysky patch
+            '336e22e51c73b50f86750875441fb3a505ac85b2f0b3f33ef4e8018c6229ae7e'
             # glitched-ondemand patch
             '9fa06f5e69332f0ab600d0b27734ade1b98a004123583c20a983bbb8529deb7b'
 )          
