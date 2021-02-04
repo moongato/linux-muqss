@@ -64,8 +64,8 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.10.12
-pkgrel=2
+pkgver=5.10.13
+pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -84,7 +84,6 @@ source=(
   0001-init-Kconfig-enable-O3-for-all-arches.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE.patch
   0002-HID-quirks-Add-Apple-Magic-Trackpad-2-to-hid_have_special_driver-list.patch
-  0003-iwlwifi-provide-gso_type-to-GSO-packets.patch
   0004-Revert-SUNRPC-Handle-TCP-socket-sends-with-kernel_se.patch
   0000-glitched-ondemand.patch
 )
@@ -93,10 +92,10 @@ validpgpkeys=(
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('1d454f2817ab4f34cf313ea680ab75e20f79c6431b3bd3ea3bcd39353030c4aa'
+sha256sums=('06698c0ce35ceefa9b79ceb108ec7fb86de05f51fe615f3ae5cc82e293dfe1f2'
             'SKIP'
             # config
-            '3c5aa710d1cc76a7db5186660d41466fc375266727d9222825c0f7db23c75f16'
+            'c4bcc078a21be93bbb5ee846872f7dfa6793b08498640236b42bbf164f17c3f7'
             # gcc patch
             '0d4db3ae8a47d7a5c5a7f37edfddef7ce8fcdc6b64926cef70e5e3dfd7c0eeed'
             # ck patch
@@ -106,7 +105,6 @@ sha256sums=('1d454f2817ab4f34cf313ea680ab75e20f79c6431b3bd3ea3bcd39353030c4aa'
             # archlinux patches
             '1d0975a43d3ac7e777d53a0bbd96556aa6b24e3f098075980865cdb691cb654a'
             '7356bec9ad33e3121d019868ac1b993b705db0c46c12b3b63255ba1b5053f0fc'
-            'cde6d80bd1d9744d1a4361578b7b5a64a982a0b0a1ba1dc1c30c014ee6545c25'
             # graysky patch
             '336e22e51c73b50f86750875441fb3a505ac85b2f0b3f33ef4e8018c6229ae7e'
             # glitched-ondemand patch
