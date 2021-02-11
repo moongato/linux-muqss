@@ -64,7 +64,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.10.14
+pkgver=5.10.15
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -84,7 +84,6 @@ source=(
   0001-init-Kconfig-enable-O3-for-all-arches.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE.patch
   0002-HID-quirks-Add-Apple-Magic-Trackpad-2-to-hid_have_special_driver-list.patch
-  0003-SUNRPC-Fix-NFS-READs-the-start-at-non-page-aligned-offsets.patch
   0000-glitched-ondemand.patch
 )
 validpgpkeys=(
@@ -92,7 +91,7 @@ validpgpkeys=(
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('fa27b79f198b5be969e497ed5461860df48e0591c85e60699fc8be26837a1d2a'
+sha256sums=('d85287bcf1d51c4d0a32380ac0a5b2b487b321058a6923617f1613fbd10e6e01'
             'SKIP'
             # config
             '809095c1e8a229c6742755718597f6209de00237470e56c9e18b0c472d147782'
@@ -105,8 +104,6 @@ sha256sums=('fa27b79f198b5be969e497ed5461860df48e0591c85e60699fc8be26837a1d2a'
             # archlinux patches
             '1d0975a43d3ac7e777d53a0bbd96556aa6b24e3f098075980865cdb691cb654a'
             '7356bec9ad33e3121d019868ac1b993b705db0c46c12b3b63255ba1b5053f0fc'
-            # graysky patch
-            '7e3f4ce56ebe48e929a8baaf2886f29aef990a627215bbd032e37b1bd3c17dde'
             # glitched-ondemand patch
             '9fa06f5e69332f0ab600d0b27734ade1b98a004123583c20a983bbb8529deb7b'
 )          
