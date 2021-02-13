@@ -64,7 +64,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.10.15
+pkgver=5.10.16
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -91,7 +91,7 @@ validpgpkeys=(
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('d85287bcf1d51c4d0a32380ac0a5b2b487b321058a6923617f1613fbd10e6e01'
+sha256sums=('536fe3ea273bfcc72b3571d3b3a7ff0a5bcdc16068efd22e42c4f9d03c200a37'
             'SKIP'
             # config
             '809095c1e8a229c6742755718597f6209de00237470e56c9e18b0c472d147782'
