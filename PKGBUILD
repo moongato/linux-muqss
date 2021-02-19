@@ -73,14 +73,14 @@ license=(GPL2)
 makedepends=(bc kmod libelf cpio perl tar xz)
 options=('!strip')
 _ckpatch="patch-5.11-ck${_ckpatchversion}"
-#_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.204.patch
+#_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.208.patch
 _gcc_more_v='20201113'
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
   "enable_additional_cpu_optimizations-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
   "http://ck.kolivas.org/patches/5.0/5.11/5.11-ck${_ckpatchversion}/$_ckpatch.xz"
-  #http://ck.kolivas.org/patches/muqss/5.0/5.9/${_muqss_patch}
+  #http://ck.kolivas.org/patches/muqss/5.0/5.11/${_muqss_patch}
   0000-init-Kconfig-enable-O3-for-all-arches.patch
   0000-ondemand-tweaks.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE.patch
