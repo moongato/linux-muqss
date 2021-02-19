@@ -65,7 +65,7 @@ _localmodcfg=y
 
 pkgbase=linux-muqss
 pkgver=5.11
-pkgrel=1
+pkgrel=2
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -81,9 +81,12 @@ source=(
   "enable_additional_cpu_optimizations-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
   "http://ck.kolivas.org/patches/5.0/5.11/5.11-ck${_ckpatchversion}/$_ckpatch.xz"
   #http://ck.kolivas.org/patches/muqss/5.0/5.9/${_muqss_patch}
-  0001-init-Kconfig-enable-O3-for-all-arches.patch
+  0000-init-Kconfig-enable-O3-for-all-arches.patch
+  0000-ondemand-tweaks.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE.patch
-  0000-glitched-ondemand.patch
+  0002-Bluetooth-btusb-Some-Qualcomm-Bluetooth-adapters-stop-working.patch
+  0003-Revert-drm-amd-display-reuse-current-context-instead-of-recreating-one.patch 
+  0004-drm-amdgpu-fix-shutdown-with-s0ix.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -100,10 +103,13 @@ sha256sums=('04f07b54f0d40adfab02ee6cbd2a942c96728d87c1ef9e120d0cb9ba3fe067b4'
             'ec102ca7c3f62085edbd616ecd77196d12d0428bce2b4073af2ae00d13be8e92'
             # enable-O3
             'de912c6d0de05187fd0ecb0da67326bfde5ec08f1007bea85e1de732e5a62619'
-            # archlinux patches
-            '1d0975a43d3ac7e777d53a0bbd96556aa6b24e3f098075980865cdb691cb654a'
-            # glitched-ondemand patch
+            # ondemand patch
             '9fa06f5e69332f0ab600d0b27734ade1b98a004123583c20a983bbb8529deb7b'
+            # archlinux patches
+            '53a203472800fb75aae6cfa1b1b627f11e906a5246510f82a93c924ca780d685'
+            '04abcd596bc99a1cc001b6807ace90bc080189e6303499cfff0daa481b7486b9'
+            'd6505808f2247a3a1df7de6b7ed7ddd689205b714296a4d602b9f8e25344116b'
+            '1aa4cb0b3f473814b729f49637ce709687c3028c61c2cab447bd5bb2f6220502' 
 )          
 
 export KBUILD_BUILD_HOST=archlinux
