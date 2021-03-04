@@ -64,7 +64,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.11.2
+pkgver=5.11.3
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -84,15 +84,13 @@ source=(
   0000-init-Kconfig-enable-O3-for-all-arches.patch
   0000-ondemand-tweaks.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE.patch
-  0002-Revert-drm-amd-display-reuse-current-context-instead-of-recreating-one.patch 
-  0003-drm-amdgpu-fix-shutdown-with-s0ix.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('904a5b3cbaf5264ef8da6c7a5445fa7ea19168ad77fb83a7cc1b8ba95d52d0a0'
+sha256sums=('3558c70bb3805763c250df3b2c29225cedfce849483afd4ecba27e29ecb1cbfe'
             'SKIP'
             # config
             '6f644bbe8233373e8232491b46ebf5a0353095f1aafab5a0df1954505a9e64f1'
@@ -106,8 +104,6 @@ sha256sums=('904a5b3cbaf5264ef8da6c7a5445fa7ea19168ad77fb83a7cc1b8ba95d52d0a0'
             '9fa06f5e69332f0ab600d0b27734ade1b98a004123583c20a983bbb8529deb7b'
             # archlinux patches
             '53a203472800fb75aae6cfa1b1b627f11e906a5246510f82a93c924ca780d685'
-            'd6505808f2247a3a1df7de6b7ed7ddd689205b714296a4d602b9f8e25344116b'
-            '1aa4cb0b3f473814b729f49637ce709687c3028c61c2cab447bd5bb2f6220502' 
 )          
 
 export KBUILD_BUILD_HOST=archlinux
