@@ -47,7 +47,10 @@ _makenconfig=
 #  30. Intel Cooper Lake (MCOOPERLAKE)
 #  31. Intel Tiger Lake (MTIGERLAKE)
 #  32. Generic-x86-64 (GENERIC_CPU)
-#  33. Native optimizations autodetected by GCC (MNATIVE)
+#  33. Generic-x86-64-v2 (GENERIC_CPU2) (NEW)
+#  34. Generic-x86-64-v3 (GENERIC_CPU3) (NEW)
+#  35. Generic-x86-64-v4 (GENERIC_CPU4) (NEW)
+#  36. Native optimizations autodetected by GCC (MNATIVE) (NEW)
 
 _subarch=
 
@@ -74,7 +77,7 @@ makedepends=(bc kmod libelf cpio perl tar xz)
 options=('!strip')
 _ckpatch="patch-5.11-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.208.patch
-_gcc_more_v='20201113'
+_gcc_more_v=20210306
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
@@ -95,7 +98,7 @@ sha256sums=('3558c70bb3805763c250df3b2c29225cedfce849483afd4ecba27e29ecb1cbfe'
             # config
             '3b482ae2fdd15da929867c5b43e750c2fd23be4e38565df781edb8a2c849a6f6'
             # gcc patch
-            '0d4db3ae8a47d7a5c5a7f37edfddef7ce8fcdc6b64926cef70e5e3dfd7c0eeed'
+            '2811f359eb2f53eeecdf5b6b077a256f834dc62666bacc2b325b407a7a1f17d4'
             # ck patch
             'ec102ca7c3f62085edbd616ecd77196d12d0428bce2b4073af2ae00d13be8e92'
             # enable-O3
