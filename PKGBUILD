@@ -67,7 +67,7 @@ _localmodcfg=y
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.11.3
+pkgver=5.11.4
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -77,7 +77,7 @@ makedepends=(bc kmod libelf cpio perl tar xz)
 options=('!strip')
 _ckpatch="patch-5.11-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.208.patch
-_gcc_more_v=20210306
+_gcc_more_v=20210307
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
@@ -93,12 +93,12 @@ validpgpkeys=(
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('3558c70bb3805763c250df3b2c29225cedfce849483afd4ecba27e29ecb1cbfe'
+sha256sums=('88e59fafc9653cb7eef501cef3eda677843027735fd11325a75e353b10770dc5'
             'SKIP'
             # config
             '3b482ae2fdd15da929867c5b43e750c2fd23be4e38565df781edb8a2c849a6f6'
             # gcc patch
-            '2811f359eb2f53eeecdf5b6b077a256f834dc62666bacc2b325b407a7a1f17d4'
+            '3f4b254ee90340aa0f6f939de4db0338fe12b71a970ee9e513940a2efd943417'
             # ck patch
             'ec102ca7c3f62085edbd616ecd77196d12d0428bce2b4073af2ae00d13be8e92'
             # enable-O3
