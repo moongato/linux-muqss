@@ -47,10 +47,7 @@ _makenconfig=
 #  30. Intel Cooper Lake (MCOOPERLAKE)
 #  31. Intel Tiger Lake (MTIGERLAKE)
 #  32. Generic-x86-64 (GENERIC_CPU)
-#  33. Generic-x86-64-v2 (GENERIC_CPU2) (NEW)
-#  34. Generic-x86-64-v3 (GENERIC_CPU3) (NEW)
-#  35. Generic-x86-64-v4 (GENERIC_CPU4) (NEW)
-#  36. Native optimizations autodetected by GCC (MNATIVE) (NEW)
+#  33. Native optimizations autodetected by GCC (MNATIVE) (NEW)
 
 _subarch=
 
