@@ -65,7 +65,7 @@ _localmodcfg=y
 
 pkgbase=linux-muqss
 pkgver=5.11.4
-pkgrel=1
+pkgrel=2
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -74,11 +74,11 @@ makedepends=(bc kmod libelf cpio perl tar xz)
 options=('!strip')
 _ckpatch="patch-5.11-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.208.patch
-_gcc_more_v=20210307
+_gcc_more_v=20210309
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
-  "enable_additional_cpu_optimizations-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
+  "more-uarches-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
   "http://ck.kolivas.org/patches/5.0/5.11/5.11-ck${_ckpatchversion}/$_ckpatch.xz"
   #http://ck.kolivas.org/patches/muqss/5.0/5.11/${_muqss_patch}
   0000-init-Kconfig-enable-O3-for-all-arches.patch
@@ -95,7 +95,7 @@ sha256sums=('88e59fafc9653cb7eef501cef3eda677843027735fd11325a75e353b10770dc5'
             # config
             '3b482ae2fdd15da929867c5b43e750c2fd23be4e38565df781edb8a2c849a6f6'
             # gcc patch
-            '3f4b254ee90340aa0f6f939de4db0338fe12b71a970ee9e513940a2efd943417'
+            '8fa4ef2c3b392c410c3f74f9b4ab89683b7fca8cac70b96e2bf532a952e46d0b'
             # ck patch
             'ec102ca7c3f62085edbd616ecd77196d12d0428bce2b4073af2ae00d13be8e92'
             # enable-O3
@@ -166,7 +166,7 @@ prepare() {
   # https://github.com/graysky2/kernel_gcc_patch
   # make sure to apply after olddefconfig to allow the next section
   echo "Patching to enable GCC optimization for other uarchs..."
-  patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/enable_additional_cpu_optimizations_for_gcc_v10.1+_kernel_v5.8+.patch"
+  patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/more-uarches-for-gcc-v10-and-kernel-5.8+.patch"
 
   if [ -n "$_subarch" ]; then
     # user wants a subarch so apply choice defined above interactively via 'yes'
