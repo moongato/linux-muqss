@@ -2,18 +2,24 @@
 # Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
 
 ### BUILD OPTIONS
-# Set these variables to ANYTHING that is not null to enable them
+# Set the next two variables to ANYTHING that is not null to enable them
 
 # Tweak kernel options prior to a build via nconfig
 _makenconfig=
 
-# Optionally select a sub architecture by number if building in a clean chroot
-# Leaving this entry blank will require user interaction during the build
-# which will cause a failure to build if using makechrootpkg. Note that the
-# generic (default) option is 32.
+# Only compile active modules to VASTLY reduce the number of modules built and
+# the build time.
 #
-# Note - the march=native option is unavailable by this method, use the nconfig
-# and manually select it.
+# To keep track of which modules are needed for your specific system/hardware,
+# give module_db a try: https://aur.archlinux.org/packages/modprobed-db
+# This PKGBUILD reads the database kept if it exists
+#
+# More at this wiki page ---> https://wiki.archlinux.org/index.php/Modprobed-db
+_localmodcfg=y
+
+# Optionally select a sub architecture by number or leave blank which will
+# require user interaction during the build. Note that the generic (default)
+# option is 32.
 #
 #  1. AMD Opteron/Athlon64/Hammer/K8 (MK8)
 #  2. AMD Opteron/Athlon64/Hammer/K8 with SSE3 (MK8SSE3)
@@ -47,25 +53,15 @@ _makenconfig=
 #  30. Intel Cooper Lake (MCOOPERLAKE)
 #  31. Intel Tiger Lake (MTIGERLAKE)
 #  32. Generic-x86-64 (GENERIC_CPU)
-#  33. Native optimizations autodetected by GCC (MNATIVE) (NEW)
-
+#  33. Intel-Native optimizations autodetected by GCC (MNATIVE_INTEL)
+#  34. AMD-Native optimizations autodetected by GCC (MNATIVE_AMD)
 _subarch=
-
-# Compile ONLY used modules to VASTLYreduce the number of modules built
-# and the build time.
-#
-# To keep track of which modules are needed for your specific system/hardware,
-# give module_db script a try: https://aur.archlinux.org/packages/modprobed-db
-# This PKGBUILD read the database kept if it exists
-#
-# More at this wiki page ---> https://wiki.archlinux.org/index.php/Modprobed-db
-_localmodcfg=y
 
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
 pkgver=5.11.11
-pkgrel=1
+pkgrel=2
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -74,7 +70,7 @@ makedepends=(bc kmod libelf cpio perl tar xz)
 options=('!strip')
 _ckpatch="patch-5.11-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.208.patch
-_gcc_more_v=20210309
+_gcc_more_v=20210327
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
@@ -96,7 +92,7 @@ sha256sums=('0a7875613823a57e7f9a937eb0ff098cbd8a2ff0d93e18171b8afeac09f583b9'
             # config
             '0de33ead646f1df21c9400ad70d7b902e4abb59f213de5b16f928e094e503092'
             # gcc patch
-            '8fa4ef2c3b392c410c3f74f9b4ab89683b7fca8cac70b96e2bf532a952e46d0b'
+            'ac0e44bd089eeb7f52d358e6899005599fff50972f090af9c8e6ee0097d01db6'
             # ck patch
             'ec102ca7c3f62085edbd616ecd77196d12d0428bce2b4073af2ae00d13be8e92'
             # enable-O3
@@ -168,7 +164,7 @@ prepare() {
   # https://github.com/graysky2/kernel_gcc_patch
   # make sure to apply after olddefconfig to allow the next section
   echo "Patching to enable GCC optimization for other uarchs..."
-  patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/more-uarches-for-gcc-v10-and-kernel-5.8+.patch"
+  patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/more-uarches-for-kernel-5.8+.patch"
 
   if [ -n "$_subarch" ]; then
     # user wants a subarch so apply choice defined above interactively via 'yes'
