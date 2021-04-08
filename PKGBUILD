@@ -61,7 +61,7 @@ _subarch=
 
 pkgbase=linux-muqss
 pkgver=5.11.12
-pkgrel=1
+pkgrel=2
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -70,7 +70,7 @@ makedepends=(bc kmod libelf cpio perl tar xz)
 options=('!strip')
 _ckpatch="patch-5.11-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.208.patch
-_gcc_more_v=20210327
+_gcc_more_v=20210402
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
@@ -95,7 +95,7 @@ sha256sums=('c0a26f173448b6d807c5f056e99601d090a6033bfd0c56824ba6e8e7a7be0e7d'
             # config
             '46078ca48feeb39e9fa5110e62d77741d5b9edf8b48c8d6b8b38cd26c05e9094'
             # gcc patch
-            'ac0e44bd089eeb7f52d358e6899005599fff50972f090af9c8e6ee0097d01db6'
+            '8aea0d8a9999b0510fa128d79af8a8dc94d25f0a193fd698ebfdf09808472d2e'
             # ck patch
             'ec102ca7c3f62085edbd616ecd77196d12d0428bce2b4073af2ae00d13be8e92'
             # enable-O3
@@ -119,7 +119,6 @@ prepare() {
   # https://bbs.archlinux.org/viewtopic.php?id=265115
 
   if [[ ! -f "$srcdir/$_ckpatch" ]]; then
-    unlink "$srcdir/$_ckpatch.xz"
     xz -dc "$SRCDEST/$_ckpatch.xz" > "$_ckpatch"
   fi
 
