@@ -60,8 +60,8 @@ _subarch=
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.11.11
-pkgrel=3
+pkgver=5.11.12
+pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -81,16 +81,19 @@ source=(
   0000-ondemand-tweaks.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE.patch
   0002-iommu-amd-Dont-initialise-remapping-irqdomain-if-IOMMU-is-disabled.patch
+  0003-drm-i915-ilk-glk-Fix-link-training-on-links-with-LTTPRs.patch
+  0004-drm-i915-dp-Prevent-setting-the-LTTPR-LT-mode-if-no-LTTPRs-are-det.patch
+  0005-drm-i915-Disable-LTTPR-support-when-the-DPCD-rev-1-4.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('0a7875613823a57e7f9a937eb0ff098cbd8a2ff0d93e18171b8afeac09f583b9'
+sha256sums=('c0a26f173448b6d807c5f056e99601d090a6033bfd0c56824ba6e8e7a7be0e7d'
             'SKIP'
             # config
-            '0de33ead646f1df21c9400ad70d7b902e4abb59f213de5b16f928e094e503092'
+            '46078ca48feeb39e9fa5110e62d77741d5b9edf8b48c8d6b8b38cd26c05e9094'
             # gcc patch
             'ac0e44bd089eeb7f52d358e6899005599fff50972f090af9c8e6ee0097d01db6'
             # ck patch
@@ -101,7 +104,10 @@ sha256sums=('0a7875613823a57e7f9a937eb0ff098cbd8a2ff0d93e18171b8afeac09f583b9'
             '9fa06f5e69332f0ab600d0b27734ade1b98a004123583c20a983bbb8529deb7b'
             # archlinux patches
             '53a203472800fb75aae6cfa1b1b627f11e906a5246510f82a93c924ca780d685'
-            '9087f02fba3782025cd064b9ed64dda0239d31ad58f69c71cb544a4c9dcf04dc' 
+            '9087f02fba3782025cd064b9ed64dda0239d31ad58f69c71cb544a4c9dcf04dc'
+            '1c4c1583ab3824f31d9ed6776048fab5fc1e500c6d4f9e6358d1b022f547b267'
+            '0c166f52349c0afb22f7dc3a787c05ddae7e745692c14f95e406e0f2a6a403b3'
+            '42dcdf73ff882de97d26dd7c53a2494d067cf213dff6fd8ae05c3f71b06d4e15'
 )          
 
 export KBUILD_BUILD_HOST=archlinux
