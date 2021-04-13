@@ -61,7 +61,7 @@ _subarch=
 
 pkgbase=linux-muqss
 pkgver=5.11.13
-pkgrel=2
+pkgrel=3
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
