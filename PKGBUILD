@@ -60,7 +60,7 @@ _subarch=
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.11.15
+pkgver=5.11.16
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -90,10 +90,10 @@ validpgpkeys=(
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('d6a7845357cf56b695e50b4c60e09a8832b651ac701062a76145550a8e77c44a'
+sha256sums=('21163681d130cbce5a6be39019e2c69e44f284855ddd70b1a3bd039249540f43'
             'SKIP'
             # config
-            'bd28bdc4f65ec6bad294c9d7b535668b41248ba83f4f22b1a4d5e088f4657035'
+            'f29a3c15abdfb77d9b060db245150aec6229217ab6737be73b088d08a74eddb1'
             # gcc patch
             '8aea0d8a9999b0510fa128d79af8a8dc94d25f0a193fd698ebfdf09808472d2e'
             # ck patch
