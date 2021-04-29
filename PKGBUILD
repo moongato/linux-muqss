@@ -60,7 +60,7 @@ _subarch=
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.11.16
+pkgver=5.12
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -68,46 +68,38 @@ url="https://wiki.archlinux.org/index.php/Linux-ck"
 license=(GPL2)
 makedepends=(bc kmod libelf cpio perl tar xz)
 options=('!strip')
-_ckpatch="patch-5.11-ck${_ckpatchversion}"
+_ckpatch="patch-5.12-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.208.patch
 _gcc_more_v=20210402
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
   "more-uarches-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
-  "http://ck.kolivas.org/patches/5.0/5.11/5.11-ck${_ckpatchversion}/$_ckpatch.xz"
+  "http://ck.kolivas.org/patches/5.0/5.12/5.12-ck${_ckpatchversion}/$_ckpatch.xz"
   #http://ck.kolivas.org/patches/muqss/5.0/5.11/${_muqss_patch}
   0000-init-Kconfig-enable-O3-for-all-arches.patch
   0000-ondemand-tweaks.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE.patch
-  0002-drm-i915-ilk-glk-Fix-link-training-on-links-with-LTTPRs.patch
-  0003-drm-i915-dp-Prevent-setting-the-LTTPR-LT-mode-if-no-LTTPRs-are.patch
-  0004-drm-i915-Disable-LTTPR-support-when-the-DPCD-rev-1-4.patch
-  0005-drm-i915-Fix-modesetting-in-case-of-unexpected-AUX-timeouts.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('21163681d130cbce5a6be39019e2c69e44f284855ddd70b1a3bd039249540f43'
+sha256sums=('7d0df6f2bf2384d68d0bd8e1fe3e071d64364dcdc6002e7b5c87c92d48fac366'
             'SKIP'
             # config
-            'f29a3c15abdfb77d9b060db245150aec6229217ab6737be73b088d08a74eddb1'
+            '38bb7d9c49a69cf16bf15158e760b5ee41ac729ec80d31c6f5e3f4640722bc86'
             # gcc patch
             '8aea0d8a9999b0510fa128d79af8a8dc94d25f0a193fd698ebfdf09808472d2e'
             # ck patch
-            'ec102ca7c3f62085edbd616ecd77196d12d0428bce2b4073af2ae00d13be8e92'
+            'dc13f2a6ca9871f7b67c4736cef5784406b51f61dfdc7848d665013df14edd7c'
             # enable-O3
             'de912c6d0de05187fd0ecb0da67326bfde5ec08f1007bea85e1de732e5a62619'
             # ondemand patch
             '9fa06f5e69332f0ab600d0b27734ade1b98a004123583c20a983bbb8529deb7b'
             # archlinux patches
             '53a203472800fb75aae6cfa1b1b627f11e906a5246510f82a93c924ca780d685'
-            'a4ce9378806aa07f465fd4ea974d2c43963a8dab75b5ff50006c9f0363104c84'
-            '91af4b24a19a5faa362e13dd64fe5bece57b81f7c0ab7c2ee48ee2f63864154b'
-            'bd477e30f5ece1b378478836d069be2d4234b85af57a72ce3c727eef8e84dea9'
-            'd5e48f423a20130a4a7f6ca6c2ae79ae9d403969399ad4d8881bf980794f9eb0'
 )          
 
 export KBUILD_BUILD_HOST=archlinux
@@ -115,13 +107,6 @@ export KBUILD_BUILD_USER=$pkgbase
 export KBUILD_BUILD_TIMESTAMP="$(date -Ru${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EPOCH})"
 
 prepare() {
-  # hacky work around for ck1 not getting extracted
-  # https://bbs.archlinux.org/viewtopic.php?id=265115
-
-  if [[ ! -f "$srcdir/$_ckpatch" ]]; then
-    xz -dc "$SRCDEST/$_ckpatch.xz" > "$_ckpatch"
-  fi
-
   cd linux-${pkgver}
 
   echo "Setting version..."
