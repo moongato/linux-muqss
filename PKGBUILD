@@ -60,7 +60,7 @@ _subarch=
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.12.6
+pkgver=5.12.7
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -80,14 +80,13 @@ source=(
   0000-init-Kconfig-enable-O3-for-all-arches.patch
   0000-ondemand-tweaks.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE.patch
-  0002-drm-i915-gt-Disable-HiZ-Raw-Stall-Optimization-on-broken-gen7-.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('4b704cf7f272c6b8e870130cf72d4d9ce67cc411386f68fc6c25b6578b6abdb1'
+sha256sums=('5322e9f0a8d55acc0aa7ec1f57756b126e3cce83399ebf01aa75e5f728cb2c47'
             'SKIP'
             # config
             'a743ec81f0db39e7bc100874c094da108b8974b7ff3bd2b62a2610c29d98b210'
@@ -101,7 +100,6 @@ sha256sums=('4b704cf7f272c6b8e870130cf72d4d9ce67cc411386f68fc6c25b6578b6abdb1'
             '9fa06f5e69332f0ab600d0b27734ade1b98a004123583c20a983bbb8529deb7b'
             # archlinux patches
             '53a203472800fb75aae6cfa1b1b627f11e906a5246510f82a93c924ca780d685'
-            'b16a61702c54a645d2ac3d0dcdd763ba5435e2181a9c17ae69cd17349eae6f8b'
 )          
 
 export KBUILD_BUILD_HOST=archlinux
