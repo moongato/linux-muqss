@@ -19,42 +19,49 @@ _localmodcfg=y
 
 # Optionally select a sub architecture by number or leave blank which will
 # require user interaction during the build. Note that the generic (default)
-# option is 32.
+# option is 36.
 #
 #  1. AMD Opteron/Athlon64/Hammer/K8 (MK8)
-#  2. AMD Opteron/Athlon64/Hammer/K8 with SSE3 (MK8SSE3)
-#  3. AMD 61xx/7x50/PhenomX3/X4/II/K10 (MK10)
-#  4. AMD Barcelona (MBARCELONA)
-#  5. AMD Bobcat (MBOBCAT)
-#  6. AMD Jaguar (MJAGUAR)
-#  7. AMD Bulldozer (MBULLDOZER)
-#  8. AMD Piledriver (MPILEDRIVER)
-#  9. AMD Steamroller (MSTEAMROLLER)
-#  10. AMD Excavator (MEXCAVATOR)
-#  11. AMD Zen (MZEN)
-#  12. AMD Zen 2 (MZEN2)
-#  13. Intel P4 / older Netburst based Xeon (MPSC)
-#  14. Intel Atom (MATOM)
+#  2. AMD Opteron/Athlon64/Hammer/K8 with SSE3 (MK8SSE3) (NEW)
+#  3. AMD 61xx/7x50/PhenomX3/X4/II/K10 (MK10) (NEW)
+#  4. AMD Barcelona (MBARCELONA) (NEW)
+#  5. AMD Bobcat (MBOBCAT) (NEW)
+#  6. AMD Jaguar (MJAGUAR) (NEW)
+#  7. AMD Bulldozer (MBULLDOZER) (NEW)
+#  8. AMD Piledriver (MPILEDRIVER) (NEW)
+#  9. AMD Steamroller (MSTEAMROLLER) (NEW)
+#  10. AMD Excavator (MEXCAVATOR) (NEW)
+#  11. AMD Zen (MZEN) (NEW)
+#  12. AMD Zen 2 (MZEN2) (NEW)
+#  13. AMD Zen 3 (MZEN3) (NEW)
+#  14. Intel P4 / older Netburst based Xeon (MPSC)
 #  15. Intel Core 2 (MCORE2)
-#  16. Intel Nehalem (MNEHALEM)
-#  17. Intel Westmere (MWESTMERE)
-#  18. Intel Silvermont (MSILVERMONT)
-#  19. Intel Goldmont (MGOLDMONT)
-#  20. Intel Goldmont Plus (MGOLDMONTPLUS)
-#  21. Intel Sandy Bridge (MSANDYBRIDGE)
-#  22. Intel Ivy Bridge (MIVYBRIDGE)
-#  23. Intel Haswell (MHASWELL)
-#  24. Intel Broadwell (MBROADWELL)
-#  25. Intel Skylake (MSKYLAKE)
-#  26. Intel Skylake X (MSKYLAKEX)
-#  27. Intel Cannon Lake (MCANNONLAKE)
-#  28. Intel Ice Lake (MICELAKE)
-#  29. Intel Cascade Lake (MCASCADELAKE)
-#  30. Intel Cooper Lake (MCOOPERLAKE)
-#  31. Intel Tiger Lake (MTIGERLAKE)
-#  32. Generic-x86-64 (GENERIC_CPU)
-#  33. Intel-Native optimizations autodetected by GCC (MNATIVE_INTEL)
-#  34. AMD-Native optimizations autodetected by GCC (MNATIVE_AMD)
+#  16. Intel Atom (MATOM)
+#  17. Intel Nehalem (MNEHALEM) (NEW)
+#  18. Intel Westmere (MWESTMERE) (NEW)
+#  19. Intel Silvermont (MSILVERMONT) (NEW)
+#  20. Intel Goldmont (MGOLDMONT) (NEW)
+#  21. Intel Goldmont Plus (MGOLDMONTPLUS) (NEW)
+#  22. Intel Sandy Bridge (MSANDYBRIDGE) (NEW)
+#  23. Intel Ivy Bridge (MIVYBRIDGE) (NEW)
+#  24. Intel Haswell (MHASWELL) (NEW)
+#  25. Intel Broadwell (MBROADWELL) (NEW)
+#  26. Intel Skylake (MSKYLAKE) (NEW)
+#  27. Intel Skylake X (MSKYLAKEX) (NEW)
+#  28. Intel Cannon Lake (MCANNONLAKE) (NEW)
+#  29. Intel Ice Lake (MICELAKE) (NEW)
+#  30. Intel Cascade Lake (MCASCADELAKE) (NEW)
+#  31. Intel Cooper Lake (MCOOPERLAKE) (NEW)
+#  32. Intel Tiger Lake (MTIGERLAKE) (NEW)
+#  33. Intel Sapphire Rapids (MSAPPHIRERAPIDS) (NEW)
+#  34. Intel Rocket Lake (MROCKETLAKE) (NEW)
+#  35. Intel Alder Lake (MALDERLAKE) (NEW)
+#  36. Generic-x86-64 (GENERIC_CPU)
+#  37. Generic-x86-64-v2 (GENERIC_CPU2) (NEW)
+#  38. Generic-x86-64-v3 (GENERIC_CPU3) (NEW)
+#  39. Generic-x86-64-v4 (GENERIC_CPU4) (NEW)
+#  40. Intel-Native optimizations autodetected by GCC (MNATIVE_INTEL) (NEW)
+#  41. AMD-Native optimizations autodetected by GCC (MNATIVE_AMD) (NEW)
 _subarch=
 
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
@@ -70,11 +77,11 @@ makedepends=(bc kmod libelf cpio perl tar xz)
 options=('!strip')
 _ckpatch="patch-5.12-ck${_ckpatchversion}"
 #_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.208.patch
-_gcc_more_v=20210412
+_gcc_more_v=20210606
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
-  "more-uarches-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_gcc_patch/archive/$_gcc_more_v.tar.gz"
+  "more-uarches-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_compiler_patch/archive/$_gcc_more_v.tar.gz"
   "http://ck.kolivas.org/patches/5.0/5.12/5.12-ck${_ckpatchversion}/$_ckpatch.xz"
   #http://ck.kolivas.org/patches/muqss/5.0/5.11/${_muqss_patch}
   0000-init-Kconfig-enable-O3-for-all-arches.patch
@@ -91,7 +98,7 @@ sha256sums=('c7fabef5754271cd12f2d3a9ae237ed91c6fce09cec3895400d48194110ce76d'
             # config
             '43ffd335f7aac126066c8881cee050970906fc5334a79f50b1db516f6346200d'
             # gcc patch
-            'f1f62b6d2cd89d0ab15f8d7311f5bb775dfc97ff39f93bc77f6f733f75fa7558'
+            '21454906014ac8e448be85147be06a1e3dfbefb644ef96d9a37c15fcc8e07a42'
             # ck patch
             'dc13f2a6ca9871f7b67c4736cef5784406b51f61dfdc7848d665013df14edd7c'
             # enable-O3
@@ -162,7 +169,7 @@ prepare() {
   # https://github.com/graysky2/kernel_gcc_patch
   # make sure to apply after olddefconfig to allow the next section
   echo "Patching to enable GCC optimization for other uarchs..."
-  patch -Np1 -i "$srcdir/kernel_gcc_patch-$_gcc_more_v/more-uarches-for-kernel-5.8+.patch"
+  patch -Np1 -i "$srcdir/kernel_compiler_patch-$_gcc_more_v/more-uarches-for-kernel-5.8+.patch"
 
   if [ -n "$_subarch" ]; then
     # user wants a subarch so apply choice defined above interactively via 'yes'
