@@ -67,7 +67,7 @@ _subarch=
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.12.10
+pkgver=5.12.11
 pkgrel=1
 _ckpatchversion=1
 arch=(x86_64)
@@ -87,16 +87,22 @@ source=(
   0000-init-Kconfig-enable-O3-for-all-arches.patch
   0000-ondemand-tweaks.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE.patch
+  0002-x86-setup-Consolidate-early-memory-reservations.patch
+  0003-x86-setup-Merge-several-reservations-of-start-of-memory.patch
+  0004-x86-setup-Move-trim_snb_memory-later-in-setup_arch-to-fix-boot-hangs.patch
+  0005-x86-setup-always-reserve-the-first-1M-of-RAM.patch
+  0006-x86-setup-remove-CONFIG_X86_RESERVE_LOW-and-reservelow-options.patch
+  0007-x86-crash-remove-crash_reserve_low_1M.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('c8d499fc53ed14838994ec2f51591ae40d64cce68559cd897be8acbeeee7630f'
+sha256sums=('ae7c3310365f6afdc0b6bd01f434a52c484589bd9b0fea8067b81a46d6f67f7a'
             'SKIP'
             # config
-            '43ffd335f7aac126066c8881cee050970906fc5334a79f50b1db516f6346200d'
+            'dea02f51e1aa0560ac7eeceae72fdcb4c00abba6009e637544fde0fa3c026243'
             # gcc patch
             '49750c51711e011786888a501fb8deef26da8bcabfa71e9ad3e85ed01e2f60ef'
             # ck patch
@@ -107,6 +113,12 @@ sha256sums=('c8d499fc53ed14838994ec2f51591ae40d64cce68559cd897be8acbeeee7630f'
             '9fa06f5e69332f0ab600d0b27734ade1b98a004123583c20a983bbb8529deb7b'
             # archlinux patches
             '53a203472800fb75aae6cfa1b1b627f11e906a5246510f82a93c924ca780d685'
+            '36452d56321f3dd641448f9336bdfb2f1fc14b37d18d0babe76668589ef5d986'
+            '97f406175ab6fa00f406c336ecd387dc30758741192bfd3c0b35639b4729f13d'
+            'ed1706b9b62565afacdbe8f9e98fc918460382d74053a84e9174b6ab1a6704ca'
+            'df383dac4d3733ffacfd0a672c18b49a9ea942820e59a4d176eb118f6d977623'
+            '6aef8f09abdeef9679f7659baef5671b22939b30a599684fd84b463a2a9a5021'
+            'a7667d12f1ecd287e8b2e77c99d34462e7696ab5c9d3f61c46caded5fc400157'
 )          
 
 export KBUILD_BUILD_HOST=archlinux
