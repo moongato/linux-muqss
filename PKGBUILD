@@ -68,7 +68,7 @@ _subarch=
 
 pkgbase=linux-muqss
 pkgver=5.12.13
-pkgrel=1
+pkgrel=2
 _ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -102,7 +102,7 @@ validpgpkeys=(
 sha256sums=('af485fcde5635981e6713b547cc8904a7f6e74e5ffb784cc08781fa5999dd255'
             'SKIP'
             # config
-            '3336079efe077431f181342799a2b8a4bab1c74b33f4bbf128a180aeedcf40c4'
+            '7e1224c6c2a2f9bac6e9fc487a2650ad370ff6514b9ab266fe764f0063605e36'
             # gcc patch
             '49750c51711e011786888a501fb8deef26da8bcabfa71e9ad3e85ed01e2f60ef'
             # ck patch
