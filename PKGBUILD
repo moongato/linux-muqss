@@ -7,13 +7,11 @@
 # Tweak kernel options prior to a build via nconfig
 _makenconfig=
 
-# Only compile active modules to VASTLY reduce the number of modules built and
-# the build time.
+# Only compile select modules to reduce the number of modules built
 #
 # To keep track of which modules are needed for your specific system/hardware,
 # give module_db a try: https://aur.archlinux.org/packages/modprobed-db
 # This PKGBUILD reads the database kept if it exists
-#
 # More at this wiki page ---> https://wiki.archlinux.org/index.php/Modprobed-db
 _localmodcfg=y
 
@@ -67,58 +65,51 @@ _subarch=
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.12.19
+pkgver=5.14.3
 pkgrel=1
-_ckpatchversion=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
 license=(GPL2)
 makedepends=(bc kmod libelf cpio perl tar xz)
 options=('!strip')
-_ckpatch="patch-5.12-ck${_ckpatchversion}"
-#_muqss_patch=0001-MultiQueue-Skiplist-Scheduler-v0.208.patch
-_gcc_more_v=20210610
+
+# https://ck-hack.blogspot.com/2021/08/514-and-future-of-muqss-and-ck-once.html
+# thankfully xanmod keeps the hrtimer patches up to date
+_commit=e2d48df5def86f498766b22e836a9c2f1bcb3809
+_xan=linux-5.14.y-xanmod
+
+_gcc_more_v=20210818
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
   "more-uarches-$_gcc_more_v.tar.gz::https://github.com/graysky2/kernel_compiler_patch/archive/$_gcc_more_v.tar.gz"
-  "http://ck.kolivas.org/patches/5.0/5.12/5.12-ck${_ckpatchversion}/$_ckpatch.xz"
-  #http://ck.kolivas.org/patches/muqss/5.0/5.11/${_muqss_patch}
+  "xanmod-patches-from-ck-$_commit.tar.gz::https://github.com/xanmod/linux-patches/archive/$_commit.tar.gz"
   0000-init-Kconfig-enable-O3-for-all-arches.patch
   0000-ondemand-tweaks.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE.patch
-  0002-x86-setup-Consolidate-early-memory-reservations.patch
-  0003-x86-setup-Merge-several-reservations-of-start-of-memory.patch
-  0004-x86-setup-Move-trim_snb_memory-later-in-setup_arch-to-fix-boot-hangs.patch
-  0005-x86-setup-always-reserve-the-first-1M-of-RAM.patch
-  0006-x86-setup-remove-CONFIG_X86_RESERVE_LOW-and-reservelow-options.patch
-  0007-x86-crash-remove-crash_reserve_low_1M.patch
+  0002-Bluetooth-Move-shutdown-callback-before-flushing-tx-.patch
+  0003-watchdog-iTCO_wdt-Fix-detection-of-SMI-off-case.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
-  '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('e9381cd3525a02f5b895f74147e2440be443ecd45484c6c64075046bc6f94c73'
+sha256sums=('c6c340be69e22021d9406c51467d03e2e28fb7221939b2ef114cac3d3602a8d8'
             'SKIP'
             # config
-            '20d7192609ef4e91afcbd286045f4a9d16051ff83e283f25f561779d7827a4bd'
+            '4c5c20c2750f2a4a530194ff7418e2fbbdae40a613e1c3dd65be9c5d8ec1d788'
             # gcc patch
-            '49750c51711e011786888a501fb8deef26da8bcabfa71e9ad3e85ed01e2f60ef'
-            # ck patch
-            'dc13f2a6ca9871f7b67c4736cef5784406b51f61dfdc7848d665013df14edd7c'
+            'd361171032ec9fce11c53bfbd667d0c3f0cb4004a17329ab195d6dcc5aa88caf'
+            # hrtimers patch
+            'SKIP'
             # enable-O3
             'de912c6d0de05187fd0ecb0da67326bfde5ec08f1007bea85e1de732e5a62619'
-            # ondemand patch
+            # ondemand tweaks patch
             '9fa06f5e69332f0ab600d0b27734ade1b98a004123583c20a983bbb8529deb7b'
             # archlinux patches
             '53a203472800fb75aae6cfa1b1b627f11e906a5246510f82a93c924ca780d685'
-            '36452d56321f3dd641448f9336bdfb2f1fc14b37d18d0babe76668589ef5d986'
-            '97f406175ab6fa00f406c336ecd387dc30758741192bfd3c0b35639b4729f13d'
-            'ed1706b9b62565afacdbe8f9e98fc918460382d74053a84e9174b6ab1a6704ca'
-            'df383dac4d3733ffacfd0a672c18b49a9ea942820e59a4d176eb118f6d977623'
-            '6aef8f09abdeef9679f7659baef5671b22939b30a599684fd84b463a2a9a5021'
-            'a7667d12f1ecd287e8b2e77c99d34462e7696ab5c9d3f61c46caded5fc400157'
+            '69b0a96547db59c98894929439b9f20249f987c6a8152abede28f3568407f3a0'
+            '8d02816705b168239234f629a9b842c7613c292c8383667cf4b5e53a4f8ad382' 
 )          
 
 export KBUILD_BUILD_HOST=archlinux
@@ -166,13 +157,16 @@ prepare() {
   # FS#66613
   # https://bugzilla.kernel.org/show_bug.cgi?id=207173#c6
   scripts/config --disable CONFIG_KVM_WERROR
+  
+  # ck recommends 1000 Hz tick and the hrtimer patches in lieu of ck1
+  scripts/config --enable CONFIG_HZ_1000
 
-  # fix naming schema in EXTRAVERSION of ck patch set
-  sed -i -re "s/^(.EXTRAVERSION).*$/\1 = /" "../${_ckpatch}"
+  # these are ck's htrimer patches
+  echo "Patching with ck hrtimer patches..."
 
-  # ck patchset itself
-  echo "Patching with ck patchset..."
-  patch -Np1 -i ../"${_ckpatch}"
+  for i in ../linux-patches-"$_commit"/"$_xan"/ck-hrtimer/0*.patch; do
+    patch -Np1 -i $i
+  done
 
   # non-interactively apply ck1 default options
   # this isn't redundant if we want a clean selection of subarch below
@@ -221,7 +215,7 @@ build() {
 }
 
 _package() {
-  pkgdesc="The ${pkgbase/linux/Linux} kernel and modules with the ck1 patchset featuring MuQSS CPU scheduler"
+  pkgdesc="The ${pkgbase/linux/Linux} kernel and modules with ck's hrtimer patches"
   depends=(coreutils kmod initramfs)
   optdepends=('crda: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
