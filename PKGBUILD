@@ -65,7 +65,7 @@ _subarch=
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
 
 pkgbase=linux-muqss
-pkgver=5.14.3
+pkgver=5.14.4
 pkgrel=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -87,14 +87,13 @@ source=(
   0000-init-Kconfig-enable-O3-for-all-arches.patch
   0000-ondemand-tweaks.patch
   0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-CLONE.patch
-  0002-Bluetooth-Move-shutdown-callback-before-flushing-tx-.patch
-  0003-watchdog-iTCO_wdt-Fix-detection-of-SMI-off-case.patch
+  0002-watchdog-iTCO_wdt-Fix-detection-of-SMI-off-case.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('c6c340be69e22021d9406c51467d03e2e28fb7221939b2ef114cac3d3602a8d8'
+sha256sums=('42e279e0d022ed702bc59b4548b60d1bd526b32caf6bc146421d53a9f17132b6'
             'SKIP'
             # config
             '4c5c20c2750f2a4a530194ff7418e2fbbdae40a613e1c3dd65be9c5d8ec1d788'
@@ -108,7 +107,6 @@ sha256sums=('c6c340be69e22021d9406c51467d03e2e28fb7221939b2ef114cac3d3602a8d8'
             '9fa06f5e69332f0ab600d0b27734ade1b98a004123583c20a983bbb8529deb7b'
             # archlinux patches
             '53a203472800fb75aae6cfa1b1b627f11e906a5246510f82a93c924ca780d685'
-            '69b0a96547db59c98894929439b9f20249f987c6a8152abede28f3568407f3a0'
             '8d02816705b168239234f629a9b842c7613c292c8383667cf4b5e53a4f8ad382' 
 )          
 
