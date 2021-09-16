@@ -96,11 +96,11 @@ validpgpkeys=(
 sha256sums=('42e279e0d022ed702bc59b4548b60d1bd526b32caf6bc146421d53a9f17132b6'
             'SKIP'
             # config
-            '4c5c20c2750f2a4a530194ff7418e2fbbdae40a613e1c3dd65be9c5d8ec1d788'
+            '552fd29b6fd3fb54e9f09c7ca896a97d099485563c545e7693a692596863199a'
             # gcc patch
             'd361171032ec9fce11c53bfbd667d0c3f0cb4004a17329ab195d6dcc5aa88caf'
             # hrtimers patch
-            '722b53e72842247eaa4fde397da1889cbbb54b40c7ed1eb0afb95fff80bffbe4'
+            'SKIP'
             # enable-O3
             'de912c6d0de05187fd0ecb0da67326bfde5ec08f1007bea85e1de732e5a62619'
             # ondemand tweaks patch
