@@ -63,9 +63,8 @@ _localmodcfg=y
 _subarch=
 
 ### IMPORTANT: Do no edit below this line unless you know what you're doing
-
 pkgbase=linux-muqss
-pkgver=5.14.4
+pkgver=5.14.5
 pkgrel=1
 arch=(x86_64)
 url="https://wiki.archlinux.org/index.php/Linux-ck"
@@ -78,7 +77,7 @@ options=('!strip')
 _commit=e2d48df5def86f498766b22e836a9c2f1bcb3809
 _xan=linux-5.14.y-xanmod
 
-_gcc_more_v=20210818
+_gcc_more_v=20210914
 source=(
   "https://www.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar".{xz,sign}
   config         # the main kernel config file
@@ -93,21 +92,21 @@ validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('42e279e0d022ed702bc59b4548b60d1bd526b32caf6bc146421d53a9f17132b6'
+sha256sums=('65168d1cd6cb6558ff57d9e3bc7507cbc722e1bb053cd80793b0ac804b546cfd'
             'SKIP'
             # config
             '552fd29b6fd3fb54e9f09c7ca896a97d099485563c545e7693a692596863199a'
             # gcc patch
-            'd361171032ec9fce11c53bfbd667d0c3f0cb4004a17329ab195d6dcc5aa88caf'
+            'b70720e7537a0b6455edaeb198d52151fb3b3c3a91631b8f43d2e71b694da611'
             # hrtimers patch
-            'SKIP'
+            '722b53e72842247eaa4fde397da1889cbbb54b40c7ed1eb0afb95fff80bffbe4'
             # enable-O3
             'de912c6d0de05187fd0ecb0da67326bfde5ec08f1007bea85e1de732e5a62619'
             # ondemand tweaks patch
             '9fa06f5e69332f0ab600d0b27734ade1b98a004123583c20a983bbb8529deb7b'
             # archlinux patches
             '53a203472800fb75aae6cfa1b1b627f11e906a5246510f82a93c924ca780d685'
-            '8d02816705b168239234f629a9b842c7613c292c8383667cf4b5e53a4f8ad382' 
+            '8d02816705b168239234f629a9b842c7613c292c8383667cf4b5e53a4f8ad382'
 )          
 
 export KBUILD_BUILD_HOST=archlinux
@@ -173,7 +172,7 @@ prepare() {
   # https://github.com/graysky2/kernel_gcc_patch
   # make sure to apply after olddefconfig to allow the next section
   echo "Patching to enable GCC optimization for other uarchs..."
-  patch -Np1 -i "$srcdir/kernel_compiler_patch-$_gcc_more_v/more-uarches-for-kernel-5.8+.patch"
+  patch -Np1 -i "$srcdir/kernel_compiler_patch-$_gcc_more_v/more-uarches-for-kernel-5.8-5.14.patch"
 
   if [ -n "$_subarch" ]; then
     # user wants a subarch so apply choice defined above interactively via 'yes'
